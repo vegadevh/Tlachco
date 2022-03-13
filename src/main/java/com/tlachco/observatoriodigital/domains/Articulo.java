@@ -20,8 +20,8 @@ public class Articulo {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id_articulo;
 	
-	@Column(name="autor")
-	private String autor;
+	//@Column(name="autor")
+	//private String autor;
 	
 	@Column(name="titulo")
 	private String titulo;
@@ -29,15 +29,15 @@ public class Articulo {
 	@Column(name="contenido")
 	private String contenido;
 	
-	@Column(name="tipo_articulo")
-	private String tipo_articulo;
-	
-	@Column(name="categoria")
-	private String categoria;
-	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name="fecha_publicacion")
 	private Date fecha_publicacion;
+	
+	@Column(name="tipo_articulo")
+	private String tipo_articulo;
+	
+	//@Column(name="categoria")
+	//private String categoria;
 	
 	//@Column(name="url")
 	//private String url;
