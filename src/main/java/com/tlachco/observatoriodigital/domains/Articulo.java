@@ -39,8 +39,8 @@ public class Articulo {
 	@Column(name="fecha_publicacion")
 	private Date fecha_publicacion;
 	
-	@Column(name="tipo_articulo")
-	private String tipo_articulo;
+	//@Column(name="tipo_articulo")
+	//private String tipo_articulo;
 	
 	//@Column(name="categoria")
 	//private String categoria;
@@ -94,14 +94,6 @@ public class Articulo {
 		this.fecha_publicacion = fecha_publicacion;
 	}
 
-	public String getTipo_articulo() {
-		return tipo_articulo;
-	}
-
-	public void setTipo_articulo(String tipo_articulo) {
-		this.tipo_articulo = tipo_articulo;
-	}
-
 	public CategoriaArticulo getCategoriaArticulo() {
 		return categoriaArticulo;
 	}
@@ -133,7 +125,5 @@ public class Articulo {
 	public void setUsername(Integer username) {
 		this.username = username;
 	}
-	
-	
 
 }
