@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,8 +20,7 @@ public class PostCrontroller {
 	public ICategoriaArticuloService categoriaS;
 
 	@RequestMapping("/creacion")
-	public ModelAndView creacion_post() {
-		ModelAndView mav = new ModelAndView();
+	public String creacion_post(Model model) {
 		
 		Articulo articulo = new Articulo();
 		
@@ -32,20 +32,17 @@ public class PostCrontroller {
 			e.printStackTrace();
 		}
 		
-		mav.addObject(categorias);
+		model.addAttribute("categorias", categorias);
+		model.addAttribute("articulo", articulo);	
 		
-		mav.addObject(articulo);
-		
-		mav.setViewName("crearPost");
-		
-		return mav;
+		return "crearPost";
 	}
 	
-	@RequestMapping("/validarCreacion")
+	@RequestMapping("/validar-creacion")
 	public ModelAndView validar_post() {
 		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("crearPost");
+		
 		
 		return mav;
 	}

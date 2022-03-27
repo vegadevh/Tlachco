@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 
-import com.tlachco.observatoriodigital.domains.Articulo;
 import com.tlachco.observatoriodigital.domains.CategoriaArticulo;
 
 public interface ICategoriaArticuloService {

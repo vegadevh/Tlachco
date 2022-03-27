@@ -1,0 +1,79 @@
+<section th:fragment="navbar">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container" style="margin-top: 0em;">
+			<a class="navbar-brand mb-0 h1" href="/">Tlachco</a>
+			<div class="text-white" sec:authorize="isAnonymous()">
+				<a class="text-white" href="/login">Iniciar Sesión</a>
+			</div>
+
+			<div class="collapse navbar-collapse">
+				<div sec:authorize="hasRole('ROLE_STATISTICS')">
+					<!-- <ul class="navbar-nav mr-auto">
+						<li class="nav-item"
+							th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}">
+							<a class="nav-link" href="/">Inicio <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item"
+							th:classappend="${#httpServletRequest.getRequestURI() == '/write/ingresarPeritaje' ? 'active':''}">
+							<a class="nav-link" href="/write/ingresarPeritaje">Ingresar Peritaje</a>
+						</li>
+						<li class="nav-item"
+							th:classappend="${#httpServletRequest.getRequestURI() == '/write/ingresarDesaparecido' ? 'active':''}">
+							<a class="nav-link" href="/write/ingresarDesaparecido">Ingresar Desaparecido</a>
+						</li>
+					</ul> -->
+				</div>
+				<div sec:authorize="hasRole('ROLE_SECRETARY')">
+					<!-- <ul class="navbar-nav mr-auto">
+						<li class="nav-item"
+							th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}">
+							<a class="nav-link" href="/">Inicio <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item"
+							th:classappend="${#httpServletRequest.getRequestURI() == '/read/listaPeritajes' ? 'active':''}">
+							<a class="nav-link" href="/read/listaPeritajes">Ver Peritajes</a>
+						</li>
+						<li class="nav-item"
+							th:classappend="${#httpServletRequest.getRequestURI() == '/read/listaDesaparecidos' ? 'active':''}">
+							<a class="nav-link" href="/read/listaDesaparecidos">Ver Desaparecidos</a>
+						</li>
+						<li class="nav-item"
+							th:classappend="${#httpServletRequest.getRequestURI() == '/show/listaRegistros' ? 'active':''}">
+							<a class="nav-link" href="/show/listaRegistros">Ver Registros</a>
+						</li>
+					</ul> -->
+				</div>
+				<div sec:authorize="hasRole('ROLE_ADMIN')">
+					<!-- <ul class="navbar-nav mr-auto">
+						<li class="nav-item"
+							th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}">
+							<a class="nav-link" href="/">Inicio <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item"
+							th:classappend="${#httpServletRequest.getRequestURI() == '/admin/usuario_registro' ? 'active':''}">
+							<a class="nav-link" th:href="@{/admin/usuario_registro}">Crear usuario</a>
+						</li>
+						<li class="nav-item"
+							th:classappend="${#httpServletRequest.getRequestURI() == '/admin/listaUsuarios' ? 'active':''}">
+							<a class="nav-link" th:href="@{/admin/listaUsuarios}">Lista de usuarios</a>
+						</li>
+					</ul> -->
+				</div>
+			</div>
+
+			<div>
+				<div style="display: flex; align-items: center" class="text-white userOptions"
+					sec:authorize="isAuthenticated()">
+					<div>
+						<i>Bienvenido</i> <b><span class="text-white" sec:authentication="name">Username</span></b>
+						&nbsp;
+						<!-- <i><span class="text-white" sec:authentication="principal.authorities">Roles</span></i>&nbsp; -->
+					</div>
+					<form th:action="@{/logout}" method="post">
+						<input type="submit" value="Salir" class="btn btn-primary bEdit" />
+					</form>
+				</div>
+			</div>
+		</div>
+	</nav>
+</section>

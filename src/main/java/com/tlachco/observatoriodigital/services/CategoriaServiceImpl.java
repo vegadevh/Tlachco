@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.tlachco.observatoriodigital.domains.Articulo;
 import com.tlachco.observatoriodigital.domains.CategoriaArticulo;
 import com.tlachco.observatoriodigital.repositories.ICategoriaArticuloRepo;
 
