@@ -1,79 +1,77 @@
 <section th:fragment="navbar">
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<div class="container" style="margin-top: 0em;">
-			<a class="navbar-brand mb-0 h1" href="/">Tlachco</a>
-			<div class="text-white" sec:authorize="isAnonymous()">
-				<a class="text-white" href="/login">Iniciar Sesión</a>
+	<div class="container"
+		style="display: flex; justify-content: space-between; margin-top: 0.5em; margin-bottom: 0.5em;">
+		<a href="">
+			<img width="100em"
+				src="https://firebasestorage.googleapis.com/v0/b/observatlachco.appspot.com/o/LogoTlachco.png?alt=media&token=673d1ec4-72d6-419d-b406-156e1f38116f"
+				alt="ThlachcoLogo" srcset="">
+			<!-- <img width="50em"
+				src="https://firebasestorage.googleapis.com/v0/b/observatlachco.appspot.com/o/LogoTlachcoP.png?alt=media&token=6b0986d4-2e0d-4c41-a1be-459975ef805d"
+				alt="ThlachcoLogo" srcset=""> -->
+		</a>
+		<div style="display: inline-flex; align-items: center;">
+			<h1 style="margin-right: 0.5em; font-size: 2em;">ObservaTlachco</h1>
+			<img width="70em"
+				src="https://firebasestorage.googleapis.com/v0/b/observatlachco.appspot.com/o/Venados%20Cient%C3%ADficos.png?alt=media&token=189b4156-18b0-4a54-806d-881d062a69b2"
+				alt="ThlachcoLogo" srcset="">
+		</div>
+	</div>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-brown">
+		<div class="container">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse navbar-options" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}">
+						<a class="nav-link text-color" href="/">Inicio <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '#' ? 'active':''}">
+						<a class="nav-link text-color" href="#">Noticias</a>
+					</li>
+					<li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '#' ? 'active':''}">
+						<a class="nav-link text-color" href="#">Articulos</a>
+					</li>
+					<li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '#' ? 'active':''}">
+						<a class="nav-link text-color" href="#">Videos</a>
+					</li>
+					<li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '#' ? 'active':''}">
+						<a class="nav-link text-color" href="#">Infografias</a>
+					</li>
+					<li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '#' ? 'active':''}">
+						<a class="nav-link text-color" href="#">Sobre nosotros</a>
+					</li>
+				</ul>
+				<form class="form-inline my-2 my-lg-0">
+					<input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+					<button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Buscar</button>
+				</form>
+				<ul class="navbar-nav">
+					<span sec:authorize="isAuthenticated()">
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<i>Bienvenido</i> <b><span class="text-white"
+										sec:authentication="name">Username</span></b>
+								&nbsp;
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+								<a class="dropdown-item" href="#">Perfil</a>
+								<a class="dropdown-item" th:href="@{/logout}">Salir</a>
+							</div>
+						</li>
+					</span>
+					<span sec:authorize="isAnonymous()">
+						<li class="nav-item">
+							<a class="nav-link" href="/login">Iniciar Sesión</a>
+						</li>
+					</span>
+				</ul>
 			</div>
 
-			<div class="collapse navbar-collapse">
-				<div sec:authorize="hasRole('ROLE_STATISTICS')">
-					<!-- <ul class="navbar-nav mr-auto">
-						<li class="nav-item"
-							th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}">
-							<a class="nav-link" href="/">Inicio <span class="sr-only">(current)</span></a>
-						</li>
-						<li class="nav-item"
-							th:classappend="${#httpServletRequest.getRequestURI() == '/write/ingresarPeritaje' ? 'active':''}">
-							<a class="nav-link" href="/write/ingresarPeritaje">Ingresar Peritaje</a>
-						</li>
-						<li class="nav-item"
-							th:classappend="${#httpServletRequest.getRequestURI() == '/write/ingresarDesaparecido' ? 'active':''}">
-							<a class="nav-link" href="/write/ingresarDesaparecido">Ingresar Desaparecido</a>
-						</li>
-					</ul> -->
-				</div>
-				<div sec:authorize="hasRole('ROLE_SECRETARY')">
-					<!-- <ul class="navbar-nav mr-auto">
-						<li class="nav-item"
-							th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}">
-							<a class="nav-link" href="/">Inicio <span class="sr-only">(current)</span></a>
-						</li>
-						<li class="nav-item"
-							th:classappend="${#httpServletRequest.getRequestURI() == '/read/listaPeritajes' ? 'active':''}">
-							<a class="nav-link" href="/read/listaPeritajes">Ver Peritajes</a>
-						</li>
-						<li class="nav-item"
-							th:classappend="${#httpServletRequest.getRequestURI() == '/read/listaDesaparecidos' ? 'active':''}">
-							<a class="nav-link" href="/read/listaDesaparecidos">Ver Desaparecidos</a>
-						</li>
-						<li class="nav-item"
-							th:classappend="${#httpServletRequest.getRequestURI() == '/show/listaRegistros' ? 'active':''}">
-							<a class="nav-link" href="/show/listaRegistros">Ver Registros</a>
-						</li>
-					</ul> -->
-				</div>
-				<div sec:authorize="hasRole('ROLE_ADMIN')">
-					<!-- <ul class="navbar-nav mr-auto">
-						<li class="nav-item"
-							th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}">
-							<a class="nav-link" href="/">Inicio <span class="sr-only">(current)</span></a>
-						</li>
-						<li class="nav-item"
-							th:classappend="${#httpServletRequest.getRequestURI() == '/admin/usuario_registro' ? 'active':''}">
-							<a class="nav-link" th:href="@{/admin/usuario_registro}">Crear usuario</a>
-						</li>
-						<li class="nav-item"
-							th:classappend="${#httpServletRequest.getRequestURI() == '/admin/listaUsuarios' ? 'active':''}">
-							<a class="nav-link" th:href="@{/admin/listaUsuarios}">Lista de usuarios</a>
-						</li>
-					</ul> -->
-				</div>
-			</div>
-
-			<div>
-				<div style="display: flex; align-items: center" class="text-white userOptions"
-					sec:authorize="isAuthenticated()">
-					<div>
-						<i>Bienvenido</i> <b><span class="text-white" sec:authentication="name">Username</span></b>
-						&nbsp;
-						<!-- <i><span class="text-white" sec:authentication="principal.authorities">Roles</span></i>&nbsp; -->
-					</div>
-					<form th:action="@{/logout}" method="post">
-						<input type="submit" value="Salir" class="btn btn-primary bEdit" />
-					</form>
-				</div>
-			</div>
 		</div>
 	</nav>
 </section>

@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
         integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
@@ -18,28 +19,30 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
         integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
         crossorigin="anonymous"></script>
-        
+
     <title>Tlachco - Inicio</title>
     <script src="//cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
 </head>
 
 <body>
-	<th:block th:replace="components/navbar :: navbar"></th:block>
-    <h1>Crear Post</h1>
+    <th:block th:replace="components/navbar :: navbar"></th:block>
+    <div class="container">
+        <h1>Crear Post</h1>
 
-    <form action="@{/post/validarCreacion}" th:object="${articulo}" method="post">
-        <label for="titulo">Titulo de la publicación:</label>
-        <input type="text" id="titulo" th:field="*{titulo}">
-        <label for="categoria">Categoria de publicación:</label>
-        <select id="categoriaSelect" th:name="categoriaSelect">
-            <option value="0" selected="selected">Selecciona una opci&oacute;n</option>
-            <option th:each="categoria : ${categorias}" th:value="${categoria.id_categoria}"
-                th:id="${categoria.id_categoria}" th:text="${categoria.categoria}">
-            </option>
-        </select>
-        <label for="contenido">Contenido:</label>
-        <textarea name="contenido" id="contenido"></textarea>
-    </form>
+        <form action="@{/post/validarCreacion}" th:object="${articulo}" method="post">
+            <label for="titulo">Titulo de la publicación:</label>
+            <input type="text" id="titulo" th:field="*{titulo}">
+            <label for="categoria">Categoria de publicación:</label>
+            <select id="categoriaSelect" th:name="categoriaSelect">
+                <option value="0" selected="selected">Selecciona una opci&oacute;n</option>
+                <option th:each="categoria : ${categorias}" th:value="${categoria.id_categoria}"
+                    th:id="${categoria.id_categoria}" th:text="${categoria.categoria}">
+                </option>
+            </select>
+            <label for="contenido">Contenido:</label>
+            <textarea name="contenido" id="contenido"></textarea>
+        </form>
+    </div>
 
 
     <script>

@@ -1,0 +1,14 @@
+.bg-brown {
+    background-color: #68533E;
+}
+
+.text-color{
+    color: #F3C95B;
+}
+
+.navbar-options > ul > li{
+    text-transform: uppercase;
+    color: #F9F4E7;
+    font-weight: bold;
+}
+
