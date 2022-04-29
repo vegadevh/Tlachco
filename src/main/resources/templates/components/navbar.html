@@ -1,7 +1,7 @@
 <section th:fragment="navbar">
 	<div class="container"
 		style="display: flex; justify-content: space-between; margin-top: 0.5em; margin-bottom: 0.5em;">
-		<a href="">
+		<a th:href="@{/}">
 			<img width="100em"
 				src="https://firebasestorage.googleapis.com/v0/b/observatlachco.appspot.com/o/LogoTlachco.png?alt=media&token=673d1ec4-72d6-419d-b406-156e1f38116f"
 				alt="ThlachcoLogo" srcset="">
@@ -29,20 +29,25 @@
 					<li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}">
 						<a class="nav-link text-color" href="/">Inicio <span class="sr-only">(current)</span></a>
 					</li>
-					<li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '#' ? 'active':''}">
-						<a class="nav-link text-color" href="#">Noticias</a>
+					<li class="nav-item"
+						th:classappend="${#httpServletRequest.getRequestURI() == '/noticias' ? 'active':''}">
+						<a class="nav-link text-color" href="/noticias">Noticias</a>
 					</li>
-					<li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '#' ? 'active':''}">
-						<a class="nav-link text-color" href="#">Articulos</a>
+					<li class="nav-item"
+						th:classappend="${#httpServletRequest.getRequestURI() == '/articulos' ? 'active':''}">
+						<a class="nav-link text-color" href="/articulos">Articulos</a>
 					</li>
-					<li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '#' ? 'active':''}">
-						<a class="nav-link text-color" href="#">Videos</a>
+					<li class="nav-item"
+						th:classappend="${#httpServletRequest.getRequestURI() == '/videos' ? 'active':''}">
+						<a class="nav-link text-color" href="/videos">Videos</a>
 					</li>
-					<li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '#' ? 'active':''}">
-						<a class="nav-link text-color" href="#">Infografias</a>
+					<li class="nav-item"
+						th:classappend="${#httpServletRequest.getRequestURI() == '/infografias' ? 'active':''}">
+						<a class="nav-link text-color" href="/infografias">Infografias</a>
 					</li>
-					<li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '#' ? 'active':''}">
-						<a class="nav-link text-color" href="#">Sobre nosotros</a>
+					<li class="nav-item"
+						th:classappend="${#httpServletRequest.getRequestURI() == '/sobre-nosotros' ? 'active':''}">
+						<a class="nav-link text-color" href="/sobre-nosotros">Sobre nosotros</a>
 					</li>
 				</ul>
 				<form class="form-inline my-2 my-lg-0">
@@ -60,7 +65,7 @@
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 								<a class="dropdown-item" href="#">Perfil</a>
-								<a class="dropdown-item" th:href="@{/logout}">Salir</a>
+								<a class="dropdown-item" style="color: red;" th:href="@{/logout}">Cerrar Sesión</a>
 							</div>
 						</li>
 					</span>

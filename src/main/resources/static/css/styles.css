@@ -2,13 +2,42 @@
     background-color: #68533E;
 }
 
-.text-color{
-    color: #F3C95B;
+.text-color {
+    color: #ffc107;
 }
 
-.navbar-options > ul > li{
+.navbar-options>ul>li {
     text-transform: uppercase;
     color: #F9F4E7;
     font-weight: bold;
 }
 
+.border-dotted {
+    margin: 1em;
+    padding: 1em;
+    border-style: dotted;
+    border-width: 0.3em;
+    border-color: rgb(209, 209, 209);
+    border-radius: 1em;
+}
+
+.border-dotted:hover>a>i {
+    color: #ffc107;
+}
+
+.border-dotted:hover>a {
+    text-decoration: none;
+    color: #212429;
+}
+
+.border-dotted>a {
+    color: #212429;
+}
+
+a {
+    content: none;
+}
+
+.crear-post {
+    margin: 1em;
+}
