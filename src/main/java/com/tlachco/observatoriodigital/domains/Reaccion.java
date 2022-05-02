@@ -12,16 +12,13 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(schema = "public", name = "COMENTARIO")
-public class Comentario {
+@Table(schema = "public", name = "REACCION")
+public class Reaccion {
 
 	@Id
-	@Column(name = "id_comentario")
+	@Column(name = "id_reaccion")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id_comentario;
-
-	@Column(name = "comentario")
-	private String comentario;
+	private Integer id_reaccion;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_publicacion")
@@ -37,8 +34,12 @@ public class Comentario {
 	@Transient
 	private Integer usuario;
 
-	public Integer getId_comentario() {
-		return id_comentario;
+	public Integer getId_reaccion() {
+		return id_reaccion;
+	}
+
+	public void setId_reaccion(Integer id_reaccion) {
+		this.id_reaccion = id_reaccion;
 	}
 
 	public Publicacion getPublicacion() {
@@ -47,6 +48,14 @@ public class Comentario {
 
 	public void setPublicacion(Publicacion publicacion) {
 		this.publicacion = publicacion;
+	}
+
+	public Integer getId_publicacion() {
+		return id_publicacion;
+	}
+
+	public void setId_publicacion(Integer id_publicacion) {
+		this.id_publicacion = id_publicacion;
 	}
 
 	public Usuario getUsername() {
@@ -63,26 +72,6 @@ public class Comentario {
 
 	public void setUsuario(Integer usuario) {
 		this.usuario = usuario;
-	}
-
-	public void setId_comentario(Integer id_comentario) {
-		this.id_comentario = id_comentario;
-	}
-
-	public String getComentario() {
-		return comentario;
-	}
-
-	public void setComentario(String comentario) {
-		this.comentario = comentario;
-	}
-
-	public Integer getId_publicacion() {
-		return id_publicacion;
-	}
-
-	public void setId_publicacion(Integer id_publicacion) {
-		this.id_publicacion = id_publicacion;
 	}
 
 }

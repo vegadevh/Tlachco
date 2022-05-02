@@ -12,19 +12,14 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(schema="public", name="USUARIOS")
+@Table(schema="public", name="USUARIO")
 public class Usuario {
-	
-	//@Id
-	//@Column(name="id_ussuario")
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
-	//private Integer id_ussuario;
 	
 	@Id
 	@NotEmpty
-	@Column(name="username")
+	@Column(name="usuario")
 	@Size(message="Como maximo puede ingresar 50 caracteres.", max=50)
-	private String username;
+	private String usuario;
 	
 	@NotEmpty
 	@Column(name="password")
@@ -50,13 +45,13 @@ public class Usuario {
 	
 	@Transient
 	private Integer id_rol;
-
-	public String getUsername() {
-		return username;
+	
+	public String getUsuario() {
+		return usuario;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
 	public String getPassword() {

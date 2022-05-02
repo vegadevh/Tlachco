@@ -1,5 +1,5 @@
 package com.tlachco.observatoriodigital.services;
 
-public interface ILikeArticuloService {
+public interface IReaccionPublicacionService {
 
 }

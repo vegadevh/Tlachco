@@ -3,6 +3,6 @@ package com.tlachco.observatoriodigital.services;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LikeArticuloServiceImpl implements ILikeArticuloService{
+public class TagPublicacionServiceImpl implements ITagPublicacionService{
 
 }

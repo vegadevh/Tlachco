@@ -9,8 +9,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(schema="public", name="CATEGORIAS")
-public class CategoriaArticulo {
+@Table(schema="public", name="CATEGORIA")
+public class CategoriaPublicacion {
 	
 	@Id
 	@Column(name="id_categoria")

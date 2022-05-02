@@ -8,23 +8,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tlachco.observatoriodigital.domains.Articulo;
-import com.tlachco.observatoriodigital.domains.CategoriaArticulo;
-import com.tlachco.observatoriodigital.services.ICategoriaArticuloService;
+import com.tlachco.observatoriodigital.domains.Publicacion;
+import com.tlachco.observatoriodigital.domains.CategoriaPublicacion;
+import com.tlachco.observatoriodigital.services.ICategoriaPublicacionService;
 
 @Controller
 @RequestMapping("/post")
 public class PostCrontroller {
 	
 	@Autowired
-	public ICategoriaArticuloService categoriaS;
+	public ICategoriaPublicacionService categoriaS;
 
 	@RequestMapping("/creacion")
 	public String creacion_post(Model model) {
 		
-		Articulo articulo = new Articulo();
+		Publicacion articulo = new Publicacion();
 		
-		List<CategoriaArticulo> categorias = null;
+		List<CategoriaPublicacion> categorias = null;
 		
 		try {
 			categorias = categoriaS.findAll();

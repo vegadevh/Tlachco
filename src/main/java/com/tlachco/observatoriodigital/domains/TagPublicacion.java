@@ -13,8 +13,8 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(schema="public", name="TAGS")
-public class TagArticulo {
+@Table(schema="public", name="TAG")
+public class TagPublicacion {
 	
 	@Id
 	@Column(name="id_tag")
@@ -26,11 +26,11 @@ public class TagArticulo {
 	private String tag;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_articulo")
-	private Articulo articulo;
+	@JoinColumn(name="id_publicacion")
+	private Publicacion publicacion;
 	
 	@Transient
-	private Integer id_articulo;
+	private Integer id_publicacion;
 
 	public Integer getId_tag() {
 		return id_tag;
@@ -47,23 +47,5 @@ public class TagArticulo {
 	public void setTag(String tag) {
 		this.tag = tag;
 	}
-
-	public Articulo getArticulo() {
-		return articulo;
-	}
-
-	public void setArticulo(Articulo articulo) {
-		this.articulo = articulo;
-	}
-
-	public Integer getId_articulo() {
-		return id_articulo;
-	}
-
-	public void setId_articulo(Integer id_articulo) {
-		this.id_articulo = id_articulo;
-	}
-	
-	
 
 }

@@ -6,22 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.tlachco.observatoriodigital.domains.CategoriaArticulo;
-import com.tlachco.observatoriodigital.repositories.ICategoriaArticuloRepo;
+import com.tlachco.observatoriodigital.domains.CategoriaPublicacion;
+import com.tlachco.observatoriodigital.repositories.ICategoriaPublicacionRepo;
 
 @Service
-public class CategoriaServiceImpl implements ICategoriaArticuloService{
+public class CategoriaServiceImpl implements ICategoriaPublicacionService{
 	
 	@Autowired
-	public ICategoriaArticuloRepo categoriaArticuloRepo;
+	public ICategoriaPublicacionRepo categoriaArticuloRepo;
 
 	@Override
-	public List<CategoriaArticulo> findAll() throws DataAccessException {
+	public List<CategoriaPublicacion> findAll() throws DataAccessException {
 		return categoriaArticuloRepo.findAll();
 	}
 
 	@Override
-	public void save(CategoriaArticulo categoriaArticulo) throws DataAccessException {
+	public void save(CategoriaPublicacion categoriaArticulo) throws DataAccessException {
 		categoriaArticuloRepo.save(categoriaArticulo);
 		
 	}

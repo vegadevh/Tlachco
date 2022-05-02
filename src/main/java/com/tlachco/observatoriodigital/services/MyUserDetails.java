@@ -11,27 +11,25 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.tlachco.observatoriodigital.domains.Usuario;
 
-
 public class MyUserDetails implements UserDetails {
-	
+
 	private String userName;
 	private String password;
 	private boolean enabled_u;
 	private List<GrantedAuthority> authorities;
-	
+
 	public MyUserDetails(Usuario user) {
-		this.userName = user.getUsername();
+		this.userName = user.getUsuario();
 		this.password = user.getPassword();
 		this.enabled_u = user.getEnabled_u();
 		this.authorities = Arrays.stream(user.getRol().getRol().split(","))
-										.map(SimpleGrantedAuthority::new)
-										.collect(Collectors.toList());
-		
+				.map(SimpleGrantedAuthority::new)
+				.collect(Collectors.toList());
+
 		System.out.println(this.authorities);
-		System.out.println(user.getUsername());
+		System.out.println(user.getUsuario());
 	}
-	
-	
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
@@ -73,7 +71,5 @@ public class MyUserDetails implements UserDetails {
 		// TODO Auto-generated method stub
 		return enabled_u;
 	}
-	
-	
-	
+
 }
