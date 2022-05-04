@@ -35,6 +35,9 @@ public class Publicacion {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "fecha_publicacion")
 	private Date fecha_publicacion;
+	
+	@Column(name="estado")
+	private String estado;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_categoria")

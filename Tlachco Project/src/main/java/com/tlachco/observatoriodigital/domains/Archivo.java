@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
@@ -12,13 +13,28 @@ import javax.persistence.Table;
 public class Archivo {
 
 	@Id
-	@Column(name = "id_articulo")
+	@Column(name = "id_archivo")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_archivo;
+	
+//	@Id
+//	@NotEmpty
+//	@Column(name="id_archivo")
+//	private String id_archivo;
 
-	// Revision de tipos
+	@Lob
 	@Column(name = "contenido")
-	private String contenido;
+	private byte[] contenido;
+	
+	public Archivo() {
+		
+	}
+
+	public Archivo(byte[] contenido) {
+		super();
+//		this.id_archivo = id_archivo;
+		this.contenido = contenido;
+	}
 
 	public Integer getId_archivo() {
 		return id_archivo;
@@ -28,12 +44,16 @@ public class Archivo {
 		this.id_archivo = id_archivo;
 	}
 
-	public String getContenido() {
+	public byte[] getContenido() {
 		return contenido;
 	}
 
-	public void setContenido(String contenido) {
+	public void setContenido(byte[] contenido) {
 		this.contenido = contenido;
 	}
+	
+	
+
+	
 
 }
