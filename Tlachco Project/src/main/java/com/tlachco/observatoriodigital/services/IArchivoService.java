@@ -1,5 +1,6 @@
 package com.tlachco.observatoriodigital.services;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
@@ -11,7 +12,7 @@ public interface IArchivoService {
 	
 	public List<Archivo> findAll() throws DataAccessException;
 	
-	public Archivo save(MultipartFile file) throws DataAccessException;
+	public void save(Archivo archivo, MultipartFile file) throws IOException;
 	
 //	public void delete(Integer id_archivo) throws DataAccessException;
 //	

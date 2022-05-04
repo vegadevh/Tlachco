@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,43 +23,59 @@ import com.tlachco.observatoriodigital.services.ICategoriaPublicacionService;
 @Controller
 @RequestMapping("/post")
 public class PostCrontroller {
-	
+
 	@Autowired
 	public ICategoriaPublicacionService categoriaService;
-	
+
 	@Autowired
 	public IArchivoService archivoService;
 
 	@RequestMapping("/creacion")
 	public String creacion_post(Model model) {
-		
-		Publicacion articulo = new Publicacion();
-		
+
+		Publicacion publicacion = new Publicacion();
+
+		// Cambios
 		List<CategoriaPublicacion> categorias = null;
-		
+
 		try {
 			categorias = categoriaService.findAll();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		// Cambios
+
 		model.addAttribute("categorias", categorias);
-		model.addAttribute("articulo", articulo);	
-		
+		model.addAttribute("publicacion", publicacion);
+
 		return "crearPost";
 	}
-	
-	@PostMapping("/archivo")
-	public Archivo subir(@RequestParam("archivo") MultipartFile archivo) throws IOException {
-		return archivoService.save(archivo);
+
+	@RequestMapping("/subir")
+	public String subir(Model model) {
+		Archivo archivo = new Archivo();
+
+		model.addAttribute("archivo", archivo);
+
+		return "subirArchivo";
 	}
-	
+
+	@PostMapping("/validacion-subir")
+	public String validar_subir(@ModelAttribute Archivo archivo, BindingResult result,
+			@RequestParam(value = "file") MultipartFile file, Model model) throws IOException {
+
+		archivoService.save(archivo, file);
+
+		return "redirect:/";
+	}
+
+	// MultipartFile file
+	// archivoService.save(archivo, file);
+
 	@RequestMapping("/validar-creacion")
 	public ModelAndView validar_post() {
 		ModelAndView mav = new ModelAndView();
-		
-		
-		
+
 		return mav;
 	}
 }

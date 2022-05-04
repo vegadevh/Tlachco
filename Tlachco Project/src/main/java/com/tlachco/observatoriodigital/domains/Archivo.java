@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 @Entity
 @Table(schema = "public", name = "ARCHIVO")
 public class Archivo {
@@ -23,6 +25,7 @@ public class Archivo {
 //	private String id_archivo;
 
 	@Lob
+	@Type(type="org.hibernate.type.BinaryType")
 	@Column(name = "contenido")
 	private byte[] contenido;
 	

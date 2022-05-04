@@ -21,36 +21,21 @@
         crossorigin="anonymous"></script>
 
     <title>Tlachco - Inicio</title>
-    <script src="//cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
 </head>
 
 <body>
     <th:block th:replace="components/navbar :: navbar"></th:block>
     <div class="container">
-        <h1>Crear Post</h1>
+        <h1>Crear Post - archivo</h1>
 
-        <form action="@{/post/validarCreacion}" th:object="${publicacion}" method="post">
-            <label for="titulo">Titulo de la publicación:</label>
-            <input type="text" id="titulo" th:field="*{titulo}">
-            <label for="categoria">Categoria de publicación:</label>
-            <select id="categoriaSelect" th:name="categoriaSelect">
-                <option value="0" selected="selected">Selecciona una opci&oacute;n</option>
-                <option th:each="categoria : ${categorias}" th:value="${categoria.id_categoria}"
-                    th:id="${categoria.id_categoria}" th:text="${categoria.categoria}">
-                </option>
-            </select>
-            <textarea name="contenido" id="contenido"></textarea>
+        <form th:action="@{/post/validacion-subir}" th:object="${archivo}" enctype="multipart/form-data" method="post">
+            <label for="titulo">Archivo</label>
+            <div>
+                <input type="file" th:name="file" th:id="file">
+            </div>
+            <input type="submit" value="Siguiente" class="btn btn-primary">
         </form>
     </div>
-
-
-    <script>
-        $(document).ready(function () {
-            CKEDITOR.replace('contenido', {
-                height: 400,
-            });
-        });
-    </script>
 </body>
 
 </html>

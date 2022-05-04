@@ -1,5 +1,6 @@
 package com.tlachco.observatoriodigital.services;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,12 @@ public class ArchivoServiceImpl implements IArchivoService{
 	private IArchivoRepo archivoRepo;
 
 	@Override
-	public Archivo save(MultipartFile file) throws DataAccessException {
-		String nombreArchivo = file.getOriginalFilename();
-		Archivo archivo = new Archivo(nombreArchivo.getBytes());
+	public void save(Archivo archivo, MultipartFile file) throws IOException {
+//		String nombreArchivo = file.getOriginalFilename();
+//		Archivo archivo = new Archivo(nombreArchivo.getBytes());
+		archivo.setContenido(file.getBytes());
 //		Archivo archivo = new Archivo(UUID.randomUUID().toString(),nombreArchivo.getBytes());
-		return archivoRepo.save(archivo);
+		archivoRepo.save(archivo);
 	}
 
 	@Override
