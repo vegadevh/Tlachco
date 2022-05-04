@@ -28,6 +28,7 @@ CREATE TABLE PUBLICACION(
     titulo VARCHAR(200),
     contenido TEXT,
     fecha_publicacion DATE,
+    estado VARCHAR(10),
     id_categoria INTEGER,
     propietario VARCHAR(50),
     id_archivo INTEGER,
