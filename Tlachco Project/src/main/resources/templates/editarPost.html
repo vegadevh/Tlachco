@@ -32,6 +32,8 @@
 
     <textarea name="editor" id="editor" rows="1000"></textarea>
 
+    <th:block th:replace="components/footer :: footer"></th:block>
+    
     <script>
         $(document).ready(function () {
             CKEDITOR.replace('editor', {
