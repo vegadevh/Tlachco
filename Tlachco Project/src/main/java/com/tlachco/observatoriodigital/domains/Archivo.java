@@ -23,9 +23,14 @@ public class Archivo {
 //	@NotEmpty
 //	@Column(name="id_archivo")
 //	private String id_archivo;
+	@Column(name = "tipo")
+	private String tipo;
+	
+	@Column(name = "nombre")
+	private String nombre;
 
-	@Lob
-	@Type(type="org.hibernate.type.BinaryType")
+//	@Lob
+//	@Type(type="org.hibernate.type.BinaryType")
 	@Column(name = "contenido")
 	private byte[] contenido;
 	
@@ -33,10 +38,27 @@ public class Archivo {
 		
 	}
 
-	public Archivo(byte[] contenido) {
+	public Archivo(String tipo, String nombre, byte[] contenido) {
 		super();
-//		this.id_archivo = id_archivo;
+		this.tipo = tipo;
+		this.nombre = nombre;
 		this.contenido = contenido;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public Integer getId_archivo() {

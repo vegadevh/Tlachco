@@ -25,11 +25,26 @@
 
 <body>
     <th:block th:replace="components/navbar :: navbar"></th:block>
-    <div>
-        <div class="container" sec:authorize="isAnonymous()">
+    <div class="container">
+        <div sec:authorize="isAnonymous()">
             <h1>Hola Tlachco</h1>
             <a class="btn btn-primary btn-lg" href="/login" role="button">Iniciar Sesión</a>
+
         </div>
+        <table class="table shadow-lg bg-white rounded">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">#</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="archivo: ${listaArchivos}">
+                    <th scope="row" th:text="${archivo.nombre}"></th>
+                    <th scope="row"><a th:href="@{'/post/archivo/'+${archivo.id_archivo}}">Descargar</a></th>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </body>
 

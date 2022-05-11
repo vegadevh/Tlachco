@@ -12,10 +12,12 @@ public interface IArchivoService {
 	
 	public List<Archivo> findAll() throws DataAccessException;
 	
-	public void save(Archivo archivo, MultipartFile file) throws IOException;
+//	public void save(Archivo archivo, MultipartFile file) throws IOException;
+	
+	public Archivo save(Archivo archivo, MultipartFile file) throws IOException;
 	
 //	public void delete(Integer id_archivo) throws DataAccessException;
 //	
-//	public Archivo findOne(Integer id_archivo) throws DataAccessException;
+	public Archivo findOne(Integer id_archivo) throws DataAccessException;
 
 }

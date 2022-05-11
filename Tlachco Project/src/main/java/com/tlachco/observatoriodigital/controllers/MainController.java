@@ -12,53 +12,53 @@ import com.tlachco.observatoriodigital.services.IArchivoService;
 
 @Controller
 public class MainController {
-	
+
 	@Autowired
 	private IArchivoService archivoService;
-	
+
 	@RequestMapping("/")
 	public String index(Model model) {
-		
+
 		List<Archivo> listaArchivos = null;
 		try {
 			listaArchivos = archivoService.findAll();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		model.addAttribute(listaArchivos);
+
+		model.addAttribute("listaArchivos", listaArchivos);
 
 		return "index";
 	}
-	
+
 	@RequestMapping("/noticias")
 	public String noticias(Model model) {
 
 		return "noticias";
 	}
-	
+
 	@RequestMapping("/articulos")
 	public String articulos(Model model) {
 
 		return "articulos";
 	}
-	
+
 	@RequestMapping("/videos")
 	public String videos(Model model) {
 
 		return "videos";
 	}
-	
+
 	@RequestMapping("/infografias")
 	public String infografias(Model model) {
 
 		return "infografias";
 	}
-	
+
 	@RequestMapping("/sobre-nosotros")
 	public String sobreNosotros(Model model) {
 
 		return "sobre-nosotros";
 	}
-	
+
 }
