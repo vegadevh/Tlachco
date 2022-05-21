@@ -19,8 +19,10 @@ CREATE TABLE CATEGORIA(
 );
 -- archivos/infografias
 CREATE TABLE ARCHIVO(
-    id_archivo SERIAL PRIMARY KEY NOT NULL,
-    contenido BYTEA
+    id_archivo TEXT PRIMARY KEY NOT NULL,
+    contenido BYTEA,
+    tipo TEXT,
+    nombre TEXT
 );
 -- noticias/articulos/infografias/archivos
 CREATE TABLE PUBLICACION(
@@ -31,7 +33,7 @@ CREATE TABLE PUBLICACION(
     estado VARCHAR(10),
     id_categoria INTEGER,
     propietario VARCHAR(50),
-    id_archivo INTEGER,
+    id_archivo TEXT,
     FOREIGN KEY(id_categoria) REFERENCES CATEGORIA(id_categoria),
     FOREIGN KEY(propietario) REFERENCES USUARIO(usuario),
     FOREIGN KEY(id_archivo) REFERENCES ARCHIVO(id_archivo)

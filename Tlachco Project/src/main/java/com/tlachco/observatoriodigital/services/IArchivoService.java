@@ -18,6 +18,6 @@ public interface IArchivoService {
 	
 //	public void delete(Integer id_archivo) throws DataAccessException;
 //	
-	public Archivo findOne(Integer id_archivo) throws DataAccessException;
+	public Archivo findOne(String id_archivo) throws DataAccessException;
 
 }

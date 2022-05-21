@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.tlachco.observatoriodigital.domains.Archivo;
 
 @Repository
-public interface IArchivoRepo extends JpaRepository<Archivo, Integer> {
+public interface IArchivoRepo extends JpaRepository<Archivo, String> {
 
 }

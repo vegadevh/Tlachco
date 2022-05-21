@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.annotations.Type;
 
@@ -15,9 +16,10 @@ import org.hibernate.annotations.Type;
 public class Archivo {
 
 	@Id
+	@NotEmpty
 	@Column(name = "id_archivo")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id_archivo;
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private String id_archivo;
 	
 //	@Id
 //	@NotEmpty
@@ -38,8 +40,9 @@ public class Archivo {
 		
 	}
 
-	public Archivo(String tipo, String nombre, byte[] contenido) {
+	public Archivo(String id_archivo, String tipo, String nombre, byte[] contenido) {
 		super();
+		this.id_archivo = id_archivo;
 		this.tipo = tipo;
 		this.nombre = nombre;
 		this.contenido = contenido;
@@ -61,11 +64,11 @@ public class Archivo {
 		this.nombre = nombre;
 	}
 
-	public Integer getId_archivo() {
+	public String getId_archivo() {
 		return id_archivo;
 	}
 
-	public void setId_archivo(Integer id_archivo) {
+	public void setId_archivo(String id_archivo) {
 		this.id_archivo = id_archivo;
 	}
 

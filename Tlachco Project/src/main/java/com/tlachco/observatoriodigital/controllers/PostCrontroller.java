@@ -76,7 +76,7 @@ public class PostCrontroller {
 	}
 
 	@RequestMapping("/archivo/{id_archivo}")
-	public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable Integer id_archivo) {
+	public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable String id_archivo) {
 		Archivo archivo = archivoService.findOne(id_archivo);
 		return ResponseEntity.ok()
 				.contentType(MediaType.parseMediaType(archivo.getTipo()))

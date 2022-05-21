@@ -58,7 +58,7 @@ public class Publicacion {
 	private Archivo archivo;
 
 	@Transient
-	private Integer id_archivo;
+	private String id_archivo;
 
 	public Integer getId_publicacion() {
 		return id_publicacion;
@@ -132,11 +132,19 @@ public class Publicacion {
 		this.archivo = archivo;
 	}
 
-	public Integer getId_archivo() {
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getId_archivo() {
 		return id_archivo;
 	}
 
-	public void setId_archivo(Integer id_archivo) {
+	public void setId_archivo(String id_archivo) {
 		this.id_archivo = id_archivo;
 	}
 

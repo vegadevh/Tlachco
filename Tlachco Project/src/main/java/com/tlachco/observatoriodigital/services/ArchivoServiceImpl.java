@@ -1,6 +1,10 @@
 package com.tlachco.observatoriodigital.services;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +48,7 @@ public class ArchivoServiceImpl implements IArchivoService {
 	// }
 
 	@Override
-	public Archivo findOne(Integer id_archivo) throws DataAccessException {
+	public Archivo findOne(String id_archivo) throws DataAccessException {
 		return archivoRepo.findById(id_archivo).orElse(null);
 	}
 
@@ -52,7 +56,14 @@ public class ArchivoServiceImpl implements IArchivoService {
 	public Archivo save(Archivo archivo, MultipartFile file) throws IOException {
 //		Archivo archivo = new Archivo(nombreArchivo.getBytes());
 		String nombre = file.getOriginalFilename();
+		
+		Date date = Calendar.getInstance().getTime();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+		String strDate = dateFormat.format(date);
+		String myDate = strDate.replaceAll(":", "");
+		
 		try {
+			archivo.setId_archivo(myDate+nombre);
 			archivo.setTipo(file.getContentType());
 			archivo.setNombre(nombre);
 			archivo.setContenido(file.getBytes());
