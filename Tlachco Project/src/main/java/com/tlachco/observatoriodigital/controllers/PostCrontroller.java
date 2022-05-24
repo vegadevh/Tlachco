@@ -1,7 +1,10 @@
 package com.tlachco.observatoriodigital.controllers;
 
 import java.io.IOException;
-import java.util.List;
+import java.security.Principal;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -17,13 +20,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.tlachco.observatoriodigital.domains.Publicacion;
+import com.tlachco.observatoriodigital.domains.Usuario;
 import com.tlachco.observatoriodigital.domains.Archivo;
 import com.tlachco.observatoriodigital.domains.CategoriaPublicacion;
 import com.tlachco.observatoriodigital.services.IArchivoService;
 import com.tlachco.observatoriodigital.services.ICategoriaPublicacionService;
+import com.tlachco.observatoriodigital.services.IPublicacionService;
+import com.tlachco.observatoriodigital.services.IUsuarioService;
 
 @Controller
 @RequestMapping("/post")
@@ -35,25 +40,68 @@ public class PostCrontroller {
 	@Autowired
 	public IArchivoService archivoService;
 
+	@Autowired
+	public IUsuarioService usuarioService;
+
+	@Autowired
+	public IPublicacionService publicacionService;
+
 	@RequestMapping("/creacion")
-	public String creacion_post(Model model) {
+	public String creacion_post(@RequestParam String categoria, HttpServletRequest request, Model model) {
+
+		// List<CategoriaPublicacion> categorias = null;
+		Integer id_categoria = null;
 
 		Publicacion publicacion = new Publicacion();
 
-		// Cambios
-		List<CategoriaPublicacion> categorias = null;
-
-		try {
-			categorias = categoriaService.findAll();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		// Cambios
-
-		model.addAttribute("categorias", categorias);
+		model.addAttribute("categoria", categoria);
+		// model.addAttribute("categorias", categorias);
+		model.addAttribute("id_categoria", id_categoria);
 		model.addAttribute("publicacion", publicacion);
 
 		return "crearPost";
+	}
+
+	@RequestMapping("/validar-creacion")
+	public String validar_post(@Valid @ModelAttribute Publicacion publicacion, BindingResult result,
+			Principal principal, @RequestParam String categoria, HttpServletRequest request, Model model) {
+
+		String estado = null;
+
+		if (result.hasErrors()) {
+			model.addAttribute("categoria", categoria);
+			model.addAttribute("publicacion", publicacion);
+
+			return "crearPost";
+		} else {
+
+			if (request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("ROLE_TEACHER")) {
+				estado = "Public";
+			} else {
+				estado = "Review";
+			}
+			
+			String id_usuario = principal.getName();
+			
+			CategoriaPublicacion id_categoria = new CategoriaPublicacion();
+			id_categoria = categoriaService.findByCategoria(categoria);
+
+			Usuario propietario = new Usuario();
+			propietario = usuarioService.findOne(id_usuario);
+
+			publicacion.setFecha_publicacion(new java.util.Date());
+			publicacion.setEstado(estado);
+			publicacion.setUsuario(propietario);
+			publicacion.setCategoriaPublicacion(id_categoria);
+
+			try {
+				publicacionService.save(publicacion);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return "index";
+		}
 	}
 
 	@RequestMapping("/subir")
@@ -80,17 +128,7 @@ public class PostCrontroller {
 		Archivo archivo = archivoService.findOne(id_archivo);
 		return ResponseEntity.ok()
 				.contentType(MediaType.parseMediaType(archivo.getTipo()))
-				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment:filename=\""+archivo.getNombre()+"\"")
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment:filename=\"" + archivo.getNombre() + "\"")
 				.body(new ByteArrayResource(archivo.getContenido()));
-	}
-
-	// MultipartFile file
-	// archivoService.save(archivo, file);
-
-	@RequestMapping("/validar-creacion")
-	public ModelAndView validar_post() {
-		ModelAndView mav = new ModelAndView();
-
-		return mav;
 	}
 }

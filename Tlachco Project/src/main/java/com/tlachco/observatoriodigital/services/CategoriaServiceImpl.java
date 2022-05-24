@@ -13,17 +13,27 @@ import com.tlachco.observatoriodigital.repositories.ICategoriaPublicacionRepo;
 public class CategoriaServiceImpl implements ICategoriaPublicacionService{
 	
 	@Autowired
-	public ICategoriaPublicacionRepo categoriaArticuloRepo;
+	public ICategoriaPublicacionRepo categoriaPublicaionRepo;
 
 	@Override
 	public List<CategoriaPublicacion> findAll() throws DataAccessException {
-		return categoriaArticuloRepo.findAll();
+		return categoriaPublicaionRepo.findAll();
 	}
 
 	@Override
 	public void save(CategoriaPublicacion categoriaArticulo) throws DataAccessException {
-		categoriaArticuloRepo.save(categoriaArticulo);
+		categoriaPublicaionRepo.save(categoriaArticulo);
 		
+	}
+
+	@Override
+	public CategoriaPublicacion findOne(Integer usuario) throws DataAccessException {
+		return categoriaPublicaionRepo.findById(usuario).orElse(null);
+	}
+
+	@Override
+	public CategoriaPublicacion findByCategoria(String categoria) throws DataAccessException {
+		return categoriaPublicaionRepo.findByCategoria(categoria);
 	}
 
 }

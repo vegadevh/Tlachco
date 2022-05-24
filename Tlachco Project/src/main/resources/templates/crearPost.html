@@ -29,18 +29,23 @@
     <div class="container">
         <h1>Crear Post</h1>
 
-        <form action="@{/post/validarCreacion}" th:object="${publicacion}" method="post">
+        <form th:action="@{/post/validar-creacion}" th:object="${publicacion}" method="post">
+            <input th:name="categoria" type="text" th:value="${categoria}">
             <label for="titulo">Titulo de la publicación:</label>
             <input type="text" id="titulo" th:field="*{titulo}">
-            <label for="categoria">Categoria de publicación:</label>
-            <select id="categoriaSelect" th:name="categoriaSelect">
-                <option value="0" selected="selected">Selecciona una opci&oacute;n</option>
+            <!-- <label for="categoria">Categoria de publicación:</label>
+            <select id="categoriaSelect" th:name="categoriaSelect" th:value="${id_categoria}">
+                <option value="0">Selecciona una opci&oacute;n</option>
                 <option th:each="categoria : ${categorias}" th:value="${categoria.id_categoria}"
                     th:id="${categoria.id_categoria}" th:text="${categoria.categoria}">
                 </option>
-            </select>
-            <textarea name="contenido" id="contenido"></textarea>
+            </select> -->
+            <textarea name="contenido" id="contenido" th:field="*{contenido}"></textarea>
+            <!-- <input th:name="estado" id="estado" type="text" th:value="estado" th:field="${estado}"}> -->
+
+            <input type="submit" value="Publicar" class="btn btn-primary">
         </form>
+
     </div>
 
     <th:block th:replace="components/footer :: footer"></th:block>

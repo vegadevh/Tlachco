@@ -12,4 +12,7 @@ public interface ICategoriaPublicacionService {
 	
 	public void save(CategoriaPublicacion categoriaArticulo) throws DataAccessException;
 
+	public CategoriaPublicacion findOne(Integer id_categoriaArticulo) throws DataAccessException;
+	
+	public CategoriaPublicacion findByCategoria(String categoria) throws DataAccessException;
 }
