@@ -31,11 +31,10 @@
         <div class="container">
             <div style="display: flex; justify-content: right;"
                 sec:authorize="hasAnyRole('ADMIN', 'TEACHER', 'STUDENT')">
-                <a th:href="@{/post/creacion}">
-                    <button type="button" class="btn btn-primary crear-post">
-                        Crear Articulo
-                    </button>
-                </a>
+                <form class="p-1" th:action="@{/post/creacion}" method="GET">
+                    <input th:name="categoria" type="text" th:value="Articulo">
+                    <input type="submit" class="btn btn-primary" value="Crear Articulo">
+                </form>
             </div>
         </div>
     </div>

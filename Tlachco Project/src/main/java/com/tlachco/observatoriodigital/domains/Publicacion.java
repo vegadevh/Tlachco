@@ -47,11 +47,11 @@ public class Publicacion {
 	private Integer id_categoria;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "usuario")
-	private Usuario propietario;
+	@JoinColumn(name = "propietario")
+	private Usuario usuario;
 
 	@Transient
-	private Integer usuario;
+	private String propietario;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_archivo")
@@ -108,20 +108,20 @@ public class Publicacion {
 		this.id_categoria = id_categoria;
 	}
 
-	public Usuario getPropietario() {
-		return propietario;
-	}
-
-	public void setPropietario(Usuario propietario) {
-		this.propietario = propietario;
-	}
-
-	public Integer getUsuario() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Integer usuario) {
+	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public String getPropietario() {
+		return propietario;
+	}
+
+	public void setPropietario(String propietario) {
+		this.propietario = propietario;
 	}
 
 	public Archivo getArchivo() {
