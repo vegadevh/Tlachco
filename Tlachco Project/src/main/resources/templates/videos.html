@@ -26,9 +26,14 @@
 <body>
     <th:block th:replace="components/navbar :: navbar"></th:block>
     <div>
-        <div class="container" sec:authorize="isAnonymous()">
-            <h1>Hola Tlachco</h1>
-            <a class="btn btn-primary btn-lg" href="/login" role="button">Iniciar Sesión</a>
+        <div class="container">
+            <div style="display: flex; justify-content: right;"
+                sec:authorize="hasAnyRole('ADMIN', 'TEACHER', 'STUDENT')">
+                <form class="p-1" th:action="@{/post/creacion}" method="GET">
+                    <input th:name="categoria" type="hidden" th:value="Video">
+                    <input type="submit" class="btn btn-primary" value="Crear Articulo">
+                </form>
+            </div>
         </div>
     </div>
     <th:block th:replace="components/footer :: footer"></th:block>

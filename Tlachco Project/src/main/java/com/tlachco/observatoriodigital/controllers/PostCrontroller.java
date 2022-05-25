@@ -47,7 +47,7 @@ public class PostCrontroller {
 	public IPublicacionService publicacionService;
 
 	@RequestMapping("/creacion")
-	public String creacion_post(@RequestParam String categoria, HttpServletRequest request, Model model) {
+	public String creacion_post(@RequestParam String categoria, Model model) {
 
 		// List<CategoriaPublicacion> categorias = null;
 		Integer id_categoria = null;

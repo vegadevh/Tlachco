@@ -32,7 +32,7 @@
             <div style="display: flex; justify-content: right;"
                 sec:authorize="hasAnyRole('ADMIN', 'TEACHER', 'STUDENT')">
                 <form class="p-1" th:action="@{/post/creacion}" method="GET">
-                    <input th:name="categoria" type="text" th:value="Articulo">
+                    <input th:name="categoria" type="hidden" th:value="Articulo">
                     <input type="submit" class="btn btn-primary" value="Crear Articulo">
                 </form>
             </div>

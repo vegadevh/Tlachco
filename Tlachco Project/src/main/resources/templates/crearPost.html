@@ -30,7 +30,7 @@
         <h1>Crear Post</h1>
 
         <form th:action="@{/post/validar-creacion}" th:object="${publicacion}" method="post">
-            <input th:name="categoria" type="text" th:value="${categoria}">
+            <input th:name="categoria" type="hidden" th:value="${categoria}">
             <label for="titulo">Titulo de la publicación:</label>
             <input type="text" id="titulo" th:field="*{titulo}">
             <!-- <label for="categoria">Categoria de publicación:</label>
