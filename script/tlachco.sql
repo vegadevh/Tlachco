@@ -39,6 +39,14 @@ CREATE TABLE PUBLICACION(
     FOREIGN KEY(id_archivo) REFERENCES ARCHIVO(id_archivo)
 );
 
+-- videos
+CREATE TABLE VIDEO(
+    id_video SERIAL PRIMARY KEY NOT NULL,
+    enlace VARCHAR(200),
+    id_categoria INTEGER,
+    FOREIGN KEY(id_categoria) REFERENCES CATEGORIA(id_categoria)
+);
+
 CREATE TABLE TAG(
     id_tag SERIAL PRIMARY KEY NOT NULL,
     tag VARCHAR(30),
