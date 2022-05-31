@@ -2,6 +2,7 @@ package com.tlachco.observatoriodigital.controllers;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -23,12 +24,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.tlachco.observatoriodigital.domains.Publicacion;
 import com.tlachco.observatoriodigital.domains.Usuario;
+import com.tlachco.observatoriodigital.domains.Video;
 import com.tlachco.observatoriodigital.domains.Archivo;
 import com.tlachco.observatoriodigital.domains.CategoriaPublicacion;
 import com.tlachco.observatoriodigital.services.IArchivoService;
 import com.tlachco.observatoriodigital.services.ICategoriaPublicacionService;
 import com.tlachco.observatoriodigital.services.IPublicacionService;
 import com.tlachco.observatoriodigital.services.IUsuarioService;
+import com.tlachco.observatoriodigital.services.IVideoService;
+import com.tlachco.observatoriodigital.services.VideoServiceImpl;
 
 @Controller
 @RequestMapping("/post")
@@ -45,6 +49,9 @@ public class PostCrontroller {
 
 	@Autowired
 	public IPublicacionService publicacionService;
+	
+	@Autowired
+	public IVideoService videoService;
 
 	@RequestMapping("/creacion")
 	public String creacion_post(@RequestParam String categoria, Model model) {
@@ -101,6 +108,45 @@ public class PostCrontroller {
 			}
 
 			return "index";
+		}
+	}
+	
+	@RequestMapping("/validar-video")
+	public String validar_video(@Valid @ModelAttribute Video video, BindingResult result,
+			Principal principal, @RequestParam String categoria, HttpServletRequest request, Model model) {
+
+		if (result.hasErrors()) {
+			model.addAttribute("categoria", categoria);
+			model.addAttribute("video", video);
+
+			return "videos";
+		} else {
+			
+			CategoriaPublicacion id_categoria = new CategoriaPublicacion();
+			id_categoria = categoriaService.findByCategoria(categoria);
+
+			video.setCategoriaPublicacion(id_categoria);
+
+			try {
+				videoService.save(video);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			List<Video> listaVideos = null;
+			Video auxvideo = new Video();
+			
+			try {
+				listaVideos = videoService.findALL();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			model.addAttribute("categoria", categoria);
+			model.addAttribute("auxvideo", auxvideo);
+			model.addAttribute("listaVideos", listaVideos);
+
+			return "videos";
 		}
 	}
 

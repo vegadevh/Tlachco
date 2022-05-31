@@ -8,13 +8,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tlachco.observatoriodigital.domains.Archivo;
+import com.tlachco.observatoriodigital.domains.Video;
 import com.tlachco.observatoriodigital.services.IArchivoService;
+import com.tlachco.observatoriodigital.services.IVideoService;
 
 @Controller
 public class MainController {
 
 	@Autowired
 	private IArchivoService archivoService;
+	
+	@Autowired
+	public IVideoService videoService;
 
 	@RequestMapping("/")
 	public String index(Model model) {
@@ -45,6 +50,20 @@ public class MainController {
 
 	@RequestMapping("/videos")
 	public String videos(Model model) {
+		
+		Video video = new Video();
+		List<Video> listaVideos = null;
+		String categoria = "Video";
+		
+		try {
+			listaVideos = videoService.findALL();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("categoria", categoria);
+		model.addAttribute("video", video);
+		model.addAttribute("listaVideos", listaVideos);
 
 		return "videos";
 	}
