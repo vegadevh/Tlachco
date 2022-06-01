@@ -44,24 +44,33 @@ a {
 
 /*---------------------------------------------*/
 .footerown {
-	background-color: #68533E;
-	color: #E9E9E9;
-	padding: 4em;
+    background-color: #68533E;
+    color: #E9E9E9;
+    padding: 4em;
 }
+
 .navown {
-	text-decoration: none;
-	font-weight: 400;
-	display: block;
-	transform: none;
-	color: #E9E9E9;
+    text-decoration: none;
+    font-weight: 400;
+    display: block;
+    transform: none;
+    color: #E9E9E9;
 }
 
 .navown:hover {
-	color: #B09E80;
-	text-decoration: underline;
+    color: #B09E80;
+    text-decoration: underline;
 }
 
-.rob{
+.rob {
     padding: 2em;
-	border: 2em;
+    border: 2em;
+}
+
+.grid-container {
+    justify-content: center;
+    /* display: grid;
+    grid-template-columns: repeat(3, 23em); */
+    display: flex;
+    flex-flow: row wrap;
 }
