@@ -137,7 +137,7 @@ public class PostCrontroller {
 			Video auxvideo = new Video();
 			
 			try {
-				listaVideos = videoService.findALL();
+				listaVideos = videoService.findAllByIdOrderByDesc();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -146,7 +146,7 @@ public class PostCrontroller {
 			model.addAttribute("auxvideo", auxvideo);
 			model.addAttribute("listaVideos", listaVideos);
 
-			return "videos";
+			return "redirect:/videos";
 		}
 	}
 

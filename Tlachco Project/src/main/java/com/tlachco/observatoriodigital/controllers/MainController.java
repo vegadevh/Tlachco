@@ -56,7 +56,7 @@ public class MainController {
 		String categoria = "Video";
 		
 		try {
-			listaVideos = videoService.findALL();
+			listaVideos = videoService.findAllByIdOrderByDesc();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

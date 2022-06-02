@@ -74,3 +74,7 @@ a {
     display: flex;
     flex-flow: row wrap;
 }
+
+.grid-container > div {
+	margin: 0.5em;
+}

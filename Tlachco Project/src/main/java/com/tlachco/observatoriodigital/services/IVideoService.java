@@ -15,5 +15,7 @@ public interface IVideoService {
 	public void delete(Integer id_video) throws DataAccessException;
 	
 	public Video findOne(Integer id_video) throws DataAccessException;
+	
+	public List<Video> findAllByIdOrderByDesc() throws DataAccessException;
 
 }
