@@ -24,7 +24,9 @@
 </head>
 
 <body>
-    <th:block th:replace="components/navbar :: navbar"></th:block>
+    <header>
+        <th:block th:replace="components/navbar :: navbar"></th:block>
+    </header>
     <div class="container">
         <div sec:authorize="isAnonymous()">
             <h1>Hola Tlachco</h1>
@@ -38,15 +40,31 @@
                     <th scope="col">#</th>
                 </tr>
             </thead>
-            <tbody>
+            <!-- <tbody>
                 <tr th:each="archivo: ${listaArchivos}">
                     <th scope="row" th:text="${archivo.nombre}"></th>
                     <th scope="row"><a th:href="@{'/post/archivo/'+${archivo.id_archivo}}">Descargar</a></th>
                 </tr>
-            </tbody>
+            </tbody> -->
         </table>
     </div>
     <th:block th:replace="components/footer :: footer"></th:block>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 110) {
+                    document.getElementById('navbar').classList.add('fixed-top');
+                    // add padding top to show content behind navbar
+                    navbar_height = document.querySelector('.navbar').offsetHeight;
+                    document.body.style.paddingTop = navbar_height + 'px';
+                } else {
+                    document.getElementById('navbar').classList.remove('fixed-top');
+                    // remove padding top from body
+                    document.body.style.paddingTop = '0';
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

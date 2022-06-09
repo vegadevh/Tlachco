@@ -1,3 +1,7 @@
+html {
+    overflow-y: scroll;
+}
+
 .bg-brown {
     background-color: #68533E;
 }
@@ -75,6 +79,6 @@ a {
     flex-flow: row wrap;
 }
 
-.grid-container > div {
-	margin: 0.5em;
+.grid-container>div {
+    margin: 0.5em;
 }

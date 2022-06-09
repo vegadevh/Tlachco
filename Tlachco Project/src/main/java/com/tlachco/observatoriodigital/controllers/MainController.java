@@ -24,14 +24,14 @@ public class MainController {
 	@RequestMapping("/")
 	public String index(Model model) {
 
-		List<Archivo> listaArchivos = null;
-		try {
-			listaArchivos = archivoService.findAll();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		model.addAttribute("listaArchivos", listaArchivos);
+//		List<Archivo> listaArchivos = null;
+//		try {
+//			listaArchivos = archivoService.findAll();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//
+//		model.addAttribute("listaArchivos", listaArchivos);
 
 		return "index";
 	}
