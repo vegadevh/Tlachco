@@ -38,4 +38,9 @@ public class PublicacionServiceImpl implements IPublicacionService {
 		return articuloRepo.findById(articulo).orElse(null);
 	}
 
+	@Override
+	public List<Publicacion> findByKeyword(String keyword) throws DataAccessException {
+		return articuloRepo.findByKeyword(keyword);
+	}
+
 }

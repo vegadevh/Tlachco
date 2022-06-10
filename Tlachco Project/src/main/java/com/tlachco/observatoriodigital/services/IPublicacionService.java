@@ -15,5 +15,10 @@ public interface IPublicacionService {
 	public void delete(Integer articulo) throws DataAccessException;
 	
 	public Publicacion findOne(Integer articulo) throws DataAccessException;
+	
+	
+	//Filtros
+	
+	public  List<Publicacion> findByKeyword(String keyword) throws DataAccessException;
 
 }
