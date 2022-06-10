@@ -13,7 +13,7 @@ import com.tlachco.observatoriodigital.repositories.IPublicacionRepo;
 
 @Service
 public class PublicacionServiceImpl implements IPublicacionService {
-	
+
 	@Autowired
 	public IPublicacionRepo publicacionRepo;
 
@@ -25,14 +25,14 @@ public class PublicacionServiceImpl implements IPublicacionService {
 	@Override
 	public void save(Publicacion articulo) throws DataAccessException {
 		publicacionRepo.save(articulo);
-		
+
 	}
 
 	@Override
 	public void delete(Integer articulo) throws DataAccessException {
 		Publicacion article = publicacionRepo.getById(articulo);
 		publicacionRepo.delete(article);
-		
+
 	}
 
 	@Override
@@ -64,6 +64,11 @@ public class PublicacionServiceImpl implements IPublicacionService {
 			return p;
 		}).collect(Collectors.toList());
 		return articulos;
+	}
+
+	@Override
+	public List<Publicacion> findByKeyword(String keyword) throws DataAccessException {
+		return publicacionRepo.findByKeyword(keyword);
 	}
 
 }
