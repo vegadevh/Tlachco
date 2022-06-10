@@ -27,35 +27,15 @@
 
 <body>
     <th:block th:replace="components/navbar :: navbar"></th:block>
-    <div>
-        <div class="container">
-            <div style="display: flex; justify-content: right;"
-                sec:authorize="hasAnyRole('ADMIN', 'TEACHER', 'STUDENT')">
-                <form class="p-1" th:action="@{/post/creacion}" method="GET">
-                    <input th:name="categoria" type="hidden" th:value="Articulo">
-                    <input type="submit" class="btn btn-primary" value="Crear Articulo">
-                </form>
-            </div>
+    <div class="container">
+        <div style="display: flex; justify-content: right;" sec:authorize="hasAnyRole('ADMIN', 'TEACHER', 'STUDENT')">
+            <form class="p-1" th:action="@{/post/creacion}" method="GET">
+                <input th:name="categoria" type="hidden" th:value="Articulo">
+                <input type="submit" class="btn btn-primary" value="Crear Articulo">
+            </form>
         </div>
     </div>
-    <section class="container">
-        <!-- <div class="row"> -->
-        <div class="row row-cols-1 row-cols-md-2 g-4">
-            <div class="col-md-4" th:each="articulo : ${listaArticulos}">
-                <article class="">
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                            <h5 class="card-title" th:text="${articulo.titulo}"></h5>
-                            <h6 class="card-subtitle mb-2 text-muted" th:text="${articulo.propietario}"></h6>
-                            <p class="card-text" th:utext="${articulo.contenido}"></p>
-                            <p class="card-subtitle mb-2 text-muted" th:text="${articulo.fecha_publicacion}"></p>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </div>
-        <!-- </div> -->
-    </section>
+    <th:block th:replace="components/listaPublicaciones :: listaPublicaciones"></th:block>
     <th:block th:replace="components/footer :: footer"></th:block>
     <script>
         document.addEventListener("DOMContentLoaded", function () {

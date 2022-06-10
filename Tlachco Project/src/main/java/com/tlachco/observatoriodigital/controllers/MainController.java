@@ -45,15 +45,15 @@ public class MainController {
 	@RequestMapping("/noticias")
 	public String noticias(Model model) {
 		
-		List<PublicacionesDTO> listaNoticias = null;
+		List<PublicacionesDTO> listaResultados = null;
 		
 		try {
-			listaNoticias = publicacionService.findAllNoticias();
+			listaResultados = publicacionService.findAllNoticias();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		model.addAttribute("listaNoticias", listaNoticias);
+		model.addAttribute("listaResultados", listaResultados);
 
 		return "noticias";
 	}
@@ -61,15 +61,15 @@ public class MainController {
 	@RequestMapping("/articulos")
 	public String articulos(Model model) {
 		
-		List<PublicacionesDTO> listaArticulos = null;
+		List<PublicacionesDTO> listaResultados = null;
 		
 		try {
-			listaArticulos = publicacionService.findAllArticulos();
+			listaResultados = publicacionService.findAllArticulos();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		model.addAttribute("listaArticulos", listaArticulos);
+		model.addAttribute("listaResultados", listaResultados);
 
 		return "articulos";
 	}
