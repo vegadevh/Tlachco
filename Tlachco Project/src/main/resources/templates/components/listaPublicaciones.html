@@ -2,7 +2,7 @@
     <div class="row row-cols-1 row-cols-md-2 g-4">
         <div class="col-md-4" th:each="resultado : ${listaResultados}">
             <article class="grid-container">
-                <div class="card" style="width: 18rem;">
+                <div class="card shadow-sm p-3 mb-5 bg-white rounded" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title" th:text="${resultado.titulo}"></h5>
                         <h6 class="card-subtitle mb-2 text-muted" th:text="${resultado.propietario}"></h6>
