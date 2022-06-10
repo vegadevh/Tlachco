@@ -8,8 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tlachco.observatoriodigital.domains.Archivo;
+import com.tlachco.observatoriodigital.domains.Publicacion;
 import com.tlachco.observatoriodigital.domains.Video;
+import com.tlachco.observatoriodigital.dto.PublicacionesDTO;
 import com.tlachco.observatoriodigital.services.IArchivoService;
+import com.tlachco.observatoriodigital.services.IPublicacionService;
 import com.tlachco.observatoriodigital.services.IVideoService;
 
 @Controller
@@ -20,6 +23,9 @@ public class MainController {
 	
 	@Autowired
 	public IVideoService videoService;
+	
+	@Autowired
+	public IPublicacionService publicacionService;
 
 	@RequestMapping("/")
 	public String index(Model model) {
@@ -38,12 +44,32 @@ public class MainController {
 
 	@RequestMapping("/noticias")
 	public String noticias(Model model) {
+		
+		List<PublicacionesDTO> listaNoticias = null;
+		
+		try {
+			listaNoticias = publicacionService.findAllNoticias();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("listaNoticias", listaNoticias);
 
 		return "noticias";
 	}
 
 	@RequestMapping("/articulos")
 	public String articulos(Model model) {
+		
+		List<PublicacionesDTO> listaArticulos = null;
+		
+		try {
+			listaArticulos = publicacionService.findAllArticulos();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("listaArticulos", listaArticulos);
 
 		return "articulos";
 	}
