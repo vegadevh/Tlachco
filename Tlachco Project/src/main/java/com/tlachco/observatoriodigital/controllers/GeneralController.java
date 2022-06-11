@@ -25,6 +25,7 @@ public class GeneralController {
 		
 	
 		try {
+			titulo = titulo.toLowerCase();
 			listaResultados = publicacionService.findByKeyword(titulo);
 		} catch (Exception e) {
 			e.printStackTrace();

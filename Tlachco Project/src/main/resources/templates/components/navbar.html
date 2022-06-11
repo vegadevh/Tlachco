@@ -50,8 +50,9 @@
 						<a class="nav-link text-color" href="/sobre-nosotros">Sobre nosotros</a>
 					</li>
 				</ul>
-				<form class="form-inline my-2 my-lg-0">
-					<input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+				<form th:action="@{/general/busquedaPublicaciones}" method="post" class="form-inline my-2 my-lg-0">
+					<input class="form-control mr-sm-2" type="text" th:name="titulo" placeholder="Buscar"
+						aria-label="Search">
 					<button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Buscar</button>
 				</form>
 				<ul class="navbar-nav">

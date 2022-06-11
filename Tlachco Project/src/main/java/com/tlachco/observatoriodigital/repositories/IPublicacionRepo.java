@@ -27,7 +27,7 @@ public interface IPublicacionRepo extends JpaRepository<Publicacion, Integer> {
 	 * findByKeyword(@Param("keyword") String keyword);
 	 */
 
-	@Query(value = "SELECT titulo, contenido, fecha_publicacion, propietario FROM public.publicacion p WHERE (lower(p.titulo) like %:keyword% ;", nativeQuery = true)
+	@Query(nativeQuery = true, value = "SELECT titulo, contenido, fecha_publicacion, propietario FROM public.publicacion p WHERE (lower(p.titulo) like %:keyword% ) ;")
 	public List<Object[]> findByKeyword(String keyword) throws DataAccessException;
 
 }
