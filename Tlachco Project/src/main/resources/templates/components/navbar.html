@@ -50,9 +50,11 @@
 						<a class="nav-link text-color" href="/sobre-nosotros">Sobre nosotros</a>
 					</li>
 				</ul>
-				<form th:action="@{/general/busquedaPublicaciones}" method="post" class="form-inline my-2 my-lg-0">
-					<input class="form-control mr-sm-2" type="text" th:name="titulo" placeholder="Buscar"
-						aria-label="Search">
+				<form th:action="@{/general/busquedaPublicaciones}" method="post" class="form-inline my-2 my-lg-0"
+					autocomplete="off">
+					<input class="form-control mr-sm-2" type="text" th:name="titulo"
+						oninvalid="setCustomValidity('Ingrese valor de busqueda.')" placeholder="Buscar"
+						aria-label="Search" required>
 					<button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Buscar</button>
 				</form>
 				<ul class="navbar-nav">
