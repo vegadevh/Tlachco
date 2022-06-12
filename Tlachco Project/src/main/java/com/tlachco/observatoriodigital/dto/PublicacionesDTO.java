@@ -2,6 +2,8 @@ package com.tlachco.observatoriodigital.dto;
 
 public class PublicacionesDTO {
 	
+	private String id_publicacion;
+	
 	private String titulo;
 	
 	private String contenido;
@@ -40,6 +42,14 @@ public class PublicacionesDTO {
 
 	public void setPropietario(String propietario) {
 		this.propietario = propietario;
+	}
+
+	public String getId_publicacion() {
+		return id_publicacion;
+	}
+
+	public void setId_publicacion(String id_publicacion) {
+		this.id_publicacion = id_publicacion;
 	}
 	
 	

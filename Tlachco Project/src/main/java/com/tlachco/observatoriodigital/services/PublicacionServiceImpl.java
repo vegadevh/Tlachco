@@ -44,10 +44,11 @@ public class PublicacionServiceImpl implements IPublicacionService {
 	public List<PublicacionesDTO> findAllNoticias() throws DataAccessException {
 		List<PublicacionesDTO> noticias = publicacionRepo.findAllNoticias().stream().map(obj -> {
 			PublicacionesDTO p = new PublicacionesDTO();
-			p.setTitulo(obj[0].toString());
-			p.setContenido(obj[1].toString());
-			p.setFecha_publicacion(obj[2].toString());
-			p.setPropietario(obj[3].toString());
+			p.setId_publicacion(obj[0].toString());
+			p.setTitulo(obj[1].toString());
+			p.setContenido(obj[2].toString());
+			p.setFecha_publicacion(obj[3].toString());
+			p.setPropietario(obj[4].toString());
 			return p;
 		}).collect(Collectors.toList());
 		return noticias;
@@ -57,10 +58,11 @@ public class PublicacionServiceImpl implements IPublicacionService {
 	public List<PublicacionesDTO> findAllArticulos() throws DataAccessException {
 		List<PublicacionesDTO> articulos = publicacionRepo.findAllArticulos().stream().map(obj -> {
 			PublicacionesDTO p = new PublicacionesDTO();
-			p.setTitulo(obj[0].toString());
-			p.setContenido(obj[1].toString());
-			p.setFecha_publicacion(obj[2].toString());
-			p.setPropietario(obj[3].toString());
+			p.setId_publicacion(obj[0].toString());
+			p.setTitulo(obj[1].toString());
+			p.setContenido(obj[2].toString());
+			p.setFecha_publicacion(obj[3].toString());
+			p.setPropietario(obj[4].toString());
 			return p;
 		}).collect(Collectors.toList());
 		return articulos;
@@ -70,10 +72,11 @@ public class PublicacionServiceImpl implements IPublicacionService {
 	public List<PublicacionesDTO> findByKeyword(String keyword) throws DataAccessException {
 		List<PublicacionesDTO> publicaciones = publicacionRepo.findByKeyword(keyword).stream().map(obj -> {
 			PublicacionesDTO p = new PublicacionesDTO();
-			p.setTitulo(obj[0].toString());
-			p.setContenido(obj[1].toString());
-			p.setFecha_publicacion(obj[2].toString());
-			p.setPropietario(obj[3].toString());
+			p.setId_publicacion(obj[0].toString());
+			p.setTitulo(obj[1].toString());
+			p.setContenido(obj[2].toString());
+			p.setFecha_publicacion(obj[3].toString());
+			p.setPropietario(obj[4].toString());
 			return p;
 		}).collect(Collectors.toList());
 		
