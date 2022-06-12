@@ -23,6 +23,6 @@ public interface IPublicacionService {
 
 	// Filtros
 
-	public List<Publicacion> findByKeyword(String keyword) throws DataAccessException;
+	public List<PublicacionesDTO> findByKeyword(String keyword) throws DataAccessException;
 
 }

@@ -1,16 +1,22 @@
 <section class="container" th:fragment="listaPublicaciones">
-    <div class="row row-cols-1 row-cols-md-2 g-4">
-        <div class="col-md-4" th:each="resultado : ${listaResultados}">
-            <article class="grid-container">
-                <div class="card shadow-sm p-3 mb-5 bg-white rounded" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title" th:text="${resultado.titulo}"></h5>
-                        <h6 class="card-subtitle mb-2 text-muted" th:text="${resultado.propietario}"></h6>
-                        <p class="card-text" th:utext="${resultado.contenido}"></p>
-                        <p class="card-subtitle mb-2 text-muted" th:text="${resultado.fecha_publicacion}"></p>
-                    </div>
-                </div>
-            </article>
-        </div>
-    </div>
+	<div th:if="${listaResultados != null and !listaResultados.empty}">
+		<div class="row row-cols-1 row-cols-md-2 g-4">
+			<div class="col-md-4" th:each="resultado : ${listaResultados}">
+				<article class="grid-container">
+					<div class="card" style="width: 18rem;">
+						<div class="card-body">
+							<h5 class="card-title" th:text="${resultado.titulo}"></h5>
+							<h6 class="card-subtitle mb-2 text-muted" th:text="${resultado.propietario}"></h6>
+							<p class="card-text" th:utext="${resultado.contenido}"></p>
+							<p class="card-subtitle mb-2 text-muted" th:text="${resultado.fecha_publicacion}"></p>
+						</div>
+					</div>
+				</article>
+			</div>
+		</div>
+	</div>
+
+	<div class="text-center p-2" th:if="${listaResultados == null or listaResultados.empty}">
+		<span>No se encontraron resultados...</span>
+	</div>
 </section>
