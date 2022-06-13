@@ -27,6 +27,7 @@
     <header>
         <th:block th:replace="components/navbar :: navbar"></th:block>
     </header>
+    <h5 th:if="${umensaje}" class="alert alert-success" th:text="${umensaje}"></h5>
     <div class="container">
         <div sec:authorize="isAnonymous()">
             <h1>Hola Tlachco</h1>
@@ -46,6 +47,12 @@
                     <th scope="row"><a th:href="@{'/post/archivo/'+${archivo.id_archivo}}">Descargar</a></th>
                 </tr>
             </tbody> -->
+            
+            <tbody>
+                <td>
+                	<a th:href="@{/admin/usuario_registro}">Ingresar Usuario</a>
+                </td>
+            </tbody>
         </table>
     </div>
     <th:block th:replace="components/footer :: footer"></th:block>
