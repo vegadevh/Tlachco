@@ -27,15 +27,18 @@
 
 <body>
     <th:block th:replace="components/navbar :: navbar"></th:block>
-    <div class="container">
-        <div style="display: flex; justify-content: right;" sec:authorize="hasAnyRole('ADMIN', 'TEACHER', 'STUDENT')">
-            <form class="p-1" th:action="@{/post/creacion}" method="GET">
-                <input th:name="categoria" type="hidden" th:value="Articulo">
-                <input type="submit" class="btn btn-primary" value="Crear Articulo">
-            </form>
+    <div class="margin-container">
+        <div class="container">
+            <div style="display: flex; justify-content: right;"
+                sec:authorize="hasAnyRole('ADMIN', 'TEACHER', 'STUDENT')">
+                <form class="p-1" th:action="@{/post/creacion}" method="GET">
+                    <input th:name="categoria" type="hidden" th:value="Articulo">
+                    <input type="submit" class="btn btn-primary" value="Crear Articulo">
+                </form>
+            </div>
         </div>
+        <th:block th:replace="components/listaPublicaciones :: listaPublicaciones"></th:block>
     </div>
-    <th:block th:replace="components/listaPublicaciones :: listaPublicaciones"></th:block>
     <th:block th:replace="components/footer :: footer"></th:block>
     <script>
         document.addEventListener("DOMContentLoaded", function () {

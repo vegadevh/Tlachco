@@ -27,54 +27,55 @@
 
 <body>
 	<th:block th:replace="components/navbar :: navbar"></th:block>
-
-	<div class="container">
-		<div class="card" style="padding: 2em;">
-			<h1 class="text-center">Registro de Usuario </h1>
-			<form
-				th:action="@{/perfil/{username}/validar-pass(username=${#authentication.getPrincipal().getUsername()})}"
-				th:object="${usuario}" method="post">
-
-				<div class="">
+	<div class="margin-container">
+		<div class="container">
+			<div class="card" style="padding: 2em;">
+				<h1 class="text-center">Registro de Usuario </h1>
+				<form
+					th:action="@{/perfil/{username}/validar-pass(username=${#authentication.getPrincipal().getUsername()})}"
+					th:object="${usuario}" method="post">
 
 					<div class="">
-						<div class="form-group">
 
-							<input type="hidden" th:field="*{usuario}" th:name="usuario" class="form-control">
-							<input id="nombre" type="hidden" th:field="*{nombre}" class="form-control">
+						<div class="">
+							<div class="form-group">
 
-							<input id="apellido" type="hidden" th:field="*{apellido}" class="form-control">
+								<input type="hidden" th:field="*{usuario}" th:name="usuario" class="form-control">
+								<input id="nombre" type="hidden" th:field="*{nombre}" class="form-control">
 
-							<input type="hidden" th:value="${usuario.password}">
-							<input type="hidden" th:value="${usuario.enabled_u}">
-							<input type="hidden" th:value="${usuario.rol.id_rol}">
+								<input id="apellido" type="hidden" th:field="*{apellido}" class="form-control">
 
-							<label for="password">Nueva Contraseña: </label>
-							<input id="password" th:name="password" type="password" th:field="*{password}"
-								class="form-control" minlength="6"
-								oninvalid="setCustomValidity('La cantidad mínima de caracteres es de 6.')"
-								onchange="try{setCustomValidity('')}catch(e){}">
+								<input type="hidden" th:value="${usuario.password}">
+								<input type="hidden" th:value="${usuario.enabled_u}">
+								<input type="hidden" th:value="${usuario.rol.id_rol}">
 
-							<label for="password">Repetir Contraseña: </label>
-							<input th:name="valid_password" type="password" class="form-control" minlength="6"
-								oninvalid="setCustomValidity('La cantidad mínima de caracteres es de 6.')"
-								onchange="try{setCustomValidity('')}catch(e){}">
+								<label for="password">Nueva Contraseña: </label>
+								<input id="password" th:name="password" type="password" th:field="*{password}"
+									class="form-control" minlength="6"
+									oninvalid="setCustomValidity('La cantidad mínima de caracteres es de 6.')"
+									onchange="try{setCustomValidity('')}catch(e){}">
 
-							<div th:if=" ${#fields.hasErrors('password')}" th:errors="*{password}"
-								class="alert alert-danger" role="alert">
+								<label for="password">Repetir Contraseña: </label>
+								<input th:name="valid_password" type="password" class="form-control" minlength="6"
+									oninvalid="setCustomValidity('La cantidad mínima de caracteres es de 6.')"
+									onchange="try{setCustomValidity('')}catch(e){}">
+
+								<div th:if=" ${#fields.hasErrors('password')}" th:errors="*{password}"
+									class="alert alert-danger" role="alert">
+								</div>
+							</div>
+							<div class="text-center">
+								<button type="submit" class="btn btn-primary">Guardar</button>
 							</div>
 						</div>
-						<div class="text-center">
-							<button type="submit" class="btn btn-primary">Guardar</button>
-						</div>
 					</div>
-				</div>
-			</form>
-			<br>
-			<div class="text-center">
-				<form th:action="@{/perfil/{username}(username=${#authentication.getPrincipal().getUsername()})}">
-					<input type="submit" class="btn btn-primary" value="Regresar">
 				</form>
+				<br>
+				<div class="text-center">
+					<form th:action="@{/perfil/{username}(username=${#authentication.getPrincipal().getUsername()})}">
+						<input type="submit" class="btn btn-primary" value="Regresar">
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>

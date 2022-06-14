@@ -24,9 +24,8 @@
 </head>
 
 <body>
-    <header>
-        <th:block th:replace="components/navbar :: navbar"></th:block>
-    </header>
+    <th:block th:replace="components/navbar :: navbar"></th:block>
+
     <h5 th:if="${umensaje}" class="alert alert-success" th:text="${umensaje}"></h5>
     <div class="container">
         <div sec:authorize="isAnonymous()">
@@ -34,7 +33,7 @@
             <a class="btn btn-primary btn-lg" href="/login" role="button">Iniciar Sesión</a>
 
         </div>
-<!--         <table class="table shadow-lg bg-white rounded">
+        <!--         <table class="table shadow-lg bg-white rounded">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>

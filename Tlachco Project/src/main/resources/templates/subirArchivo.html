@@ -25,16 +25,19 @@
 
 <body>
     <th:block th:replace="components/navbar :: navbar"></th:block>
-    <div class="container">
-        <h1>Crear Post - archivo</h1>
+    <div class="margin-container">
+        <div class="container">
+            <h1>Crear Post - archivo</h1>
 
-        <form th:action="@{/post/validacion-subir}" th:object="${archivo}" enctype="multipart/form-data" method="post">
-            <label for="titulo">Archivo</label>
-            <div>
-                <input type="file" th:name="file" th:id="file">
-            </div>
-            <input type="submit" value="Siguiente" class="btn btn-primary">
-        </form>
+            <form th:action="@{/post/validacion-subir}" th:object="${archivo}" enctype="multipart/form-data"
+                method="post">
+                <label for="titulo">Archivo</label>
+                <div>
+                    <input type="file" th:name="file" th:id="file">
+                </div>
+                <input type="submit" value="Siguiente" class="btn btn-primary">
+            </form>
+        </div>
     </div>
     <th:block th:replace="components/footer :: footer"></th:block>
     <script>

@@ -1,4 +1,4 @@
-<section class="navigation-sec" th:fragment="navbar">
+<header class="navigation-sec" th:fragment="navbar">
 	<div class="container"
 		style="display: flex; justify-content: space-between; margin-top: 0.5em; margin-bottom: 0.5em;">
 		<a th:href="@{/}">
@@ -81,7 +81,8 @@
 								&nbsp;
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-								<a class="dropdown-item" th:href="@{/perfil/{username}(username=${#authentication.getPrincipal().getUsername()})}">Perfil</a>
+								<a class="dropdown-item"
+									th:href="@{/perfil/{username}(username=${#authentication.getPrincipal().getUsername()})}">Perfil</a>
 								<a class="dropdown-item" th:href="@{/admin/usuario_registro}">Registrar Usuario</a>
 								<a class="dropdown-item" style="color: red;" th:href="@{/logout}">Cerrar Sesión</a>
 							</div>
@@ -97,4 +98,4 @@
 
 		</div>
 	</nav>
-</section>
+</header>
