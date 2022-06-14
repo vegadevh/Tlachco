@@ -27,34 +27,28 @@
     <header>
         <th:block th:replace="components/navbar :: navbar"></th:block>
     </header>
-    <h5 th:if="${umensaje}" class="alert alert-success" th:text="${umensaje}"></h5>
-    <div class="container">
-        <div sec:authorize="isAnonymous()">
-            <h1>Hola Tlachco</h1>
-            <a class="btn btn-primary btn-lg" href="/login" role="button">Iniciar Sesión</a>
 
+    <div class="container">
+        <h5 th:if="${umensaje}" class="alert alert-success" th:text="${umensaje}"></h5>
+        <div class="card text-center" th:object="${usuario}">
+            <div class="card-header" th:text="${usuario.usuario}">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title"
+                    th:text="'¡Bienvenido a tu perfil' + ' ' + ${usuario.nombre} + ' ' + ${usuario.apellido} + '!'">
+                </h5>
+                <input type="hidden" th:value="${usuario.password}">
+                <input type="hidden" th:value="${usuario.enabled_u}">
+                <input type="hidden" th:value="${usuario.rol.id_rol}">
+                <p class="card-text">Aquí podrás encontrar tus publicaciones realizadas y
+                    editarlas, además de realizar el cambio de tu contraseña.</p>
+                <a th:href="@{/perfil/{username}/pass(username=${#authentication.getPrincipal().getUsername()})}"
+                    class="btn btn-primary">Cambiar Contraseña</a>
+            </div>
         </div>
-<!--         <table class="table shadow-lg bg-white rounded">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">#</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="archivo: ${listaArchivos}">
-                    <th scope="row" th:text="${archivo.nombre}"></th>
-                    <th scope="row"><a th:href="@{'/post/archivo/'+${archivo.id_archivo}}">Descargar</a></th>
-                </tr>
-            </tbody>
-            
-            <tbody>
-                <td>
-                	<a th:href="@{/admin/usuario_registro}">Ingresar Usuario</a>
-                </td>
-            </tbody>
-        </table> -->
     </div>
+
+
     <th:block th:replace="components/footer :: footer"></th:block>
     <script>
         document.addEventListener("DOMContentLoaded", function () {

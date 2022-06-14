@@ -50,7 +50,7 @@
 						<a class="nav-link text-color" href="/sobre-nosotros">Sobre nosotros</a>
 					</li>
 				</ul>
-				<form th:action="@{/general/busquedaPublicaciones}" method="post" class="form-inline my-2 my-lg-0"
+				<form th:action="@{/busquedaPublicaciones}" method="post" class="form-inline my-2 my-lg-0"
 					autocomplete="off">
 					<input class="form-control mr-sm-2" type="text" th:name="titulo"
 						oninvalid="setCustomValidity('Ingrese Valor de Busqueda')" oninput="this.setCustomValidity('')"
@@ -58,7 +58,7 @@
 					<button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Buscar</button>
 				</form>
 				<ul class="navbar-nav">
-					<span sec:authorize="isAuthenticated()">
+					<span sec:authorize="hasAnyRole('TEACHER', 'STUDENT')">
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
 								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -68,6 +68,21 @@
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 								<a class="dropdown-item" href="#">Perfil</a>
+								<a class="dropdown-item" style="color: red;" th:href="@{/logout}">Cerrar Sesión</a>
+							</div>
+						</li>
+					</span>
+					<span sec:authorize="hasAnyRole('ADMIN')">
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<i>Bienvenido</i> <b><span class="text-white"
+										sec:authentication="name">Username</span></b>
+								&nbsp;
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+								<a class="dropdown-item" th:href="@{/perfil/{username}(username=${#authentication.getPrincipal().getUsername()})}">Perfil</a>
+								<a class="dropdown-item" th:href="@{/admin/usuario_registro}">Registrar Usuario</a>
 								<a class="dropdown-item" style="color: red;" th:href="@{/logout}">Cerrar Sesión</a>
 							</div>
 						</li>
