@@ -105,5 +105,11 @@ public class MainController {
 
 		return "sobre-nosotros";
 	}
+	
+	@RequestMapping("/403")
+	public String Error(Model model) {
+
+		return "403";
+	}
 
 }
