@@ -69,6 +69,14 @@ public class Usuario {
 	public void setEnabled_u(Boolean enabled_u) {
 		this.enabled_u = enabled_u;
 	}
+	
+	public String getEstadoDelegate() {
+		if(this.enabled_u == null) return "Valor invalido";
+		else {
+			return enabled_u == true ? "Disponible": "No Disponible";
+		}
+		
+	}
 
 	public String getNombre() {
 		return nombre;

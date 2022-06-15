@@ -116,4 +116,21 @@ public class AdminController {
 			return "index";
 		}
 	}
+	
+	
+	@RequestMapping("/lista_usuarios")
+	public String listaUsuarios(Model model) {
+		
+		List<Usuario> usuarios = null;
+		
+		try {
+			usuarios = usuarioService.findAll();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("users", usuarios);
+		return "listaUsuarios";
+	}
+	
 }
