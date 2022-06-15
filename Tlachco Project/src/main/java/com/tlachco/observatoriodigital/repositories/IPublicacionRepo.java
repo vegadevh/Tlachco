@@ -31,5 +31,13 @@ public interface IPublicacionRepo extends JpaRepository<Publicacion, Integer> {
 			+"WHERE (lower(p.titulo) like %:keyword% ) \r\n"
 			+ "OR (lower(p.propietario) like %:keyword% );")
 	public List<Object[]> findByKeyword(String keyword) throws DataAccessException;
+	
+	@Query(nativeQuery = true, value = "SELECT id_publicacion, titulo, contenido, fecha_publicacion, estado\r\n"
+			+ "	FROM public.publicacion WHERE propietario = :propietario ;")
+	public List<Object[]> findAllPublicacionesByPropietario(String propietario) throws DataAccessException;
+	
+	@Query(nativeQuery = true, value = "SELECT id_publicacion, titulo, contenido, fecha_publicacion, propietario\r\n"
+			+ "	FROM public.publicacion WHERE id_categoria = :id_categoria ORDER BY id_publicacion DESC limit 3;")
+	public List<Object[]> findTopThreePublicaciones(Integer id_categoria) throws DataAccessException;
 
 }

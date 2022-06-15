@@ -24,5 +24,9 @@ public interface IPublicacionService {
 	// Filtros
 
 	public List<PublicacionesDTO> findByKeyword(String keyword) throws DataAccessException;
+	
+	public List<PublicacionesDTO> findAllPublicacionesByPropietario(String propietario) throws DataAccessException;
+	
+	public List<PublicacionesDTO> findTopThreePublicaciones(Integer id_categoria) throws DataAccessException;
 
 }

@@ -52,8 +52,16 @@ public class GeneralController {
 		
 		Usuario usuario = usuarioService.findOne(username);
 		
-		System.out.println(usuario.getNombre() + "EN /perfil/{username}");
+		List<PublicacionesDTO> listaResultados = null;
+		
+		
+		try {
+			listaResultados = publicacionService.findAllPublicacionesByPropietario(username);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
+		model.addAttribute("listaResultados", listaResultados);
 		model.addAttribute("usuario",usuario);
 		return "perfil";
 				

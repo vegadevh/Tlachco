@@ -29,16 +29,23 @@ public class MainController {
 
 	@RequestMapping("/")
 	public String index(Model model) {
+		
+		List<PublicacionesDTO> listaNoticias = null;
+		List<PublicacionesDTO> listaArticulos = null;
+		List<Video> listaVideos = null;
+		
+		try {
+			listaNoticias = publicacionService.findTopThreePublicaciones(1);
+			listaArticulos = publicacionService.findTopThreePublicaciones(2);
+			listaVideos = videoService.findTopVideos();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-//		List<Archivo> listaArchivos = null;
-//		try {
-//			listaArchivos = archivoService.findAll();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//
-//		model.addAttribute("listaArchivos", listaArchivos);
-
+		model.addAttribute("listaNoticias", listaNoticias);
+		model.addAttribute("listaArticulos", listaArticulos);
+		model.addAttribute("listaVideos", listaVideos);
+		
 		return "index";
 	}
 

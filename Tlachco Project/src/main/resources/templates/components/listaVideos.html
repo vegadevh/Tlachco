@@ -1,0 +1,7 @@
+<section th:fragment="listaVideos" class="grid-container">
+    <div th:each="mivideo : ${listaVideos}">
+        <iframe width="350" height="200" th:src="${mivideo.enlace}" title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+    </div>
+</section>

@@ -83,4 +83,34 @@ public class PublicacionServiceImpl implements IPublicacionService {
 		return publicaciones;
 	}
 
+	@Override
+	public List<PublicacionesDTO> findAllPublicacionesByPropietario(String propietario) throws DataAccessException {
+		List<PublicacionesDTO> publicaciones = publicacionRepo.findAllPublicacionesByPropietario(propietario).stream().map(obj -> {
+			PublicacionesDTO p = new PublicacionesDTO();
+			p.setId_publicacion(obj[0].toString());
+			p.setTitulo(obj[1].toString());
+			p.setContenido(obj[2].toString());
+			p.setFecha_publicacion(obj[3].toString());
+			p.setEstado(obj[4].toString());
+			return p;
+		}).collect(Collectors.toList());
+		
+		return publicaciones;
+	}
+
+	@Override
+	public List<PublicacionesDTO> findTopThreePublicaciones(Integer id_categoria) throws DataAccessException {
+		List<PublicacionesDTO> publicaciones = publicacionRepo.findTopThreePublicaciones(id_categoria).stream().map(obj -> {
+			PublicacionesDTO p = new PublicacionesDTO();
+			p.setId_publicacion(obj[0].toString());
+			p.setTitulo(obj[1].toString());
+			p.setContenido(obj[2].toString());
+			p.setFecha_publicacion(obj[3].toString());
+			p.setPropietario(obj[4].toString());
+			return p;
+		}).collect(Collectors.toList());
+		
+		return publicaciones;
+	}
+
 }

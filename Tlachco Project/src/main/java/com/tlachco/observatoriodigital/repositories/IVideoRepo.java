@@ -14,5 +14,9 @@ public interface IVideoRepo extends JpaRepository<Video, Integer> {
 			+ "	FROM public.video\r\n"
 			+ "order by id_video desc;")
 	public List<Video> findAllByIdOrderByDesc() throws DataAccessException;
+	
+	@Query(nativeQuery = true, value = "SELECT id_video, enlace, id_categoria\r\n"
+			+ "	FROM public.video ORDER BY id_video DESC limit 3;")
+	public List<Video> findTopVideos() throws DataAccessException;
 
 }

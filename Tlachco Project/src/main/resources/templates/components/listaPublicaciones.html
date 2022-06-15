@@ -1,18 +1,46 @@
-<section class="container" th:fragment="listaPublicaciones">
+<section th:fragment="listaPublicaciones">
 	<div th:if="${listaResultados != null and !listaResultados.empty}">
-		<article class="cards-resultados" th:each="resultado : ${listaResultados}">
-			<div class="card">
+		<div class="cards-resultados" th:each="resultado : ${listaResultados}">
+			<article class="card">
 				<div class="card-body">
 					<h5 class="card-title" th:text="${resultado.titulo}"></h5>
 					<h6 class="card-subtitle mb-2 text-muted" th:text="${resultado.propietario}"></h6>
-					<p class="card-text limit-content" th:utext="${resultado.contenido}"></p>
+					<p class="card-text" th:utext="${#strings.abbreviate(resultado.contenido, 250)}"></p>
 					<p class="card-subtitle mb-2 text-muted" th:text="${resultado.fecha_publicacion}"></p>
 				</div>
-			</div>
-		</article>
+			</article>
+		</div>
 	</div>
 
 	<div class="text-center p-2" th:if="${listaResultados == null or listaResultados.empty}">
 		<span>No se encontraron resultados...</span>
 	</div>
 </section>
+
+<section th:fragment="listaPublicacionesPerfil">
+	<div class="container-fluid mt-4">
+		<div class="row" style="justify-content: center;">
+			<div class="col-auto mb-3" th:each="resultado : ${listaResultados}">
+				<div class="card" style="width: 20.5rem;">
+					<article class="card-body">
+						<h5 class="card-title" th:text="${resultado.titulo}"></h5>
+						<h6 class="card-subtitle mb-2 text-muted" th:text="${resultado.estado}"></h6>
+						<p class="card-text" th:utext="${#strings.abbreviate(resultado.contenido, 120)}">
+						</p>
+						<p class="card-subtitle mb-2 text-muted" th:text="${resultado.fecha_publicacion}"></p>
+					</article>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<div th:fragment="listaTopPublicaciones" class="card" style="width: 20.5rem;">
+	<article class="card-body">
+		<h5 class="card-title" th:text="${resultado.titulo}"></h5>
+		<h6 class="card-subtitle mb-2 text-muted" th:text="${resultado.propietario}"></h6>
+		<p class="card-text" th:utext="${#strings.abbreviate(resultado.contenido, 100)}">
+		</p>
+		<p class="card-subtitle mb-2 text-muted" th:text="${resultado.fecha_publicacion}"></p>
+	</article>
+</div>

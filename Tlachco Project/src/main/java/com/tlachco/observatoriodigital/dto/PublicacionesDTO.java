@@ -11,6 +11,8 @@ public class PublicacionesDTO {
 	private String fecha_publicacion;
 	
 	private String propietario;
+	
+	private String estado;
 
 	public String getTitulo() {
 		return titulo;
@@ -51,7 +53,14 @@ public class PublicacionesDTO {
 	public void setId_publicacion(String id_publicacion) {
 		this.id_publicacion = id_publicacion;
 	}
-	
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
 	
 
 }

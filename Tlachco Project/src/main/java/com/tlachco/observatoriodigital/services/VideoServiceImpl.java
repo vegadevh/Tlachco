@@ -42,6 +42,11 @@ public class VideoServiceImpl implements IVideoService {
 	public List<Video> findAllByIdOrderByDesc() throws DataAccessException {
 		return videoRepo.findAllByIdOrderByDesc();
 	}
+
+	@Override
+	public List<Video> findTopVideos() throws DataAccessException {
+		return videoRepo.findTopVideos();
+	}
 	
 	
 
