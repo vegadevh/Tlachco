@@ -1,8 +1,13 @@
 package com.tlachco.observatoriodigital.controllers;
 
+import java.time.Duration;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -82,7 +87,7 @@ public class MainController {
 	}
 
 	@RequestMapping("/videos")
-	public String videos(Model model) {
+	public String videos(HttpServletResponse response, Model model) {
 		
 		Video video = new Video();
 		List<Video> listaVideos = null;
@@ -93,6 +98,17 @@ public class MainController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+//		ResponseCookie cookie = ResponseCookie.from("myCookie", "myCookieValue") // key & value
+//				.httpOnly(true)
+//		        .secure(false)
+//		  //    .domain("localhost")  // host
+//		  //    .path("/")      // path
+//		        .maxAge(Duration.ofHours(1))
+//		        .sameSite("Lax")  // sameSite
+//		        .build();
+//		    
+//		    // Response to the client
+//		response.setHeader(HttpHeaders.SET_COOKIE, cookie.toString());
 		
 		model.addAttribute("categoria", categoria);
 		model.addAttribute("video", video);
