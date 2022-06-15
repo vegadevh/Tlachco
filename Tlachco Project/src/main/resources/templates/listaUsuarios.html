@@ -50,20 +50,15 @@
                         <td th:if="${user.usuario} != 'admin'">
 
                             <div class="d-flex">
-                                <form class="p-1" th:action="@{/admin/editar/usuario/} + ${user.usuario} "
+                                <form class="p-1" th:action="@{/admin/editar_usuario/} + ${user.usuario} "
                                     method="GET">
                                     <input th:name="id_usuario" hidden th:value=${user.usuario}>
-                                    <input th:if="${user.enabled_u} == true" type="submit" class="btn btn-success"
+                                    <input th:if="${user.enabled_u} == true" type="submit" class="btn btn-danger"
                                         value="Deshabilitar">
                                     <input th:unless="${user.enabled_u} == true" type="submit" class="btn btn-success"
                                         value="Habilitar">
                                 </form>
-                                <form class="p-1" th:action="@{/admin/eliminar/usuario/} + ${user.usuario}"
-                                    method="GET">
-                                    <input th:name="id_usuario" hidden th:value=${user.usuario}>
-                                    <input type="submit" class="btn btn-danger" value="Eliminar"
-                                        onclick="return confirm('¿Estás seguro que deseas eliminar el usuario?');">
-                                </form>
+                                
                                 
                             </div>
                         </td>
