@@ -68,7 +68,17 @@ public class PostCrontroller {
 
 		return "crearPost";
 	}
-
+	
+	@RequestMapping("/articuloDetail/{idPublicacion}")
+	public String perfilDeUsuario(@PathVariable("idPublicacion") String idPublicacion, Model model) {
+		
+		Publicacion publicacion = publicacionService.findOne(Integer.parseInt(idPublicacion));
+		
+		model.addAttribute("publicacion",publicacion);
+		return "articuloDetail";
+				
+	}
+	
 	@RequestMapping("/validar-creacion")
 	public String validar_post(@Valid @ModelAttribute Publicacion publicacion, BindingResult result,
 			Principal principal, @RequestParam String categoria, HttpServletRequest request, Model model) {
