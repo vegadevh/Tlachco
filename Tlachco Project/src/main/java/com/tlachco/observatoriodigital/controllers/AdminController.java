@@ -133,8 +133,8 @@ public class AdminController {
 		return "listaUsuarios";
 	}
 	
-	@RequestMapping("/editar_usuario/{id_usuario}")
-	public String editarUsuario(@RequestParam(value = "id_usuario") String id_usuario, Model model) {
+	@RequestMapping("/cambiar_estado/{id_usuario}")
+	public String cambiarEstadoUsuario(@RequestParam(value = "id_usuario") String id_usuario, Model model) {
 		
 		Usuario usuario = new Usuario();
 		
