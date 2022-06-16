@@ -1,7 +1,7 @@
 <section th:fragment="listaPublicaciones">
 	<div th:if="${listaResultados != null and !listaResultados.empty}">
 		<div class="cards-resultados" th:each="resultado : ${listaResultados}">
-			<article class="card">
+			<article class="card shadow-sm bg-white rounded">
 				<div class="card-body">
 					<a class="color-tag-a" th:href="@{'/post/articuloDetail/' + ${resultado.id_publicacion}}">
 						<h5 class="card-title" th:text="${resultado.titulo}"></h5>
@@ -26,7 +26,7 @@
 	<div class="container-fluid mt-4">
 		<div class="row" style="justify-content: center;">
 			<div class="col-auto mb-3" th:each="resultado : ${listaResultados}">
-				<div class="card" style="width: 20.5rem;">
+				<div class="card shadow-sm bg-white rounded" style="width: 20.5rem;">
 					<article class="card-body">
 						<a class="color-tag-a" th:href="@{'/post/articuloDetail/' + ${resultado.id_publicacion}}">
 							<h5 class="card-title" th:text="${resultado.titulo}"></h5>
@@ -45,7 +45,7 @@
 	</div>
 </section>
 
-<div th:fragment="listaTopPublicaciones" class="card" style="width: 20.5rem;">
+<div th:fragment="listaTopPublicaciones" class="card shadow-sm bg-white rounded" style="width: 20.5rem;">
 	<article class="card-body">
 		<a class="color-tag-a" th:href="@{'/post/articuloDetail/' + ${resultado.id_publicacion}}">
 			<h5 class="card-title" th:text="${resultado.titulo}"></h5>
