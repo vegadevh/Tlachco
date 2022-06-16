@@ -15,5 +15,7 @@ public interface IUsuarioService {
 	public void delete(String usuario) throws DataAccessException;
 	
 	public Usuario findOne(String usuario) throws DataAccessException;
+	
+	public List<Usuario> findTeachers() throws DataAccessException;
 
 }

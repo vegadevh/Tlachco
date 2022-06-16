@@ -37,6 +37,11 @@ public class UsuarioServiceImpl implements IUsuarioService{
 	public Usuario findOne(String usuario) throws DataAccessException {
 		return userRepo.findById(usuario).orElse(null);
 	}
+
+	@Override
+	public List<Usuario> findTeachers() throws DataAccessException {
+		return userRepo.findTeachers();
+	}
 	
 	
 

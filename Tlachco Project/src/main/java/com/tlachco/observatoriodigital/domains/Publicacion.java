@@ -59,6 +59,29 @@ public class Publicacion {
 
 	@Transient
 	private String id_archivo;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "profesor")
+	private Usuario profesor;
+
+	@Transient
+	private String validador;
+	
+	public Usuario getProfesor() {
+		return profesor;
+	}
+
+	public void setProfesor(Usuario profesor) {
+		this.profesor = profesor;
+	}
+
+	public String getValidador() {
+		return validador;
+	}
+
+	public void setValidador(String validador) {
+		this.validador = validador;
+	}
 
 	public Integer getId_publicacion() {
 		return id_publicacion;
