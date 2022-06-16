@@ -11,12 +11,14 @@ import com.tlachco.observatoriodigital.domains.Publicacion;
 
 public interface IPublicacionRepo extends JpaRepository<Publicacion, Integer> {
 
-	@Query(nativeQuery = true, value = "SELECT id_publicacion, titulo, contenido, fecha_publicacion, propietario\r\n"
-			+ "	FROM public.publicacion WHERE estado = 'Public' and id_categoria = 1 ;")
+	@Query(nativeQuery = true, value = "SELECT p.id_publicacion, p.titulo, p.contenido, p.fecha_publicacion, p.propietario, u.nombre, u.apellido\r\n"
+			+ "FROM public.publicacion AS p INNER JOIN public.usuario AS u ON p.propietario  = u.usuario\r\n"
+			+ "WHERE estado = 'Public' and id_categoria = 1 ;")
 	public List<Object[]> findAllNoticias() throws DataAccessException;
 
-	@Query(nativeQuery = true, value = "SELECT id_publicacion, titulo, contenido, fecha_publicacion, propietario\r\n"
-			+ "	FROM public.publicacion WHERE estado = 'Public' and id_categoria = 2 ;")
+	@Query(nativeQuery = true, value = "SELECT p.id_publicacion, p.titulo, p.contenido, p.fecha_publicacion, p.propietario, u.nombre, u.apellido\r\n"
+			+ "FROM public.publicacion AS p INNER JOIN public.usuario AS u ON p.propietario  = u.usuario\r\n"
+			+ "WHERE estado = 'Public' and id_categoria = 2 ;")
 	public List<Object[]> findAllArticulos() throws DataAccessException;
 
 	/*
@@ -27,7 +29,8 @@ public interface IPublicacionRepo extends JpaRepository<Publicacion, Integer> {
 	 * findByKeyword(@Param("keyword") String keyword);
 	 */
 
-	@Query(nativeQuery = true, value = "SELECT id_publicacion, titulo, contenido, fecha_publicacion, propietario FROM public.publicacion p \r\n"
+	@Query(nativeQuery = true, value = "SELECT p.id_publicacion, p.titulo, p.contenido, p.fecha_publicacion, p.propietario, u.nombre, u.apellido FROM public.publicacion AS p \r\n"
+			+ "INNER JOIN public.usuario AS u ON p.propietario  = u.usuario \r\n"
 			+"WHERE (lower(p.titulo) like %:keyword% ) \r\n"
 			+ "OR (lower(p.propietario) like %:keyword% );")
 	public List<Object[]> findByKeyword(String keyword) throws DataAccessException;
@@ -36,8 +39,9 @@ public interface IPublicacionRepo extends JpaRepository<Publicacion, Integer> {
 			+ "	FROM public.publicacion WHERE propietario = :propietario ;")
 	public List<Object[]> findAllPublicacionesByPropietario(String propietario) throws DataAccessException;
 	
-	@Query(nativeQuery = true, value = "SELECT id_publicacion, titulo, contenido, fecha_publicacion, propietario\r\n"
-			+ "	FROM public.publicacion WHERE id_categoria = :id_categoria ORDER BY id_publicacion DESC limit 3;")
+	@Query(nativeQuery = true, value = "SELECT p.id_publicacion, p.titulo, p.contenido, p.fecha_publicacion, p.propietario, u.nombre, u.apellido\r\n"
+			+ "FROM public.publicacion AS p INNER JOIN public.usuario AS u ON p.propietario  = u.usuario\r\n"
+			+ "WHERE id_categoria = :id_categoria ORDER BY id_publicacion DESC limit 3 ;")
 	public List<Object[]> findTopThreePublicaciones(Integer id_categoria) throws DataAccessException;
 
 }

@@ -49,6 +49,8 @@ public class PublicacionServiceImpl implements IPublicacionService {
 			p.setContenido(obj[2].toString());
 			p.setFecha_publicacion(obj[3].toString());
 			p.setPropietario(obj[4].toString());
+			p.setNombre(obj[5].toString());
+			p.setApellido(obj[6].toString());
 			return p;
 		}).collect(Collectors.toList());
 		return noticias;
@@ -63,6 +65,8 @@ public class PublicacionServiceImpl implements IPublicacionService {
 			p.setContenido(obj[2].toString());
 			p.setFecha_publicacion(obj[3].toString());
 			p.setPropietario(obj[4].toString());
+			p.setNombre(obj[5].toString());
+			p.setApellido(obj[6].toString());
 			return p;
 		}).collect(Collectors.toList());
 		return articulos;
@@ -77,6 +81,8 @@ public class PublicacionServiceImpl implements IPublicacionService {
 			p.setContenido(obj[2].toString());
 			p.setFecha_publicacion(obj[3].toString());
 			p.setPropietario(obj[4].toString());
+			p.setNombre(obj[5].toString());
+			p.setApellido(obj[6].toString());
 			return p;
 		}).collect(Collectors.toList());
 		
@@ -107,6 +113,8 @@ public class PublicacionServiceImpl implements IPublicacionService {
 			p.setContenido(obj[2].toString());
 			p.setFecha_publicacion(obj[3].toString());
 			p.setPropietario(obj[4].toString());
+			p.setNombre(obj[5].toString());
+			p.setApellido(obj[6].toString());
 			return p;
 		}).collect(Collectors.toList());
 		

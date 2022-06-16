@@ -29,10 +29,10 @@
     <th:block th:replace="components/navbar :: navbar"></th:block>
 
     <div class="margin-container">
-        <th:block th:replace="components/listaPublicaciones :: listaPublicaciones"></th:block>
+        <div class="container">
+            <th:block th:replace="components/listaPublicaciones :: listaPublicaciones"></th:block>
+        </div>
     </div>
-
-
     <th:block th:replace="components/footer :: footer"></th:block>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
