@@ -116,4 +116,43 @@ public class AdminController {
 			return "index";
 		}
 	}
+	
+	
+	@RequestMapping("/lista_usuarios")
+	public String listaUsuarios(Model model) {
+		
+		List<Usuario> usuarios = null;
+		
+		try {
+			usuarios = usuarioService.findAll();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("users", usuarios);
+		return "listaUsuarios";
+	}
+	
+	@RequestMapping("/editar_usuario/{id_usuario}")
+	public String editarUsuario(@RequestParam(value = "id_usuario") String id_usuario, Model model) {
+		
+		Usuario usuario = new Usuario();
+		
+		if(id_usuario != null) {
+			usuario = usuarioService.findOne(id_usuario);
+			if(usuario.getEnabled_u() == true) {
+				usuario.setEnabled_u(false);
+				
+			}else {
+				usuario.setEnabled_u(true);
+			}
+			
+			usuarioService.save(usuario);
+			
+		}
+		
+		
+		return "redirect:/admin/lista_usuarios";
+	}
+	
 }
