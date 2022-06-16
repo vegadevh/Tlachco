@@ -4,9 +4,19 @@
 			<div class="card">
 				<div class="card-body">
 					<h5 class="card-title" th:text="${resultado.titulo}"></h5>
+					<h5 class="card-title" th:text="${resultado.id_publicacion}"></h5>
 					<h6 class="card-subtitle mb-2 text-muted" th:text="${resultado.propietario}"></h6>
 					<p class="card-text limit-content" th:utext="${resultado.contenido}"></p>
 					<p class="card-subtitle mb-2 text-muted" th:text="${resultado.fecha_publicacion}"></p>
+					<p>
+						<a th:onclick="'obtenerIds('${resultado.id_publicacion}')'" class="btn btn-primary">Click</a>
+					</p>
+					<!--<p>
+						<a th:onclick="'prueba('+${resultado.id_publicacion}+')'" class="btn btn-primary">Click 2</a>
+					</p>-->
+					<p>
+						<a th:onclick="prueba(${resultado.titulo})" class="btn btn-primary">Click 3</a>
+					</p>
 				</div>
 			</div>
 		</article>
@@ -16,3 +26,4 @@
 		<span>No se encontraron resultados...</span>
 	</div>
 </section>
+<script th:href="@{/js/main.js}"></script>

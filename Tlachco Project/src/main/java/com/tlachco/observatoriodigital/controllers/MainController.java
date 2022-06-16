@@ -73,7 +73,7 @@ public class MainController {
 
 		return "articulos";
 	}
-
+	
 	@RequestMapping("/videos")
 	public String videos(Model model) {
 		
