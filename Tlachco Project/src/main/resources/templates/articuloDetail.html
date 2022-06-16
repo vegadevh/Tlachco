@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <script th:href="@{/js/main.js}"></script>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
@@ -23,43 +24,21 @@
     <!-- icons -->
     <script src="https://kit.fontawesome.com/6e61b7d6d1.js" crossorigin="anonymous"></script>
 
-
-
-    <title>Tlachco - Inicio</title>
 </head>
 
 <body>
     <th:block th:replace="components/navbar :: navbar"></th:block>
     <div class="margin-container">
         <div class="container">
-            <div style="display: flex; justify-content: right;"
-                sec:authorize="hasAnyRole('ADMIN', 'TEACHER', 'STUDENT')">
-                <form class="p-1" th:action="@{/post/creacion}" method="GET">
-                    <input th:name="categoria" type="hidden" th:value="Articulo">
-                    <input type="submit" class="btn btn-primary" value="Crear Articulo">
-                </form>
-            </div>
-            <th:block th:replace="components/listaPublicaciones :: listaPublicaciones"></th:block>
+            <article th:object="${publicacion}">
+                <h5 class="card-title" th:text="${publicacion.titulo}"></h5>
+                <h6 class="card-subtitle mb-2 text-muted" th:text="${publicacion.usuario.usuario}"></h6>
+                <p class="card-text limit-content" th:utext="${publicacion.contenido}"></p>
+                <p class="card-subtitle mb-2 text-muted" th:text="${publicacion.fecha_publicacion}"></p>
+            </article>
         </div>
     </div>
     <th:block th:replace="components/footer :: footer"></th:block>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            window.addEventListener('scroll', function () {
-                if (window.scrollY > 110) {
-                    document.getElementById('navbar').classList.add('fixed-top');
-                    // add padding top to show content behind navbar
-                    navbar_height = document.querySelector('.navbar').offsetHeight;
-                    document.body.style.paddingTop = navbar_height + 'px';
-                } else {
-                    document.getElementById('navbar').classList.remove('fixed-top');
-                    // remove padding top from body
-                    document.body.style.paddingTop = '0';
-                }
-            });
-        });
-    </script>
-    <script th:src="@{/js/main.js}"></script>
 </body>
 
 </html>

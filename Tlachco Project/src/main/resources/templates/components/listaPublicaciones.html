@@ -4,9 +4,15 @@
 			<article class="card">
 				<div class="card-body">
 					<h5 class="card-title" th:text="${resultado.titulo}"></h5>
+					<input type="hidden" th:value="${resultado.id_publicacion}" th:name="idPublicacion">
 					<h6 class="card-subtitle mb-2 text-muted" th:text="${resultado.propietario}"></h6>
 					<p class="card-text" th:utext="${#strings.abbreviate(resultado.contenido, 250)}"></p>
 					<p class="card-subtitle mb-2 text-muted" th:text="${resultado.fecha_publicacion}"></p>
+					<a th:if="${noticias != null OR articulos != null}"
+						th:href="@{'/post/articuloDetail/' + ${resultado.id_publicacion}}" class="btn btn-primary">Leer
+						M&oacute;s</a>
+					<!-- <a th:if="${articulos}" th:href="@{'/post/articuloDetail/' + ${resultado.id_publicacion}}"
+						class="btn btn-primary">Click</a> -->
 				</div>
 			</article>
 		</div>

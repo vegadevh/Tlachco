@@ -58,6 +58,7 @@ public class MainController {
 	public String noticias(Model model) {
 		
 		List<PublicacionesDTO> listaResultados = null;
+		String noticias = "noticias";
 		
 		try {
 			listaResultados = publicacionService.findAllNoticias();
@@ -66,6 +67,7 @@ public class MainController {
 		}
 		
 		model.addAttribute("listaResultados", listaResultados);
+		model.addAttribute("noticias", noticias);
 
 		return "noticias";
 	}
@@ -74,6 +76,7 @@ public class MainController {
 	public String articulos(Model model) {
 		
 		List<PublicacionesDTO> listaResultados = null;
+		String articulos = "articulos";
 		
 		try {
 			listaResultados = publicacionService.findAllArticulos();
@@ -82,10 +85,11 @@ public class MainController {
 		}
 		
 		model.addAttribute("listaResultados", listaResultados);
+		model.addAttribute("articulos", articulos);
 
 		return "articulos";
 	}
-
+	
 	@RequestMapping("/videos")
 	public String videos(HttpServletResponse response, Model model) {
 		
