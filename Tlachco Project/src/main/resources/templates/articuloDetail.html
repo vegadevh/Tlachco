@@ -26,7 +26,16 @@
 </head>
 <body>
     <th:block th:replace="components/navbar :: navbar"></th:block>
-    <h1>HOLA</h1>
+    <article class="cards-resultados" th:object="${publicacion}">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${publicacion.titulo}"></h5>
+                <h6 class="card-subtitle mb-2 text-muted" th:text="${publicacion.usuario.usuario}"></h6>
+                <p class="card-text limit-content" th:utext="${publicacion.contenido}"></p>
+                <p class="card-subtitle mb-2 text-muted" th:text="${publicacion.fecha_publicacion}"></p>
+            </div>
+        </div>
+    </article>
     <th:block th:replace="components/footer :: footer"></th:block>
 </body>
 </html>
