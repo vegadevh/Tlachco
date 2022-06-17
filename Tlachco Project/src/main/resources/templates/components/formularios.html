@@ -1,0 +1,7 @@
+<div th:fragment="formulario-post">
+	<input th:name="id_publicacion" type="hidden" th:value="${id_publicacion}">
+	<input th:name="categoria" type="hidden" th:value="${categoria}">
+    <label for="titulo">Titulo de la publicación:</label>
+    <input type="text" id="titulo" th:field="*{titulo}">
+    <textarea name="contenido" id="contenido" th:field="*{contenido}"></textarea>
+</div>

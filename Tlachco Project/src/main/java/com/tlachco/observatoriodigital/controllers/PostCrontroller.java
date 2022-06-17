@@ -187,4 +187,51 @@ public class PostCrontroller {
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment:filename=\"" + archivo.getNombre() + "\"")
 				.body(new ByteArrayResource(archivo.getContenido()));
 	}
+	
+	@RequestMapping("/editar/{id_publicacion}")
+	public String editarPublicacion(@PathVariable("id_publicacion") String id_publicacion, @RequestParam("categoria") Integer categoria, Model model) {
+		if(id_publicacion != null) {
+			Publicacion publicacion = publicacionService.findOne(Integer.parseInt(id_publicacion));
+			String miCategoria = null;
+			
+			if(categoria == 1) {
+				miCategoria = "Noticia";
+			}else if(categoria == 2) {
+				miCategoria = "Articulo";
+			}
+			
+			System.out.println(categoria);
+			model.addAttribute("miCategoria", miCategoria);
+			model.addAttribute("publicacion", publicacion);
+		}
+		return "editarPost";
+	}
+	
+	@RequestMapping("/validar-edicion")
+	public String validarEdicionPublicacion(@Valid @ModelAttribute Publicacion publicacion, @RequestParam("id_publicacion") String id_publicacion, @RequestParam("categoria") String categoria, Model model) {
+		if(id_publicacion == null) {
+			
+			System.out.println(categoria);
+			
+			model.addAttribute("categoria", categoria);
+			model.addAttribute("publicacion", publicacion);
+			
+			return "editarPost";
+		} else {
+			Publicacion publicacionAux = publicacionService.findOne(Integer.parseInt(id_publicacion));
+			publicacion.setFecha_publicacion(publicacionAux.getFecha_publicacion());
+			publicacion.setEstado(publicacionAux.getEstado());
+			publicacion.setUsuario(publicacionAux.getUsuario());
+			publicacion.setCategoriaPublicacion(publicacionAux.getCategoriaPublicacion());
+
+			try {
+				publicacionService.save(publicacion);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return "redirect:/";
+		}
+	}
+	
 }

@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tlachco - Inicio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <!-- Bootstrap -->
@@ -20,18 +19,22 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
         integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
         crossorigin="anonymous"></script>
-    <!-- Editor -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
+
+    <title>Tlachco - Inicio</title>
     <script src="//cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
 </head>
 
 <body>
+    <th:block th:replace="components/navbar :: navbar"></th:block>
     <div class="margin-container">
-        <h1>EditarPost</h1>
+        <div class="container" th:object="${publicacion}">
+            <h1>Editar Post</h1>
 
-        <textarea name="editor" id="editor" rows="1000"></textarea>
+            <form th:action="@{/post/validar-edicion}" method="post">
+                <th:block th:replace="components/formularios :: formulario-post"></th:block>
+                <input type="submit" value="Guardar" class="btn btn-primary">
+            </form>
+        </div>
     </div>
 
     <th:block th:replace="components/footer :: footer"></th:block>
@@ -53,8 +56,8 @@
         });
 
         $(document).ready(function () {
-            CKEDITOR.replace('editor', {
-
+            CKEDITOR.replace('contenido', {
+                height: 400,
             });
         });
     </script>

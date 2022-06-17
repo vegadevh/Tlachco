@@ -30,12 +30,21 @@
     <th:block th:replace="components/navbar :: navbar"></th:block>
     <div class="margin-container">
         <div class="container">
-            <article th:object="${publicacion}">
-                <h5 class="card-title" th:text="${publicacion.titulo}"></h5>
-                <h6 class="card-subtitle mb-2 text-muted" th:text="${publicacion.usuario.usuario}"></h6>
-                <p class="card-text limit-content" th:utext="${publicacion.contenido}"></p>
-                <p class="card-subtitle mb-2 text-muted" th:text="${publicacion.fecha_publicacion}"></p>
-            </article>
+            <div th:object="${publicacion}">
+                <div style="display: flex; justify-content: right;"
+                    th:if="${publicacion.usuario.usuario} == ${#authentication.getPrincipal().getUsername()}">
+                    <form class="p-1" th:action="@{'/post/editar/' + ${publicacion.id_publicacion}}" method="GET">
+                        <input th:name="categoria" type="hidden" th:value="${publicacion.categoriaPublicacion.id_categoria}">
+                        <input type="submit" class="btn btn-primary" value="Editar publicaci&oacute;n">
+                    </form>
+                </div>
+                <article>
+                    <h5 class="card-title" th:text="${publicacion.titulo}"></h5>
+                    <h6 class="card-subtitle mb-2 text-muted" th:text="${publicacion.usuario.usuario}"></h6>
+                    <p class="card-text limit-content" th:utext="${publicacion.contenido}"></p>
+                    <p class="card-subtitle mb-2 text-muted" th:text="${publicacion.fecha_publicacion}"></p>
+                </article>
+            </div>
         </div>
     </div>
     <th:block th:replace="components/footer :: footer"></th:block>
