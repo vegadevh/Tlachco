@@ -32,11 +32,14 @@
         <div class="container">
             <div th:object="${publicacion}">
                 <div style="display: flex; justify-content: right;"
-                    th:if="${publicacion.usuario.usuario} == ${#authentication.getPrincipal().getUsername()}">
-                    <form class="p-1" th:action="@{'/post/editar/' + ${publicacion.id_publicacion}}" method="GET">
-                        <input th:name="categoria" type="hidden" th:value="${publicacion.categoriaPublicacion.id_categoria}">
-                        <input type="submit" class="btn btn-primary" value="Editar publicaci&oacute;n">
-                    </form>
+                    sec:authorize="hasAnyRole('ADMIN', 'TEACHER', 'STUDENT')">
+                    <div th:if="${publicacion.usuario.usuario} == ${#authentication.getPrincipal().getUsername()}">
+                        <form class="p-1" th:action="@{'/post/editar/' + ${publicacion.id_publicacion}}" method="GET">
+                            <input th:name="categoria" type="hidden"
+                                th:value="${publicacion.categoriaPublicacion.id_categoria}">
+                            <input type="submit" class="btn btn-primary" value="Editar publicaci&oacute;n">
+                        </form>
+                    </div>
                 </div>
                 <article>
                     <h5 class="card-title" th:text="${publicacion.titulo}"></h5>
@@ -44,6 +47,12 @@
                     <p class="card-text limit-content" th:utext="${publicacion.contenido}"></p>
                     <p class="card-subtitle mb-2 text-muted" th:text="${publicacion.fecha_publicacion}"></p>
                 </article>
+                <div th:object="${comentario}">
+                    <th:block th:replace="components/comentarios :: editor-comentarios"></th:block>
+                </div>
+            </div>
+            <div th:each="comentarios : ${listaComentarios}">
+                <th:block th:replace="components/comentarios :: comentarios"></th:block>
             </div>
         </div>
     </div>

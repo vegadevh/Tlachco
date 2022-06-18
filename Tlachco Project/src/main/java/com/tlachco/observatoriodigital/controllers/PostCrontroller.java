@@ -25,10 +25,14 @@ import org.springframework.web.multipart.MultipartFile;
 import com.tlachco.observatoriodigital.domains.Publicacion;
 import com.tlachco.observatoriodigital.domains.Usuario;
 import com.tlachco.observatoriodigital.domains.Video;
+import com.tlachco.observatoriodigital.dto.ComentarioDTO;
+import com.tlachco.observatoriodigital.dto.PublicacionesDTO;
 import com.tlachco.observatoriodigital.domains.Archivo;
 import com.tlachco.observatoriodigital.domains.CategoriaPublicacion;
+import com.tlachco.observatoriodigital.domains.Comentario;
 import com.tlachco.observatoriodigital.services.IArchivoService;
 import com.tlachco.observatoriodigital.services.ICategoriaPublicacionService;
+import com.tlachco.observatoriodigital.services.IComentarioService;
 import com.tlachco.observatoriodigital.services.IPublicacionService;
 import com.tlachco.observatoriodigital.services.IUsuarioService;
 import com.tlachco.observatoriodigital.services.IVideoService;
@@ -52,6 +56,9 @@ public class PostCrontroller {
 	
 	@Autowired
 	public IVideoService videoService;
+	
+	@Autowired
+	public IComentarioService comentarioService;
 
 	@RequestMapping("/creacion")
 	public String creacion_post(@RequestParam String categoria, Model model) {
@@ -70,13 +77,26 @@ public class PostCrontroller {
 	}
 	
 	@RequestMapping("/articuloDetail/{idPublicacion}")
-	public String perfilDeUsuario(@PathVariable("idPublicacion") String idPublicacion, Model model) {
-		
+	public String perfilDeUsuario(@PathVariable("idPublicacion") String idPublicacion, Principal principal, Model model) {
+		String id_usuario;
+		if(principal != null) {			
+			id_usuario = principal.getName();
+			if(id_usuario != null) {
+				Comentario comentario = new Comentario();
+				model.addAttribute("comentario",comentario);
+			}
+		}
 		Publicacion publicacion = publicacionService.findOne(Integer.parseInt(idPublicacion));
+		List<ComentarioDTO> listaComentarios = null;
 		
+		try {
+			listaComentarios = comentarioService.findCommentByPublication(Integer.parseInt(idPublicacion));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		model.addAttribute("listaComentarios",listaComentarios);
 		model.addAttribute("publicacion",publicacion);
 		return "articuloDetail";
-				
 	}
 	
 	@RequestMapping("/validar-creacion")

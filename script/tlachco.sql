@@ -64,7 +64,7 @@ CREATE TABLE REACCION(
 
 CREATE TABLE COMENTARIO(
     id_comentario SERIAL PRIMARY KEY NOT NULL,
-    comentario VARCHAR(500),
+    contenido VARCHAR(500),
     id_publicacion INTEGER,
     usuario VARCHAR(50),
     FOREIGN KEY(id_publicacion) REFERENCES PUBLICACION(id_publicacion),

@@ -20,8 +20,8 @@ public class Comentario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_comentario;
 
-	@Column(name = "comentario")
-	private String comentario;
+	@Column(name = "contenido")
+	private String contenido;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_publicacion")
@@ -69,12 +69,12 @@ public class Comentario {
 		this.id_comentario = id_comentario;
 	}
 
-	public String getComentario() {
-		return comentario;
+	public String getContenido() {
+		return contenido;
 	}
 
-	public void setComentario(String comentario) {
-		this.comentario = comentario;
+	public void setContenido(String contenido) {
+		this.contenido = contenido;
 	}
 
 	public Integer getId_publicacion() {

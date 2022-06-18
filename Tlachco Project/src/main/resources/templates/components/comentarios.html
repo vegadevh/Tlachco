@@ -1,0 +1,31 @@
+<section th:fragment="editor-comentarios" sec:authorize="hasAnyRole('ADMIN', 'TEACHER', 'STUDENT')">
+    <div class="card" style="background-color: #F9F4E7;">
+        <div class="card-body">
+            <form th:action="@{/post/validar-comentario}" method="get">
+                <div class="form-outline mb-4">
+                    <input th:name="id_publicacion" type="hidden" th:value="${publicacion.id_publicacion}">
+                    <textarea class="form-control" id="textAreaExample6" rows="3" th:field="*{contenido}"
+                        placeholder="Escribe un comentario" required
+                        oninvalid="setCustomValidity('El campo no debe estar vacio.')"
+                        onchange="try{setCustomValidity('')}catch(e){}"></textarea>
+                </div>
+                <div style="display: flex; justify-content: right;">
+                    <input type="submit" class="btn btn-primary" value="Publicar">
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section th:fragment="comentarios">
+    <div class="card" style="background-color: #F9F4E7;">
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+                <p th:text="${comentarios.contenido}"></p>
+
+                <footer class="blockquote-footer" th:text="${comentarios.nombre} + ' ' + ${comentarios.apellido} + ' (' + ${comentarios.usuario} + ')'">
+                </footer>
+            </blockquote>
+        </div>
+    </div>
+</section>

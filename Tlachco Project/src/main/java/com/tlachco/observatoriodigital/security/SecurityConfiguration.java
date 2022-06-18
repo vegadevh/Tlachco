@@ -44,7 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.sessionManagement().maximumSessions(1); 
 		http.authorizeRequests()
 		 	.antMatchers("/users").authenticated()
-		 	.antMatchers("/post/**").hasAnyRole("ADMIN")
+		 	.antMatchers("/admin/**").hasAnyRole("ADMIN")
 	             .anyRequest().permitAll()
 	             .and()
 	             .formLogin()
