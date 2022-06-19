@@ -50,7 +50,7 @@
         </table> -->
             <section>
                 <div class="container-fluid mt-4">
-                    <div class="row" style="justify-content: space-between;">
+                    <div class="row" style="justify-content: center;">
                         <div class="col-auto mb-3" th:each="resultado : ${listaNoticias}">
                             <th:block th:replace="components/listaPublicaciones :: listaTopPublicaciones"></th:block>
                         </div>
@@ -60,7 +60,7 @@
 
             <section>
                 <div class="container-fluid mt-4">
-                    <div class="row" style="justify-content: space-between;">
+                    <div class="row" style="justify-content: center;">
                         <div class="col-auto mb-3" th:each="resultado : ${listaArticulos}">
                             <th:block th:replace="components/listaPublicaciones :: listaTopPublicaciones"></th:block>
                         </div>

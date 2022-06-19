@@ -53,10 +53,10 @@ public class PostCrontroller {
 
 	@Autowired
 	public IPublicacionService publicacionService;
-	
+
 	@Autowired
 	public IVideoService videoService;
-	
+
 	@Autowired
 	public IComentarioService comentarioService;
 
@@ -75,30 +75,31 @@ public class PostCrontroller {
 
 		return "crearPost";
 	}
-	
+
 	@RequestMapping("/articuloDetail/{idPublicacion}")
-	public String perfilDeUsuario(@PathVariable("idPublicacion") String idPublicacion, Principal principal, Model model) {
+	public String perfilDeUsuario(@PathVariable("idPublicacion") String idPublicacion, Principal principal,
+			Model model) {
 		String id_usuario;
-		if(principal != null) {			
+		if (principal != null) {
 			id_usuario = principal.getName();
-			if(id_usuario != null) {
+			if (id_usuario != null) {
 				Comentario comentario = new Comentario();
-				model.addAttribute("comentario",comentario);
+				model.addAttribute("comentario", comentario);
 			}
 		}
 		Publicacion publicacion = publicacionService.findOne(Integer.parseInt(idPublicacion));
 		List<ComentarioDTO> listaComentarios = null;
-		
+
 		try {
 			listaComentarios = comentarioService.findCommentByPublication(Integer.parseInt(idPublicacion));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		model.addAttribute("listaComentarios",listaComentarios);
-		model.addAttribute("publicacion",publicacion);
+		model.addAttribute("listaComentarios", listaComentarios);
+		model.addAttribute("publicacion", publicacion);
 		return "articuloDetail";
 	}
-	
+
 	@RequestMapping("/validar-creacion")
 	public String validar_post(@Valid @ModelAttribute Publicacion publicacion, BindingResult result,
 			Principal principal, @RequestParam String categoria, HttpServletRequest request, Model model) {
@@ -117,9 +118,9 @@ public class PostCrontroller {
 			} else {
 				estado = "Review";
 			}
-			
+
 			String id_usuario = principal.getName();
-			
+
 			CategoriaPublicacion id_categoria = new CategoriaPublicacion();
 			id_categoria = categoriaService.findByCategoria(categoria);
 
@@ -140,7 +141,7 @@ public class PostCrontroller {
 			return "index";
 		}
 	}
-	
+
 	@RequestMapping("/validar-video")
 	public String validar_video(@Valid @ModelAttribute Video video, BindingResult result,
 			Principal principal, @RequestParam String categoria, HttpServletRequest request, Model model) {
@@ -151,7 +152,7 @@ public class PostCrontroller {
 
 			return "videos";
 		} else {
-			
+
 			CategoriaPublicacion id_categoria = new CategoriaPublicacion();
 			id_categoria = categoriaService.findByCategoria(categoria);
 
@@ -162,16 +163,16 @@ public class PostCrontroller {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 			List<Video> listaVideos = null;
 			Video auxvideo = new Video();
-			
+
 			try {
 				listaVideos = videoService.findAllByIdOrderByDesc();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 			model.addAttribute("categoria", categoria);
 			model.addAttribute("auxvideo", auxvideo);
 			model.addAttribute("listaVideos", listaVideos);
@@ -207,35 +208,38 @@ public class PostCrontroller {
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment:filename=\"" + archivo.getNombre() + "\"")
 				.body(new ByteArrayResource(archivo.getContenido()));
 	}
-	
+
 	@RequestMapping("/editar/{id_publicacion}")
-	public String editarPublicacion(@PathVariable("id_publicacion") String id_publicacion, @RequestParam("categoria") Integer categoria, Model model) {
-		if(id_publicacion != null) {
+	public String editarPublicacion(@PathVariable("id_publicacion") String id_publicacion,
+			@RequestParam("categoria") Integer categoria, Model model) {
+		if (id_publicacion != null) {
 			Publicacion publicacion = publicacionService.findOne(Integer.parseInt(id_publicacion));
 			String miCategoria = null;
-			
-			if(categoria == 1) {
+
+			if (categoria == 1) {
 				miCategoria = "Noticia";
-			}else if(categoria == 2) {
+			} else if (categoria == 2) {
 				miCategoria = "Articulo";
 			}
-			
+
 			System.out.println(categoria);
 			model.addAttribute("miCategoria", miCategoria);
 			model.addAttribute("publicacion", publicacion);
 		}
 		return "editarPost";
 	}
-	
+
 	@RequestMapping("/validar-edicion")
-	public String validarEdicionPublicacion(@Valid @ModelAttribute Publicacion publicacion, @RequestParam("id_publicacion") String id_publicacion, @RequestParam("categoria") String categoria, Model model) {
-		if(id_publicacion == null) {
-			
+	public String validarEdicionPublicacion(@Valid @ModelAttribute Publicacion publicacion, BindingResult result,
+			@RequestParam("id_publicacion") String id_publicacion, @RequestParam("categoria") String categoria,
+			Model model) {
+		if (result.hasErrors() || id_publicacion == null) {
+
 			System.out.println(categoria);
-			
+
 			model.addAttribute("categoria", categoria);
 			model.addAttribute("publicacion", publicacion);
-			
+
 			return "editarPost";
 		} else {
 			Publicacion publicacionAux = publicacionService.findOne(Integer.parseInt(id_publicacion));
@@ -253,5 +257,5 @@ public class PostCrontroller {
 			return "redirect:/";
 		}
 	}
-	
+
 }

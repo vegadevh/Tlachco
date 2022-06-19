@@ -94,3 +94,9 @@ a {
 .color-tag-a {
     color: #000;
 }
+
+@media only screen and (max-width:450px) {
+    .tlachcoTitulo {
+        display: none;
+    }
+}
