@@ -61,13 +61,25 @@ public class PostCrontroller {
 	public IComentarioService comentarioService;
 
 	@RequestMapping("/creacion")
-	public String creacion_post(@RequestParam String categoria, Model model) {
+	public String creacion_post(@RequestParam String categoria, Principal principal, Model model) {
 
 		// List<CategoriaPublicacion> categorias = null;
 		Integer id_categoria = null;
+		String id_usuario = principal.getName();
+		Usuario user = usuarioService.findOne(id_usuario);
 
 		Publicacion publicacion = new Publicacion();
-
+		List<Usuario> teachers = null;
+		
+		if(user.getRol().getId_rol() == 3) {
+			try {
+				teachers = usuarioService.findTeachers();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		model.addAttribute("teachers", teachers);
 		model.addAttribute("categoria", categoria);
 		// model.addAttribute("categorias", categorias);
 		model.addAttribute("id_categoria", id_categoria);
@@ -102,11 +114,23 @@ public class PostCrontroller {
 
 	@RequestMapping("/validar-creacion")
 	public String validar_post(@Valid @ModelAttribute Publicacion publicacion, BindingResult result,
-			Principal principal, @RequestParam String categoria, HttpServletRequest request, Model model) {
+			Principal principal, @RequestParam String categoria, @RequestParam String teacherSelect, HttpServletRequest request, Model model) {
 
 		String estado = null;
 
 		if (result.hasErrors()) {
+			String id_usuario = principal.getName();
+			Usuario user = usuarioService.findOne(id_usuario);
+			List<Usuario> teachers = null;
+			
+			if(user.getRol().getId_rol() == 3) {
+				try {
+					teachers = usuarioService.findTeachers();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			model.addAttribute("teachers", teachers);
 			model.addAttribute("categoria", categoria);
 			model.addAttribute("publicacion", publicacion);
 
@@ -126,7 +150,10 @@ public class PostCrontroller {
 
 			Usuario propietario = new Usuario();
 			propietario = usuarioService.findOne(id_usuario);
-
+			
+			System.out.println(teacherSelect);
+			
+			publicacion.setProfesor(usuarioService.findOne(teacherSelect));
 			publicacion.setFecha_publicacion(new java.util.Date());
 			publicacion.setEstado(estado);
 			publicacion.setUsuario(propietario);
@@ -138,7 +165,7 @@ public class PostCrontroller {
 				e.printStackTrace();
 			}
 
-			return "index";
+			return "redirect:/post/articuloDetail/" + publicacion.getId_publicacion();
 		}
 	}
 

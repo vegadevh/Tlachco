@@ -43,5 +43,9 @@ public interface IPublicacionRepo extends JpaRepository<Publicacion, Integer> {
 			+ "FROM public.publicacion AS p INNER JOIN public.usuario AS u ON p.propietario  = u.usuario\r\n"
 			+ "WHERE id_categoria = :id_categoria ORDER BY id_publicacion DESC limit 3 ;")
 	public List<Object[]> findTopThreePublicaciones(Integer id_categoria) throws DataAccessException;
+	
+	@Query(nativeQuery = true, value = "SELECT id_publicacion, titulo, contenido, fecha_publicacion, estado\r\n"
+			+ "FROM public.publicacion WHERE profesor = :id_profesor ;")
+	public List<Object[]> findReviewPublicacionesByProfesor(String id_profesor) throws DataAccessException;
 
 }

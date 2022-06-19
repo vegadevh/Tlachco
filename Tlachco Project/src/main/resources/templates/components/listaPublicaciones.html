@@ -7,7 +7,8 @@
 						<h5 class="card-title" th:text="${resultado.titulo}"></h5>
 					</a>
 					<input type="hidden" th:value="${resultado.id_publicacion}" th:name="idPublicacion">
-					<h6 class="card-subtitle mb-2 text-muted" th:text="'Autor: ' + ${resultado.nombre} + ' ' + ${resultado.apellido}"></h6>
+					<h6 class="card-subtitle mb-2 text-muted"
+						th:text="'Autor: ' + ${resultado.nombre} + ' ' + ${resultado.apellido}"></h6>
 					<p class="card-text" th:utext="${#strings.abbreviate(resultado.contenido, 250)}"></p>
 					<p class="card-subtitle mb-2 text-muted" th:text="${resultado.fecha_publicacion}"></p>
 					<a th:href="@{'/post/articuloDetail/' + ${resultado.id_publicacion}}" class="btn btn-primary">Leer
@@ -45,12 +46,36 @@
 	</div>
 </section>
 
+<section th:fragment="listaPublicacionesReview">
+	<div class="container-fluid mt-4">
+		<div class="row" style="justify-content: center;">
+			<div class="col-auto mb-3" th:each="resultado : ${listaPublicacionesReview}">
+				<div class="card shadow-sm bg-white rounded" style="width: 20.5rem;">
+					<article class="card-body">
+						<a class="color-tag-a" th:href="@{'/post/articuloDetail/' + ${resultado.id_publicacion}}">
+							<h5 class="card-title" th:text="${resultado.titulo}"></h5>
+						</a>
+						<h6 class="card-subtitle mb-2 text-muted" th:text="${resultado.estado}"></h6>
+						<p class="card-text" th:utext="${#strings.abbreviate(resultado.contenido, 120)}">
+						</p>
+						<p class="card-subtitle mb-2 text-muted" th:text="${resultado.fecha_publicacion}"></p>
+						<a th:href="@{'/post/articuloDetail/' + ${resultado.id_publicacion}}"
+							class="btn btn-primary">Leer
+							M&aacute;s</a>
+					</article>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
 <div th:fragment="listaTopPublicaciones" class="card shadow-sm bg-white rounded" style="width: 20.5rem;">
 	<article class="card-body">
 		<a class="color-tag-a" th:href="@{'/post/articuloDetail/' + ${resultado.id_publicacion}}">
 			<h5 class="card-title" th:text="${resultado.titulo}"></h5>
 		</a>
-		<h6 class="card-subtitle mb-2 text-muted" th:text="'Autor: ' + ${resultado.nombre} + ' ' + ${resultado.apellido}"></h6>
+		<h6 class="card-subtitle mb-2 text-muted"
+			th:text="'Autor: ' + ${resultado.nombre} + ' ' + ${resultado.apellido}"></h6>
 		<p class="card-text" th:utext="${#strings.abbreviate(resultado.contenido, 100)}">
 		</p>
 		<p class="card-subtitle mb-2 text-muted" th:text="${resultado.fecha_publicacion}"></p>

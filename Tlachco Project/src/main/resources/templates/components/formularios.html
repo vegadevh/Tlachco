@@ -1,7 +1,16 @@
 <div th:fragment="formulario-post">
-	<input th:name="id_publicacion" type="hidden" th:value="${id_publicacion}">
-	<input th:name="categoria" type="hidden" th:value="${categoria}">
+    <input th:name="id_publicacion" type="hidden" th:value="${id_publicacion}">
+    <input th:name="categoria" type="hidden" th:value="${categoria}">
     <label for="titulo">Titulo de la publicación:</label>
     <input type="text" id="titulo" th:field="*{titulo}">
+    <div sec:authorize="hasAnyRole('STUDENT')">
+        <label class="col-form-label">Profesor que revisara su publicaci&oacute;n:</label>
+        <select class="form-control" id="teacherSelect" th:name="teacherSelect">
+            <option value="0" selected="selected">Selecciona una opci&oacute;n</option>
+            <option th:each="teacher : ${teachers}" th:value="${teacher.usuario}" th:id="${teacher.usuario}"
+                th:text="${teacher.nombre}">
+            </option>
+        </select>
+    </div>
     <textarea name="contenido" id="contenido" th:field="*{contenido}"></textarea>
 </div>

@@ -1,22 +1,32 @@
 package com.tlachco.observatoriodigital.dto;
 
 public class PublicacionesDTO {
-	
+
 	private String id_publicacion;
-	
+
 	private String titulo;
-	
+
 	private String contenido;
-	
+
 	private String fecha_publicacion;
-	
+
 	private String propietario;
-	
+
 	private String estado;
-	
+
 	private String nombre;
-	
+
 	private String apellido;
+
+	private String profesor;
+
+	public String getProfesor() {
+		return profesor;
+	}
+
+	public void setProfesor(String profesor) {
+		this.profesor = profesor;
+	}
 
 	public String getNombre() {
 		return nombre;
@@ -81,6 +91,5 @@ public class PublicacionesDTO {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	
 
 }

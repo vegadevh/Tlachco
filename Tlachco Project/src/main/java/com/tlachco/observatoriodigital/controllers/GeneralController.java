@@ -53,15 +53,18 @@ public class GeneralController {
 		Usuario usuario = usuarioService.findOne(username);
 		
 		List<PublicacionesDTO> listaResultados = null;
+		List<PublicacionesDTO> listaPublicacionesReview = null;
 		
 		
 		try {
 			listaResultados = publicacionService.findAllPublicacionesByPropietario(username);
+			listaPublicacionesReview = publicacionService.findReviewPublicacionesByProfesor(username);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		model.addAttribute("listaResultados", listaResultados);
+		model.addAttribute("listaPublicacionesReview", listaPublicacionesReview);
 		model.addAttribute("usuario",usuario);
 		return "perfil";
 				

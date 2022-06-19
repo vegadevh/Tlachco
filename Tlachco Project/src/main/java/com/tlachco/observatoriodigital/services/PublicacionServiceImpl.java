@@ -121,4 +121,19 @@ public class PublicacionServiceImpl implements IPublicacionService {
 		return publicaciones;
 	}
 
+	@Override
+	public List<PublicacionesDTO> findReviewPublicacionesByProfesor(String id_profesor) throws DataAccessException {
+		List<PublicacionesDTO> publicaciones = publicacionRepo.findReviewPublicacionesByProfesor(id_profesor).stream().map(obj -> {
+			PublicacionesDTO p = new PublicacionesDTO();
+			p.setId_publicacion(obj[0].toString());
+			p.setTitulo(obj[1].toString());
+			p.setContenido(obj[2].toString());
+			p.setFecha_publicacion(obj[3].toString());
+			p.setEstado(obj[4].toString());
+			return p;
+		}).collect(Collectors.toList());
+		
+		return publicaciones;
+	}
+
 }
