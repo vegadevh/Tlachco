@@ -59,16 +59,17 @@
                                         value="Habilitar">
                                 </form>
                                 
-                                <form class="p-1" th:action="@{/admin/ver_publicaciones/} + ${user.username}"
+                                <form class="p-1" th:action="@{/admin/ver_publicaciones/} + ${user.usuario}"
                                     method="GET">
-                                    <input th:name="id_usuario" hidden th:value=${user.username}>
+                                    <input th:name="id_usuario" hidden th:value=${user.usuario}>
                                     <input type="submit" class="btn btn-danger" value="Perfil">
                                 </form>
                                 
-                                <form class="p-1" th:action="@{/admin/ver_publicaciones/} + ${user.username}"
+                                
+                                <form class="p-1" th:action="@{/admin/editar_usuario/} + ${user.usuario}"
                                     method="GET">
-                                    <input th:name="id_usuario" hidden th:value=${user.username}>
-                                    <input type="submit" class="btn btn-danger" value="Perfil">
+                                    <input th:name="id_usuario" hidden th:value=${user.usuario}>
+                                    <input type="submit" class="btn btn-danger" value="Editar">
                                 </form>
                                 
                             </div>
