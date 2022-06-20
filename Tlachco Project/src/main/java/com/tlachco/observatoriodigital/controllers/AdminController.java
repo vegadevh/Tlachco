@@ -42,6 +42,7 @@ public class AdminController {
 		
 		
 		usuario.setEnabled_u(true);
+		model.addAttribute("titulo", "Crear Usuario");
 		model.addAttribute("roles", roles);
 		model.addAttribute("usuario", usuario);
 		
@@ -66,6 +67,7 @@ public class AdminController {
 			
 			
 			usuario.setEnabled_u(true);
+			
 			model.addAttribute("roles", roles);
 			model.addAttribute("usuario", usuario);
 			
@@ -133,8 +135,8 @@ public class AdminController {
 		return "listaUsuarios";
 	}
 	
-	@RequestMapping("/editar_usuario/{id_usuario}")
-	public String editarUsuario(@RequestParam(value = "id_usuario") String id_usuario, Model model) {
+	@RequestMapping("/cambiar_estado/{id_usuario}")
+	public String cambiarEstadoUsuario(@RequestParam(value = "id_usuario") String id_usuario, Model model) {
 		
 		Usuario usuario = new Usuario();
 		
@@ -153,6 +155,93 @@ public class AdminController {
 		
 		
 		return "redirect:/admin/lista_usuarios";
+	}
+	
+	@RequestMapping("/editar_usuario/{id_usuario}")
+	public String editarUsuario(@RequestParam(value = "id_usuario") String id_usuario, Model model) {
+		
+		Usuario usuario = new Usuario();
+		
+		
+		try {
+			usuario = usuarioService.findOne(id_usuario);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		List <Rol> roles = null;
+		
+		try {
+			roles = rolService.findAll();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("roles", roles);
+		model.addAttribute("usuario", usuario);
+		
+		return "editarUsuario";
+	}
+	
+	@RequestMapping("validar_edicion_usuario")
+	public String validarEdicionUsuario(@Valid @ModelAttribute Usuario usuario, BindingResult result, Model model,
+			@RequestParam(value="rol.id_rol") String rolSelect,
+			@RequestParam(value="usuario") String id_usuario) {
+		
+		if (result.hasErrors()) {
+			List <Rol> roles = null;
+			
+			try {
+				roles = rolService.findAll();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+			//usuario.setEnabled_u(true);
+			
+			model.addAttribute("roles", roles);
+			model.addAttribute("usuario", usuario);
+			
+			return "editarUsuario";
+		}else if(rolSelect.equals("0")) {
+			List <Rol> roles = null;
+			
+			try {
+				
+				roles = rolService.findAll();
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+			model.addAttribute("roles", roles);
+			model.addAttribute("alertRol","Debe seleccionar un rol para el usuario.");
+			model.addAttribute("usuario", usuario);
+			return "editarUsuario";
+		} else {
+			
+			/*
+			Usuario usuarioAux = usuarioService.findOne(id_usuario);
+			
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			String encodedPassword = passwordEncoder.encode(usuario.getPassword());
+			
+			if(!usuarioAux.getPassword().equals(encodedPassword)) {
+				usuario.setPassword(encodedPassword);
+			}else {
+				//usuario.setPassword(usuarioAux.getPassword());
+			}
+			*/
+			
+			try {
+				usuarioService.save(usuario);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+			//model.addAttribute("umensaje","Usuario actualizado con éxito.");
+			return "redirect:/admin/lista_usuarios";
+		}
 	}
 	
 }
