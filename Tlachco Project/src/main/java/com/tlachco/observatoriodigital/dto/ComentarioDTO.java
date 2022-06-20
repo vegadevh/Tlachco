@@ -6,6 +6,7 @@ public class ComentarioDTO {
 	private String nombre;
 	private String apellido;
 	private String usuario;
+	private String id_comentario;
 	
 	public String getContenido() {
 		return contenido;
@@ -30,6 +31,12 @@ public class ComentarioDTO {
 	}
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
+	}
+	public String getId_comentario() {
+		return id_comentario;
+	}
+	public void setId_comentario(String id_comentario) {
+		this.id_comentario = id_comentario;
 	}
 	
 	

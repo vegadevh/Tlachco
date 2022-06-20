@@ -17,5 +17,9 @@ public interface IComentarioRepo extends JpaRepository<Comentario, Integer>{
 			+ "WHERE p.id_publicacion = :id_publicacion \r\n"
 			+ "ORDER BY c.id_comentario ASC ;")
 	public List<Object[]> findCommentByPublication(Integer id_publicacion) throws DataAccessException;
+	
+	@Query(nativeQuery = true, value ="DELETE FROM public.comentario\r\n"
+			+ "	WHERE id_publicacion = :id_comentario;")
+	public void eliminarComentario(Integer id_comentario) throws DataAccessException;
 
 }
