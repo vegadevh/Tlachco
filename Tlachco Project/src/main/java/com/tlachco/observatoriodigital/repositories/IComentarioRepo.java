@@ -10,7 +10,7 @@ import com.tlachco.observatoriodigital.domains.Comentario;
 
 public interface IComentarioRepo extends JpaRepository<Comentario, Integer>{
 	
-	@Query(nativeQuery = true, value = "SELECT c.contenido, u.nombre, u.apellido, u.usuario\r\n"
+	@Query(nativeQuery = true, value = "SELECT c.contenido, u.nombre, u.apellido, u.usuario, c.id_comentario\r\n"
 			+ "FROM public.publicacion AS p\r\n"
 			+ "INNER JOIN public.comentario AS c on p.id_publicacion = c.id_publicacion\r\n"
 			+ "INNER JOIN public.usuario AS u on c.usuario = u.usuario\r\n"
