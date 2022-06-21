@@ -31,60 +31,11 @@
 		<div class="container">
 			<div class="card" style="padding: 2em;">
 
-				<h1 class="text-center">Registro de Usuario </h1>
+				<h1 class="text-center">Crear Usuario </h1>
 				<form th:action="@{/admin/validar_registro}" th:object="${usuario}" method="post">
 
-					<div class="">
-						<div class="form-group">
-							<label for="usuario">Usuario: </label>
-							<input type="text" th:field="*{usuario}" th:name="usuario" class="form-control">
-							<div th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}"
-								class="alert alert-danger" role="alert"></div>
-							<div th:if="${iderror}" th:text="${iderror}" class="alert alert-danger" role="alert"></div>
-						</div>
-
-						<div class="form-group">
-							<label for="password">Contraseña: </label>
-							<input id="password" type="password" th:field="*{password}" class="form-control"
-								minlength="6" oninvalid="setCustomValidity('La cantidad mínima de caracteres es de 6.')"
-								onchange="try{setCustomValidity('')}catch(e){}">
-							<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
-								class="alert alert-danger" role="alert"></div>
-						</div>
-
-						<div class="form-group">
-							<label for="nombre">Nombres: </label>
-							<input id="nombre" type="text" th:field="*{nombre}" class="form-control">
-							<div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="alert alert-danger"
-								role="alert"></div>
-						</div>
-
-						<div class="form-group">
-							<label for="apellido">Apellido: </label>
-							<input id="apellido" type="text" th:field="*{apellido}" class="form-control">
-							<div th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"
-								class="alert alert-danger" role="alert"></div>
-						</div>
-
-						<select hidden class="form-control" name="enabled_u" id="estado"
-							th:field="${usuario.enabled_u}">
-							<option th:value="${true}">Activa</option>
-						</select>
-
-						<div class="form-group">
-							<label for="rol">Roles: </label>
-							<select class="form-control" id="rolSelect" th:field="*{rol.id_rol}">
-								<option value="0">Selecciona una opci&oacute;n</option>
-								<option th:each="rol : ${roles}" th:id="${rol.id_rol}" th:value="${rol.id_rol}"
-									th:text="${rol.rol}"></option>
-							</select>
-						</div>
-						<div th:if="${alertRol}" th:text="${alertRol}" class="alert alert-danger" role="alert"></div>
-
-						<div class="text-center">
-							<button type="submit" class="btn btn-primary">Registrar</button>
-						</div>
-					</div>
+					<th:block th:replace="components/camposUsuario :: camposUsuario"></th:block>
+					
 				</form>
 				<br>
 				<div class="text-center">
