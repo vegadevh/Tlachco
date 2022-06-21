@@ -30,4 +30,6 @@ public interface IPublicacionService {
 	public List<PublicacionesDTO> findTopThreePublicaciones(Integer id_categoria) throws DataAccessException;
 
 	public List<PublicacionesDTO> findReviewPublicacionesByProfesor(String id_profesor) throws DataAccessException;
+	
+	public void deletePublicacion(Integer id_publicacion) throws DataAccessException;
 }

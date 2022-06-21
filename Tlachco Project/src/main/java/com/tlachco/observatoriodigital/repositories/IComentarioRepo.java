@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tlachco.observatoriodigital.domains.Comentario;
 
@@ -18,8 +20,10 @@ public interface IComentarioRepo extends JpaRepository<Comentario, Integer>{
 			+ "ORDER BY c.id_comentario ASC ;")
 	public List<Object[]> findCommentByPublication(Integer id_publicacion) throws DataAccessException;
 	
+	@Modifying
+	@Transactional
 	@Query(nativeQuery = true, value ="DELETE FROM public.comentario\r\n"
-			+ "	WHERE id_publicacion = :id_comentario;")
-	public void eliminarComentario(Integer id_comentario) throws DataAccessException;
+			+ "	WHERE id_publicacion = :id_publicacion ;")
+	public void eliminarComentario(Integer id_publicacion) throws DataAccessException;
 
 }

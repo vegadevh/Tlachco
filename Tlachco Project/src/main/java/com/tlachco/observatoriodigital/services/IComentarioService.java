@@ -13,7 +13,7 @@ public interface IComentarioService {
 
 	public void delete(Integer comentario) throws DataAccessException;
 	
-	public void eliminarComentario(String comentario) throws DataAccessException;
+	public void eliminarComentario(String id_publicacion) throws DataAccessException;
 	
 	public Comentario findOne(Integer comentario) throws DataAccessException;
 	

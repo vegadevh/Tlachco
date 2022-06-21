@@ -136,4 +136,10 @@ public class PublicacionServiceImpl implements IPublicacionService {
 		return publicaciones;
 	}
 
+	@Override
+	public void deletePublicacion(Integer id_publicacion) throws DataAccessException {
+		publicacionRepo.deletePublicacion(id_publicacion);
+		
+	}
+
 }
