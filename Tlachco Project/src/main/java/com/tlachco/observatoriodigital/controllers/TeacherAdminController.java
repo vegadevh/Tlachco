@@ -63,13 +63,15 @@ public class TeacherAdminController {
 	}
 	
 	@RequestMapping("/eliminar/comentario/{id_comentario}")
-	public String eliminarComentario(@PathVariable(value="id_comentario") String id_comentario) {
+	public String eliminarComentario(@PathVariable(value="id_comentario") String id_comentario, @RequestParam(value="id_publicacion") String id_publicacion, Model model) {
 		
 		if(id_comentario != null) {
-			comentarioService.eliminarComentario(id_comentario);
+			comentarioService.delete(Integer.parseInt(id_comentario));
 			
 		}
-		return "redirect:/articulos";
+		String pub = id_publicacion;
+		model.addAttribute("id_publicacion", pub);
+		return "redirect:/post/articuloDetail/"+pub;
 	}
 	
 	@RequestMapping("/eliminar/video/{id_video}")
