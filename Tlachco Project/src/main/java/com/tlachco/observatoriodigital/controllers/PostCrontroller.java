@@ -151,9 +151,10 @@ public class PostCrontroller {
 			Usuario propietario = new Usuario();
 			propietario = usuarioService.findOne(id_usuario);
 			
-			System.out.println(teacherSelect);
-			
-			publicacion.setProfesor(usuarioService.findOne(teacherSelect));
+			System.out.println("SELECT VALOR PARA " + teacherSelect);
+			if(teacherSelect != null) {
+				publicacion.setProfesor(usuarioService.findOne(teacherSelect));
+			}
 			publicacion.setFecha_publicacion(new java.util.Date());
 			publicacion.setEstado(estado);
 			publicacion.setUsuario(propietario);
