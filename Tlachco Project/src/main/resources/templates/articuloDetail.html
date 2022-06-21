@@ -54,11 +54,14 @@
                 <div th:each="comentarios : ${listaComentarios}">
                     <th:block th:replace="components/comentarios :: comentarios"></th:block>
                 </div>
-                <div>
-                    <form th:action="@{'/post/eliminar/publicacion/'+ ${publicacion.id_publicacion}}" method="post">
-                        <input th:name="id_publicacion" type="hidden" th:value=${publicacion.id_publicacion}>
-                        <input type="submit" class="btn btn-danger" value="Eliminar publicacion">
-                    </form>
+                <div sec:authorize="hasAnyRole('ADMIN', 'TEACHER', 'STUDENT')">
+                    <div
+                        th:if="${publicacion.usuario.usuario} == ${#authentication.getPrincipal().getUsername()} or ${#authorization.expression('hasRole(''ADMIN'')')} or ${#authorization.expression('hasRole(''TEACHER'')')}">
+                        <form th:action="@{'/post/eliminar/publicacion/'+ ${publicacion.id_publicacion}}" method="post">
+                            <input th:name="id_publicacion" type="hidden" th:value=${publicacion.id_publicacion}>
+                            <input type="submit" class="btn btn-danger" value="Eliminar publicacion">
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
