@@ -49,10 +49,17 @@
                 </article>
                 <div th:object="${comentario}">
                     <th:block th:replace="components/comentarios :: editor-comentarios"></th:block>
+
                 </div>
-            </div>
-            <div th:each="comentarios : ${listaComentarios}">
-                <th:block th:replace="components/comentarios :: comentarios"></th:block>
+                <div th:each="comentarios : ${listaComentarios}">
+                    <th:block th:replace="components/comentarios :: comentarios"></th:block>
+                </div>
+                <div>
+                    <form th:action="@{'/post/eliminar/publicacion/'+ ${publicacion.id_publicacion}}" method="post">
+                        <input th:name="id_publicacion" type="hidden" th:value=${publicacion.id_publicacion}>
+                        <input type="submit" class="btn btn-danger" value="Eliminar publicacion">
+                    </form>
+                </div>
             </div>
         </div>
     </div>

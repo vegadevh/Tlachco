@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 //import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tlachco.observatoriodigital.domains.Publicacion;
 
@@ -47,5 +49,11 @@ public interface IPublicacionRepo extends JpaRepository<Publicacion, Integer> {
 	@Query(nativeQuery = true, value = "SELECT id_publicacion, titulo, contenido, fecha_publicacion, estado\r\n"
 			+ "FROM public.publicacion WHERE profesor = :id_profesor ;")
 	public List<Object[]> findReviewPublicacionesByProfesor(String id_profesor) throws DataAccessException;
+	
+	@Modifying
+	@Transactional
+	@Query(nativeQuery = true, value = "DELETE FROM public.publicacion\r\n"
+			+ "WHERE id_publicacion= :id_publicacion ;")
+	public void deletePublicacion(Integer id_publicacion) throws DataAccessException;
 
 }

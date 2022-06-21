@@ -27,8 +27,7 @@ public class ComentarioServiceImpl implements IComentarioService{
 	public void delete(Integer comentario) throws DataAccessException {
 		Comentario comentarioaux = comentarioRepo.getById(comentario);
 		comentarioRepo.delete(comentarioaux);
-		
-		
+	
 	}
 
 	@Override
@@ -44,9 +43,15 @@ public class ComentarioServiceImpl implements IComentarioService{
 			p.setNombre(obj[1].toString());
 			p.setApellido(obj[2].toString());
 			p.setUsuario(obj[3].toString());
+			p.setId_comentario(obj[4].toString());
 			return p;
 		}).collect(Collectors.toList());
 		return listaComentarios;
+	}
+
+	@Override
+	public void eliminarComentario(String id_publicacion) throws DataAccessException {
+		comentarioRepo.eliminarComentario(Integer.parseInt(id_publicacion));
 	}
 
 }

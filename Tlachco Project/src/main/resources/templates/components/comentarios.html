@@ -23,9 +23,17 @@
             <blockquote class="blockquote mb-0">
                 <p th:text="${comentarios.contenido}"></p>
 
-                <footer class="blockquote-footer" th:text="${comentarios.nombre} + ' ' + ${comentarios.apellido} + ' (' + ${comentarios.usuario} + ')'">
+                <footer class="blockquote-footer"
+                    th:text="${comentarios.nombre} + ' ' + ${comentarios.apellido} + ' (' + ${comentarios.usuario} + ')'">
                 </footer>
             </blockquote>
+            <div style="display: flex; justify-content: right;">
+                <form th:action="@{'/post/eliminar/comentario/'+ ${comentarios.id_comentario}}" method="post">
+                    <input th:name="id_publicacion" type="hidden" th:value="${publicacion.id_publicacion}">
+                    <input th:name="id_comentario" type="hidden" th:value=${comentarios.id_comentario}>
+                    <input type="submit" class="btn btn-danger" value="Eliminar comentario">
+                </form>
+            </div>
         </div>
     </div>
 </section>
