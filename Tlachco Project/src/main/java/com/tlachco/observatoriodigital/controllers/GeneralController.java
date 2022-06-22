@@ -83,8 +83,6 @@ public class GeneralController {
 	@RequestMapping("/perfil/{username}/validar-pass")
 	public String validarPass(@Valid @ModelAttribute Usuario usuario, BindingResult result, @RequestParam("password") String password, @RequestParam("valid_password") String valid_password,  Model model) {
 		
-		System.out.println(password + " " + valid_password);
-		
 		if (result.hasErrors()) {
 			model.addAttribute("usuario",usuario);
 			return "editarPass";
@@ -107,7 +105,7 @@ public class GeneralController {
 				e.printStackTrace();
 			}
 			
-			model.addAttribute("umensaje","Su contraseña fue cambiada con éxito.");
+			model.addAttribute("umensaje","La contraseña fue cambiada con éxito.");
 			return "perfil";
 		}
 				

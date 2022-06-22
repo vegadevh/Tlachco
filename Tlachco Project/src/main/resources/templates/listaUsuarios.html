@@ -29,7 +29,7 @@
     <th:block th:replace="components/navbar :: navbar"></th:block>
 
     <div class="margin-container container">
-
+		<h5 th:if="${umensaje}" class="alert alert-success" th:text="${umensaje}"></h5>
         <table class="table shadow-lg bg-white rounded">
             <thead class="thead-dark">
                 <tr>
@@ -50,23 +50,23 @@
                     <td th:if="${user.usuario} != 'admin'">
 
                         <div class="d-flex">
+                            <form class="p-1" th:action="@{/admin/ver_publicaciones/} + ${user.usuario}" method="GET">
+                                <input th:name="id_usuario" hidden th:value=${user.usuario}>
+                                <input type="submit" class="btn btn-info" value="Perfil">
+                            </form>
+
+
+                            <form class="p-1" th:action="@{/admin/editar_usuario/} + ${user.usuario}" method="GET">
+                                <input th:name="id_usuario" hidden th:value=${user.usuario}>
+                                <input type="submit" class="btn btn-info" value="Editar">
+                            </form>
+                            
                             <form class="p-1" th:action="@{/admin/cambiar_estado/} + ${user.usuario} " method="GET">
                                 <input th:name="id_usuario" hidden th:value=${user.usuario}>
                                 <input th:if="${user.enabled_u} == true" type="submit" class="btn btn-danger"
                                     value="Deshabilitar">
                                 <input th:unless="${user.enabled_u} == true" type="submit" class="btn btn-success"
                                     value="Habilitar">
-                            </form>
-
-                            <form class="p-1" th:action="@{/admin/ver_publicaciones/} + ${user.usuario}" method="GET">
-                                <input th:name="id_usuario" hidden th:value=${user.usuario}>
-                                <input type="submit" class="btn btn-danger" value="Perfil">
-                            </form>
-
-
-                            <form class="p-1" th:action="@{/admin/editar_usuario/} + ${user.usuario}" method="GET">
-                                <input th:name="id_usuario" hidden th:value=${user.usuario}>
-                                <input type="submit" class="btn btn-danger" value="Editar">
                             </form>
 
                         </div>

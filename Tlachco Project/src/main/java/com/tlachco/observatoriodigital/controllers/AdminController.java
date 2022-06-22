@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tlachco.observatoriodigital.domains.Rol;
 import com.tlachco.observatoriodigital.domains.Usuario;
+import com.tlachco.observatoriodigital.dto.PublicacionesDTO;
+import com.tlachco.observatoriodigital.services.IPublicacionService;
 import com.tlachco.observatoriodigital.services.IRolService;
 import com.tlachco.observatoriodigital.services.IUsuarioService;
 
@@ -27,6 +29,9 @@ public class AdminController {
 
 	@Autowired
 	private IRolService rolService;
+	
+	@Autowired
+	public IPublicacionService publicacionService;
 	
 	@RequestMapping("/usuario_registro")
 	public String creacion_usuario(Model model) {
@@ -220,28 +225,33 @@ public class AdminController {
 			return "editarUsuario";
 		} else {
 			
-			/*
-			Usuario usuarioAux = usuarioService.findOne(id_usuario);
-			
-			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-			String encodedPassword = passwordEncoder.encode(usuario.getPassword());
-			
-			if(!usuarioAux.getPassword().equals(encodedPassword)) {
-				usuario.setPassword(encodedPassword);
-			}else {
-				//usuario.setPassword(usuarioAux.getPassword());
-			}
-			*/
-			
 			try {
 				usuarioService.save(usuario);
 			}catch(Exception e){
 				e.printStackTrace();
 			}
 			
-			//model.addAttribute("umensaje","Usuario actualizado con éxito.");
+			model.addAttribute("umensaje","Usuario actualizado con éxito.");
 			return "redirect:/admin/lista_usuarios";
 		}
+	}
+	
+	@RequestMapping("/ver_publicaciones/{id_usuario}")
+	public String publicacionesUsuarioFromAdmin(@RequestParam(value = "id_usuario") String id_usuario, Model model) {
+		
+		List<PublicacionesDTO> listaResultados = null;
+		Usuario usuario = usuarioService.findOne(id_usuario);
+		
+		try {
+			listaResultados = publicacionService.findAllPublicacionesByPropietario(id_usuario);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("usuario", usuario);
+		model.addAttribute("listaResultados", listaResultados);
+
+		return "perfilFromAdmin";
 	}
 	
 }
