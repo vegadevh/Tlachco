@@ -1,19 +1,14 @@
 package com.tlachco.observatoriodigital.controllers;
 
-import java.time.Duration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.tlachco.observatoriodigital.domains.Archivo;
-import com.tlachco.observatoriodigital.domains.Publicacion;
 import com.tlachco.observatoriodigital.domains.Video;
 import com.tlachco.observatoriodigital.dto.PublicacionesDTO;
 import com.tlachco.observatoriodigital.services.IArchivoService;

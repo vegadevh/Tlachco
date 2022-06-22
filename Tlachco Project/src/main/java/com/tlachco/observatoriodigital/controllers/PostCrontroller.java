@@ -26,7 +26,6 @@ import com.tlachco.observatoriodigital.domains.Publicacion;
 import com.tlachco.observatoriodigital.domains.Usuario;
 import com.tlachco.observatoriodigital.domains.Video;
 import com.tlachco.observatoriodigital.dto.ComentarioDTO;
-import com.tlachco.observatoriodigital.dto.PublicacionesDTO;
 import com.tlachco.observatoriodigital.domains.Archivo;
 import com.tlachco.observatoriodigital.domains.CategoriaPublicacion;
 import com.tlachco.observatoriodigital.domains.Comentario;
@@ -36,7 +35,6 @@ import com.tlachco.observatoriodigital.services.IComentarioService;
 import com.tlachco.observatoriodigital.services.IPublicacionService;
 import com.tlachco.observatoriodigital.services.IUsuarioService;
 import com.tlachco.observatoriodigital.services.IVideoService;
-import com.tlachco.observatoriodigital.services.VideoServiceImpl;
 
 @Controller
 @RequestMapping("/post")
