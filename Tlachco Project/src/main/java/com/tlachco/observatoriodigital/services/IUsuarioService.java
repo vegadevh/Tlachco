@@ -17,5 +17,7 @@ public interface IUsuarioService {
 	public Usuario findOne(String usuario) throws DataAccessException;
 	
 	public List<Usuario> findTeachers() throws DataAccessException;
+	
+	public List<Usuario> findByCriteria(String criteria) throws DataAccessException;
 
 }
