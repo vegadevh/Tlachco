@@ -29,11 +29,11 @@
 	<th:block th:replace="components/navbar :: navbar"></th:block>
 	<div class="margin-container">
 		<div class="container">
-			<div class="card" style="padding: 2em;">
-				<h1 class="text-center">Registro de Usuario </h1>
+			<div class="card" th:object="${usuario}" style="padding: 2em;">
+				<h1 class="text-center">Cambio de contraseña </h1>
 				<form
 					th:action="@{/perfil/{username}/validar-pass(username=${#authentication.getPrincipal().getUsername()})}"
-					th:object="${usuario}" method="post">
+					method="post">
 
 					<div class="">
 
@@ -72,8 +72,13 @@
 				</form>
 				<br>
 				<div class="text-center">
-					<form th:action="@{/perfil/{username}(username=${#authentication.getPrincipal().getUsername()})}">
-						<input type="submit" class="btn btn-primary" value="Regresar">
+					
+					<form  th:if="${usuario.usuario} == ${#authentication.getPrincipal().getUsername()}" th:action="@{'/perfil/'+ ${usuario.usuario}}">
+						<input type="submit" class="btn btn-primary" value="Cancelar">
+					</form>
+					
+					<form  th:if="${usuario.usuario} != ${#authentication.getPrincipal().getUsername()}" th:action="@{/admin/lista_usuarios}">
+						<input type="submit" class="btn btn-primary" value="Cancelar">
 					</form>
 				</div>
 			</div>
