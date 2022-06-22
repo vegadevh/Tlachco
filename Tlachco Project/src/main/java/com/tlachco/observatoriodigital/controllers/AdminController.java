@@ -54,7 +54,7 @@ public class AdminController {
 		return "crearUsuario";
 	}
 
-	@RequestMapping("validar_registro")
+	@RequestMapping("/validar_registro")
 	public String validar_registro(@Valid @ModelAttribute Usuario usuario, BindingResult result, Model model,
 			@RequestParam(value="rol.id_rol") String rolSelect,
 			@RequestParam(value="usuario") String id_usuario) {
@@ -188,7 +188,7 @@ public class AdminController {
 		return "editarUsuario";
 	}
 	
-	@RequestMapping("validar_edicion_usuario")
+	@RequestMapping("/validar_edicion_usuario")
 	public String validarEdicionUsuario(@Valid @ModelAttribute Usuario usuario, BindingResult result, Model model,
 			@RequestParam(value="rol.id_rol") String rolSelect,
 			@RequestParam(value="usuario") String id_usuario) {
@@ -231,8 +231,18 @@ public class AdminController {
 				e.printStackTrace();
 			}
 			
+			
+			List<Usuario> usuarios = null;
+			
+			try {
+				usuarios = usuarioService.findAll();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
 			model.addAttribute("umensaje","Usuario actualizado con éxito.");
-			return "redirect:/admin/lista_usuarios";
+			model.addAttribute("users", usuarios);
+			return "listaUsuarios";
 		}
 	}
 	
