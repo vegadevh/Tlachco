@@ -1,8 +1,13 @@
 <section th:fragment="listaVideos" class="grid-container">
-    <div th:each="mivideo : ${listaVideos}">
+    <div class="card" th:each="mivideo : ${listaVideos}">
         <iframe width="350" height="200" th:src="${mivideo.enlace}" title="YouTube video player" frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen></iframe>
-        <input type="hidden" th:value="${mivideo.id_video}">
+        <div class="text-center" sec:authorize="hasAnyRole('ADMIN', 'TEACHER')">
+            <form th:action="@{'/post/eliminar/video/'+ ${mivideo.id_video}}" method="post">
+                <input th:name="id_video" type="hidden" th:value=${mivideo.id_video}>
+                <input type="submit" class="btn btn-danger" value="Eliminar Video">
+            </form>
+        </div>
     </div>
 </section>

@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -26,18 +27,20 @@ public class Publicacion {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_publicacion;
 
+	@NotEmpty
 	@Column(name = "titulo")
 	@Size(message = "Como maximo puede ingresar 200 caracteres.", max = 200)
 	private String titulo;
 
+	@NotEmpty
 	@Column(name = "contenido")
 	private String contenido;
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "fecha_publicacion")
 	private Date fecha_publicacion;
-	
-	@Column(name="estado")
+
+	@Column(name = "estado")
 	private String estado;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -53,21 +56,21 @@ public class Publicacion {
 
 	@Transient
 	private String propietario;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_archivo")
 	private Archivo archivo;
 
 	@Transient
 	private String id_archivo;
-	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	@JoinColumn(name = "profesor")
 	private Usuario profesor;
 
 	@Transient
 	private String validador;
-	
+
 	public Usuario getProfesor() {
 		return profesor;
 	}
@@ -172,5 +175,4 @@ public class Publicacion {
 		this.id_archivo = id_archivo;
 	}
 
-	
 }

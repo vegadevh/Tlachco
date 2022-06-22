@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.tlachco.observatoriodigital.domains.Usuario;
-import com.tlachco.observatoriodigital.domains.Video;
 
 public interface IUsuarioRepo extends JpaRepository<Usuario, String>{
 	
