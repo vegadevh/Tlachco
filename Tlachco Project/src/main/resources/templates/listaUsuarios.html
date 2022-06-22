@@ -28,14 +28,18 @@
 <body>
 	<th:block th:replace="components/navbar :: navbar"></th:block>
 
-	<form th:action="@{/busquedaPublicaciones}" method="post" class="form-inline my-2 my-lg-0" autocomplete="off">
-		<input class="form-control mr-sm-2" type="text" th:name="username"
-			oninvalid="setCustomValidity('Ingrese Valor de Busqueda')" oninput="this.setCustomValidity('')"
-			placeholder="Buscar" aria-label="Search" required>
-		<button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Buscar</button>
-	</form>
 
 	<div class="margin-container container">
+		<div style="display: flex; justify-content: right;">
+			<form th:action="@{/busquedaPublicaciones}" method="post" class="form-inline my-2 my-lg-0"
+				autocomplete="off">
+				<input class="form-control mr-sm-2" type="text" th:name="username"
+					oninvalid="setCustomValidity('Ingrese Valor de Busqueda')" oninput="this.setCustomValidity('')"
+					placeholder="Buscar" aria-label="Search" required>
+				<button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Buscar</button>
+			</form>
+		</div>
+		<br>
 		<h5 th:if="${umensaje}" class="alert alert-success" th:text="${umensaje}"></h5>
 		<table class="table shadow-lg bg-white rounded">
 			<thead class="thead-dark">
@@ -63,12 +67,14 @@
 								<input type="submit" class="btn btn-info" value="Perfil">
 							</form>
 
-							<form th:if="${user.usuario} != 'admin'" class="p-1" th:action="@{/admin/editar_usuario/} + ${user.usuario}" method="GET">
+							<form th:if="${user.usuario} != 'admin'" class="p-1"
+								th:action="@{/admin/editar_usuario/} + ${user.usuario}" method="GET">
 								<input th:name="id_usuario" hidden th:value=${user.usuario}>
 								<input type="submit" class="btn btn-info" value="Editar">
 							</form>
 
-							<form th:if="${user.usuario} != 'admin'" class="p-1" th:action="@{/admin/cambiar_estado/} + ${user.usuario} " method="GET">
+							<form th:if="${user.usuario} != 'admin'" class="p-1"
+								th:action="@{/admin/cambiar_estado/} + ${user.usuario} " method="GET">
 								<input th:name="id_usuario" hidden th:value=${user.usuario}>
 								<input th:if="${user.enabled_u} == true" type="submit" class="btn btn-danger"
 									value="Deshabilitar">
