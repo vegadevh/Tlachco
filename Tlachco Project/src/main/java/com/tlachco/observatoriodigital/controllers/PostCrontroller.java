@@ -274,8 +274,6 @@ public class PostCrontroller {
 			}else {
 				publicacion.setEstado(publicacionAux.getEstado());
 			}
-			publicacion.setTitulo(publicacionAux.getTitulo());
-			publicacion.setContenido(publicacionAux.getContenido());
 			publicacion.setFecha_publicacion(publicacionAux.getFecha_publicacion());
 			publicacion.setCategoriaPublicacion(publicacionAux.getCategoriaPublicacion());
 			publicacion.setUsuario(publicacionAux.getUsuario());
