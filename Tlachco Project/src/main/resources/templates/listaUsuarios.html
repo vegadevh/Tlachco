@@ -33,14 +33,14 @@
 		<div style="display: flex; justify-content: right;">
 			<form th:action="@{/admin/lista_usuarios}" method="post" class="form-inline my-2 my-lg-0"
 				autocomplete="off">
-				<input class="form-control mr-sm-2" type="text" th:name="criterio"
-					placeholder="Buscar" aria-label="Search">
+				<input class="form-control mr-sm-2" type="text" th:name="criterio" placeholder="Buscar"
+					aria-label="Search">
 				<button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Buscar</button>
 			</form>
 		</div>
 		<br>
 		<h5 th:if="${umensaje}" class="alert alert-success" th:text="${umensaje}"></h5>
-		
+
 		<div th:if="${users != null and !users.empty}">
 			<table class="table shadow-lg bg-white rounded">
 				<thead class="thead-dark">
@@ -60,20 +60,21 @@
 						<td th:text="${user.apellido}">
 						</td>
 						<td>
-	
+
 							<div class="d-flex">
-	
-								<form class="p-1" th:action="@{/admin/ver_publicaciones/} + ${user.usuario}" method="GET">
+
+								<form class="p-1" th:action="@{/admin/ver_publicaciones/} + ${user.usuario}"
+									method="GET">
 									<input th:name="id_usuario" hidden th:value=${user.usuario}>
 									<input type="submit" class="btn btn-info" value="Perfil">
 								</form>
-	
+
 								<form th:if="${user.usuario} != 'admin'" class="p-1"
 									th:action="@{/admin/editar_usuario/} + ${user.usuario}" method="GET">
 									<input th:name="id_usuario" hidden th:value=${user.usuario}>
 									<input type="submit" class="btn btn-info" value="Editar">
 								</form>
-	
+
 								<form th:if="${user.usuario} != 'admin'" class="p-1"
 									th:action="@{/admin/cambiar_estado/} + ${user.usuario} " method="GET">
 									<input th:name="id_usuario" hidden th:value=${user.usuario}>
@@ -91,13 +92,6 @@
 		<div class="text-center p-2" th:if="${users == null or users.empty}">
 			<span>No se encontraron resultados...</span>
 		</div>
-		
-		<div class="text-center">
-			<form th:action="@{/}">
-				<input type="submit" class="btn btn-primary" value="Regresar">
-			</form>
-		</div>
-
 	</div>
 
 
