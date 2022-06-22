@@ -31,7 +31,7 @@
             <h1>Editar Post</h1>
 
             <form th:action="@{/post/validar-edicion}" method="post">
-                <th:block th:replace="components/formularios :: formulario-post"></th:block>
+                <th:block th:replace="components/formularios :: formulario-editar-post"></th:block>
                 <input type="submit" value="Guardar" class="btn btn-primary">
             </form>
         </div>
