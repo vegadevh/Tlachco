@@ -34,6 +34,26 @@
                 <div style="display: flex; justify-content: right;"
                     sec:authorize="hasAnyRole('ADMIN', 'TEACHER', 'STUDENT')">
                     <div class="row">
+                        <div th:if="${publicacion.profesor != null}">
+                            <div
+                                th:if="${publicacion.profesor.usuario} == ${#authentication.getPrincipal().getUsername()} and ${publicacion.estado} != 'Public'">
+                                <form th:action="@{'/post/aceptar/' + ${publicacion.id_publicacion}}" method="GET">
+                                    <input th:name="categoria" type="hidden"
+                                        th:value="${publicacion.categoriaPublicacion.id_categoria}">
+                                    <input type="submit" class="btn btn-success" value="Aceptar publicación">
+                                </form>
+                            </div>
+                        </div>
+                        <div th:if="${publicacion.profesor != null}">
+                            <div
+                                th:if="${publicacion.profesor.usuario} == ${#authentication.getPrincipal().getUsername()} and ${publicacion.estado} != 'Reviewed'">
+                                <form th:action="@{'/post/en-espera/' + ${publicacion.id_publicacion}}" method="GET">
+                                    <input th:name="categoria" type="hidden"
+                                        th:value="${publicacion.categoriaPublicacion.id_categoria}">
+                                    <input type="submit" class="btn btn-warning" value="Aún no aceptar">
+                                </form>
+                            </div>
+                        </div>
                         <div th:if="${publicacion.usuario.usuario} == ${#authentication.getPrincipal().getUsername()}">
                             <form th:action="@{'/post/editar/' + ${publicacion.id_publicacion}}" method="GET">
                                 <input th:name="categoria" type="hidden"

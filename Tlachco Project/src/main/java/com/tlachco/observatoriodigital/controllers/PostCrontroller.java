@@ -269,10 +269,18 @@ public class PostCrontroller {
 			return "editarPost";
 		} else {
 			Publicacion publicacionAux = publicacionService.findOne(Integer.parseInt(id_publicacion));
+			if(publicacionAux.getEstado().equals("Reviewed")) {
+				publicacion.setEstado("Review");
+			}else {
+				publicacion.setEstado(publicacionAux.getEstado());
+			}
+			publicacion.setTitulo(publicacionAux.getTitulo());
+			publicacion.setContenido(publicacionAux.getContenido());
 			publicacion.setFecha_publicacion(publicacionAux.getFecha_publicacion());
-			publicacion.setEstado(publicacionAux.getEstado());
-			publicacion.setUsuario(publicacionAux.getUsuario());
 			publicacion.setCategoriaPublicacion(publicacionAux.getCategoriaPublicacion());
+			publicacion.setUsuario(publicacionAux.getUsuario());
+			publicacion.setArchivo(publicacionAux.getArchivo());
+			publicacion.setProfesor(publicacionAux.getProfesor());
 
 			try {
 				publicacionService.save(publicacion);
