@@ -12,5 +12,8 @@
             </option>
         </select>
     </div>
+    <div sec:authorize="hasAnyRole('TEACHER', 'ADMIN')">
+        <input type="hidden" id="teacherSelect" th:name="teacherSelect">
+    </div>
     <textarea name="contenido" id="contenido" th:field="*{contenido}"></textarea>
 </div>

@@ -33,12 +33,42 @@
             <div th:object="${publicacion}">
                 <div style="display: flex; justify-content: right;"
                     sec:authorize="hasAnyRole('ADMIN', 'TEACHER', 'STUDENT')">
-                    <div th:if="${publicacion.usuario.usuario} == ${#authentication.getPrincipal().getUsername()}">
-                        <form class="p-1" th:action="@{'/post/editar/' + ${publicacion.id_publicacion}}" method="GET">
-                            <input th:name="categoria" type="hidden"
-                                th:value="${publicacion.categoriaPublicacion.id_categoria}">
-                            <input type="submit" class="btn btn-primary" value="Editar publicaci&oacute;n">
-                        </form>
+                    <div class="row">
+                        <div th:if="${publicacion.profesor != null}">
+                            <div
+                                th:if="${publicacion.profesor.usuario} == ${#authentication.getPrincipal().getUsername()} and ${publicacion.estado} != 'Public'">
+                                <form th:action="@{'/post/aceptar/' + ${publicacion.id_publicacion}}" method="GET">
+                                    <input th:name="categoria" type="hidden"
+                                        th:value="${publicacion.categoriaPublicacion.id_categoria}">
+                                    <input type="submit" class="btn btn-success" value="Aceptar publicación">
+                                </form>
+                            </div>
+                        </div>
+                        <div th:if="${publicacion.profesor != null}">
+                            <div
+                                th:if="${publicacion.profesor.usuario} == ${#authentication.getPrincipal().getUsername()} and ${publicacion.estado} != 'Reviewed'">
+                                <form th:action="@{'/post/en-espera/' + ${publicacion.id_publicacion}}" method="GET">
+                                    <input th:name="categoria" type="hidden"
+                                        th:value="${publicacion.categoriaPublicacion.id_categoria}">
+                                    <input type="submit" class="btn btn-warning" value="Aún no aceptar">
+                                </form>
+                            </div>
+                        </div>
+                        <div th:if="${publicacion.usuario.usuario} == ${#authentication.getPrincipal().getUsername()}">
+                            <form th:action="@{'/post/editar/' + ${publicacion.id_publicacion}}" method="GET">
+                                <input th:name="categoria" type="hidden"
+                                    th:value="${publicacion.categoriaPublicacion.id_categoria}">
+                                <input type="submit" class="btn btn-primary" value="Editar publicaci&oacute;n">
+                            </form>
+                        </div>
+                        <div
+                            th:if="${publicacion.usuario.usuario} == ${#authentication.getPrincipal().getUsername()} or ${#authorization.expression('hasRole(''ADMIN'')')} or ${#authorization.expression('hasRole(''TEACHER'')')}">
+                            <form th:action="@{'/post/eliminar/publicacion/'+ ${publicacion.id_publicacion}}"
+                                method="post">
+                                <input th:name="id_publicacion" type="hidden" th:value=${publicacion.id_publicacion}>
+                                <input type="submit" class="btn btn-danger" value="Eliminar publicacion">
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <article>
@@ -54,12 +84,6 @@
                 <div th:each="comentarios : ${listaComentarios}">
                     <th:block th:replace="components/comentarios :: comentarios"></th:block>
                 </div>
-            </div>
-            <div>
-                <form th:action="@{'/post/eliminar/publicacion/'+ ${publicacion.id_publicacion}}" method="post">
-                    <input th:name="id_publicacion" th:value=${publicacion.id_publicacion}>
-                    <input type="submit" class="btn btn-danger" value="Eliminar publicacion">
-                </form>
             </div>
         </div>
     </div>

@@ -50,9 +50,8 @@ public class ComentarioServiceImpl implements IComentarioService{
 	}
 
 	@Override
-	public void eliminarComentario(String comentario) throws DataAccessException {
-		// TODO Auto-generated method stub 
-		comentarioRepo.eliminarComentario(Integer.parseInt(comentario));
+	public void eliminarComentario(String id_publicacion) throws DataAccessException {
+		comentarioRepo.eliminarComentario(Integer.parseInt(id_publicacion));
 	}
 
 }

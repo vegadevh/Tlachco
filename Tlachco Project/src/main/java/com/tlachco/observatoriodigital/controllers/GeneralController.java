@@ -1,6 +1,7 @@
 package com.tlachco.observatoriodigital.controllers;
 
 import java.util.List;
+import java.security.Principal;
 
 import javax.validation.Valid;
 
@@ -81,9 +82,7 @@ public class GeneralController {
 	}
 	
 	@RequestMapping("/perfil/{username}/validar-pass")
-	public String validarPass(@Valid @ModelAttribute Usuario usuario, BindingResult result, @RequestParam("password") String password, @RequestParam("valid_password") String valid_password,  Model model) {
-		
-		System.out.println(password + " " + valid_password);
+	public String validarPass(@Valid @ModelAttribute Usuario usuario, BindingResult result, @PathVariable(value="username") String username, Principal principal, @RequestParam("password") String password, @RequestParam("valid_password") String valid_password,  Model model) {
 		
 		if (result.hasErrors()) {
 			model.addAttribute("usuario",usuario);
@@ -107,8 +106,26 @@ public class GeneralController {
 				e.printStackTrace();
 			}
 			
-			model.addAttribute("umensaje","Su contraseña fue cambiada con éxito.");
-			return "perfil";
+			if(usuario.getUsuario().equals(principal.getName())) {
+				System.out.println(usuario.getUsuario());
+				System.out.println("   ");
+				System.out.println(principal.getName());
+				model.addAttribute("umensaje","La contraseña fue cambiada con éxito.");
+				return "perfil";
+			}else {
+				List<Usuario> usuarios = null;
+				
+				try {
+					usuarios = usuarioService.findAll();
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+				
+				model.addAttribute("umensaje","Contraseña del usuario actualizado con éxito.");
+				model.addAttribute("users", usuarios);
+				return "listaUsuarios";
+			}
+			
 		}
 				
 	}

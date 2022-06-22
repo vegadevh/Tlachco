@@ -49,6 +49,8 @@
             </tbody>
         </table> -->
             <section>
+                <strong class="blockquote">Ultimas Noticias</strong>
+                <hr>
                 <div class="container-fluid mt-4">
                     <div class="row" style="justify-content: center;">
                         <div class="col-auto mb-3" th:each="resultado : ${listaNoticias}">
@@ -59,6 +61,8 @@
             </section>
 
             <section>
+                <strong class="blockquote">Ultimos Artículos</strong>
+                <hr>
                 <div class="container-fluid mt-4">
                     <div class="row" style="justify-content: center;">
                         <div class="col-auto mb-3" th:each="resultado : ${listaArticulos}">
@@ -67,6 +71,9 @@
                     </div>
                 </div>
             </section>
+            <p></p>
+            <strong class="blockquote">Ultimos videos</strong>
+            <hr>
             <th:block th:replace="components/listaVideos :: listaVideos"></th:block>
         </div>
     </div>

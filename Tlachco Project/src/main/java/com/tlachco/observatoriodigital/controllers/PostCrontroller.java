@@ -26,7 +26,6 @@ import com.tlachco.observatoriodigital.domains.Publicacion;
 import com.tlachco.observatoriodigital.domains.Usuario;
 import com.tlachco.observatoriodigital.domains.Video;
 import com.tlachco.observatoriodigital.dto.ComentarioDTO;
-import com.tlachco.observatoriodigital.dto.PublicacionesDTO;
 import com.tlachco.observatoriodigital.domains.Archivo;
 import com.tlachco.observatoriodigital.domains.CategoriaPublicacion;
 import com.tlachco.observatoriodigital.domains.Comentario;
@@ -36,7 +35,6 @@ import com.tlachco.observatoriodigital.services.IComentarioService;
 import com.tlachco.observatoriodigital.services.IPublicacionService;
 import com.tlachco.observatoriodigital.services.IUsuarioService;
 import com.tlachco.observatoriodigital.services.IVideoService;
-import com.tlachco.observatoriodigital.services.VideoServiceImpl;
 
 @Controller
 @RequestMapping("/post")
@@ -151,9 +149,10 @@ public class PostCrontroller {
 			Usuario propietario = new Usuario();
 			propietario = usuarioService.findOne(id_usuario);
 			
-			System.out.println(teacherSelect);
-			
-			publicacion.setProfesor(usuarioService.findOne(teacherSelect));
+			System.out.println("SELECT VALOR PARA " + teacherSelect);
+			if(teacherSelect != null) {
+				publicacion.setProfesor(usuarioService.findOne(teacherSelect));
+			}
 			publicacion.setFecha_publicacion(new java.util.Date());
 			publicacion.setEstado(estado);
 			publicacion.setUsuario(propietario);
@@ -270,10 +269,18 @@ public class PostCrontroller {
 			return "editarPost";
 		} else {
 			Publicacion publicacionAux = publicacionService.findOne(Integer.parseInt(id_publicacion));
+			if(publicacionAux.getEstado().equals("Reviewed")) {
+				publicacion.setEstado("Review");
+			}else {
+				publicacion.setEstado(publicacionAux.getEstado());
+			}
+			publicacion.setTitulo(publicacionAux.getTitulo());
+			publicacion.setContenido(publicacionAux.getContenido());
 			publicacion.setFecha_publicacion(publicacionAux.getFecha_publicacion());
-			publicacion.setEstado(publicacionAux.getEstado());
-			publicacion.setUsuario(publicacionAux.getUsuario());
 			publicacion.setCategoriaPublicacion(publicacionAux.getCategoriaPublicacion());
+			publicacion.setUsuario(publicacionAux.getUsuario());
+			publicacion.setArchivo(publicacionAux.getArchivo());
+			publicacion.setProfesor(publicacionAux.getProfesor());
 
 			try {
 				publicacionService.save(publicacion);

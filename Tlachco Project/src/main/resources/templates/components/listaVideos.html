@@ -3,11 +3,15 @@
         <iframe width="350" height="200" th:src="${mivideo.enlace}" title="YouTube video player" frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen></iframe>
+<<<<<<< HEAD
         <div class="text-center" sec:authorize="hasAnyRole('ADMIN', 'TEACHER')">
             <form th:action="@{'/post/eliminar/video/'+ ${mivideo.id_video}}" method="post">
                 <input th:name="id_video" type="hidden" th:value=${mivideo.id_video}>
                 <input type="submit" class="btn btn-danger" value="Eliminar Video">
             </form>
         </div>
+=======
+        <input type="hidden" th:value="${mivideo.id_video}">
+>>>>>>> 7060014f04222e09c006718e8ca87b01cec4850b
     </div>
 </section>
