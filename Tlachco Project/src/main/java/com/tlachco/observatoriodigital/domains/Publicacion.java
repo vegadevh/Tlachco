@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -27,10 +28,12 @@ public class Publicacion {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_publicacion;
 
+	@NotEmpty
 	@Column(name = "titulo")
 	@Size(message = "Como maximo puede ingresar 200 caracteres.", max = 200)
 	private String titulo;
-
+	
+	@NotEmpty
 	@Column(name = "contenido")
 	private String contenido;
 

@@ -56,7 +56,9 @@ public class TeacherAdminController {
 	public String eliminarPublicacion(@RequestParam(value="id_publicacion") String id_publicacion) {
 		
 		if(id_publicacion != null) {
+			//comentarioService.eliminarComentario(id_publicacion);
 			publicacionService.delete(Integer.parseInt(id_publicacion));
+
 			
 		}
 		return "redirect:/articulos";
@@ -81,7 +83,7 @@ public class TeacherAdminController {
 			videoService.delete(Integer.parseInt(id_video));
 			
 		}
-		return "redirect:/articulos";
+		return "redirect:/videos";
 	}
 	
 }
