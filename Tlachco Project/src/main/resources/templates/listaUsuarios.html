@@ -31,61 +31,67 @@
 
 	<div class="margin-container container">
 		<div style="display: flex; justify-content: right;">
-			<form th:action="@{/busquedaPublicaciones}" method="post" class="form-inline my-2 my-lg-0"
+			<form th:action="@{/admin/lista_usuarios}" method="post" class="form-inline my-2 my-lg-0"
 				autocomplete="off">
-				<input class="form-control mr-sm-2" type="text" th:name="username"
-					oninvalid="setCustomValidity('Ingrese Valor de Busqueda')" oninput="this.setCustomValidity('')"
-					placeholder="Buscar" aria-label="Search" required>
+				<input class="form-control mr-sm-2" type="text" th:name="criterio"
+					placeholder="Buscar" aria-label="Search">
 				<button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Buscar</button>
 			</form>
 		</div>
 		<br>
 		<h5 th:if="${umensaje}" class="alert alert-success" th:text="${umensaje}"></h5>
-		<table class="table shadow-lg bg-white rounded">
-			<thead class="thead-dark">
-				<tr>
-					<th scope="col">Usuario</th>
-					<th scope="col">Estado</th>
-					<th scope="col">Nombre</th>
-					<th scope="col">Apellido</th>
-					<th scope="col">Acción</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each=" user: ${users}">
-					<th scope="row" th:text="${user.usuario}"></th>
-					<td th:text="${user.getEstadoDelegate}"></td>
-					<td th:text="${user.nombre}"></td>
-					<td th:text="${user.apellido}">
-					</td>
-					<td>
-
-						<div class="d-flex">
-
-							<form class="p-1" th:action="@{/admin/ver_publicaciones/} + ${user.usuario}" method="GET">
-								<input th:name="id_usuario" hidden th:value=${user.usuario}>
-								<input type="submit" class="btn btn-info" value="Perfil">
-							</form>
-
-							<form th:if="${user.usuario} != 'admin'" class="p-1"
-								th:action="@{/admin/editar_usuario/} + ${user.usuario}" method="GET">
-								<input th:name="id_usuario" hidden th:value=${user.usuario}>
-								<input type="submit" class="btn btn-info" value="Editar">
-							</form>
-
-							<form th:if="${user.usuario} != 'admin'" class="p-1"
-								th:action="@{/admin/cambiar_estado/} + ${user.usuario} " method="GET">
-								<input th:name="id_usuario" hidden th:value=${user.usuario}>
-								<input th:if="${user.enabled_u} == true" type="submit" class="btn btn-danger"
-									value="Deshabilitar">
-								<input th:unless="${user.enabled_u} == true" type="submit" class="btn btn-success"
-									value="Habilitar">
-							</form>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+		
+		<div th:if="${users != null and !users.empty}">
+			<table class="table shadow-lg bg-white rounded">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">Usuario</th>
+						<th scope="col">Estado</th>
+						<th scope="col">Nombre</th>
+						<th scope="col">Apellido</th>
+						<th scope="col">Acción</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each=" user: ${users}">
+						<th scope="row" th:text="${user.usuario}"></th>
+						<td th:text="${user.getEstadoDelegate}"></td>
+						<td th:text="${user.nombre}"></td>
+						<td th:text="${user.apellido}">
+						</td>
+						<td>
+	
+							<div class="d-flex">
+	
+								<form class="p-1" th:action="@{/admin/ver_publicaciones/} + ${user.usuario}" method="GET">
+									<input th:name="id_usuario" hidden th:value=${user.usuario}>
+									<input type="submit" class="btn btn-info" value="Perfil">
+								</form>
+	
+								<form th:if="${user.usuario} != 'admin'" class="p-1"
+									th:action="@{/admin/editar_usuario/} + ${user.usuario}" method="GET">
+									<input th:name="id_usuario" hidden th:value=${user.usuario}>
+									<input type="submit" class="btn btn-info" value="Editar">
+								</form>
+	
+								<form th:if="${user.usuario} != 'admin'" class="p-1"
+									th:action="@{/admin/cambiar_estado/} + ${user.usuario} " method="GET">
+									<input th:name="id_usuario" hidden th:value=${user.usuario}>
+									<input th:if="${user.enabled_u} == true" type="submit" class="btn btn-danger"
+										value="Deshabilitar">
+									<input th:unless="${user.enabled_u} == true" type="submit" class="btn btn-success"
+										value="Habilitar">
+								</form>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="text-center p-2" th:if="${users == null or users.empty}">
+			<span>No se encontraron resultados...</span>
+		</div>
+		
 		<div class="text-center">
 			<form th:action="@{/}">
 				<input type="submit" class="btn btn-primary" value="Regresar">

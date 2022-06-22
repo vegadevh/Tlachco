@@ -42,6 +42,11 @@ public class UsuarioServiceImpl implements IUsuarioService{
 	public List<Usuario> findTeachers() throws DataAccessException {
 		return userRepo.findTeachers();
 	}
+
+	@Override
+	public List<Usuario> findByCriteria(String criteria) throws DataAccessException {
+		return userRepo.findByCriteria(criteria);
+	}
 	
 	
 

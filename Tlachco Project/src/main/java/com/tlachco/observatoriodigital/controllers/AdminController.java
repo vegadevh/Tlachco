@@ -126,15 +126,25 @@ public class AdminController {
 	
 	
 	@RequestMapping("/lista_usuarios")
-	public String listaUsuarios(Model model) {
+	public String listaUsuarios(Model model, String criterio) {
 		
 		List<Usuario> usuarios = null;
 		
-		try {
-			usuarios = usuarioService.findAll();
-		}catch(Exception e) {
-			e.printStackTrace();
+		if(criterio != null) {
+			try {
+				criterio = criterio.toLowerCase();
+				usuarios = usuarioService.findByCriteria(criterio);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			try {
+				usuarios = usuarioService.findAll();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
+		
 		
 		model.addAttribute("users", usuarios);
 		return "listaUsuarios";
