@@ -1,12 +1,25 @@
 package com.tlachco.observatoriodigital.controllers;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.tlachco.observatoriodigital.domains.Archivo;
+import com.tlachco.observatoriodigital.services.IArchivoService;
+import com.tlachco.observatoriodigital.services.ICategoriaPublicacionService;
 import com.tlachco.observatoriodigital.services.IComentarioService;
 import com.tlachco.observatoriodigital.services.IPublicacionService;
 import com.tlachco.observatoriodigital.services.IVideoService;
@@ -23,6 +36,12 @@ public class TeacherAdminController {
 
 	@Autowired
 	public IVideoService videoService;
+	
+	@Autowired
+	public IArchivoService archivoService;
+	
+	@Autowired
+	public ICategoriaPublicacionService categoriaService;
 
 	@RequestMapping("/eliminar/publicacion/{id_publicacion}")
 	public String eliminarPublicacion(@RequestParam(value = "id_publicacion") String id_publicacion) {
@@ -55,6 +74,45 @@ public class TeacherAdminController {
 
 		}
 		return "redirect:/videos";
+	}
+	
+	@RequestMapping("/subir")
+	public String subir(Model model) {
+		Archivo archivo = new Archivo();
+
+		model.addAttribute("archivo", archivo);
+
+		return "subirArchivo";
+	}
+
+	// TEST - VALIDACIONES FALTANTES
+	@PostMapping("/validacion-subir")
+	public String validar_subir(@ModelAttribute Archivo archivo, BindingResult result,
+			@RequestParam(value = "file") MultipartFile file, Model model) throws IOException {
+
+		archivo.setCategoriaPublicacion(categoriaService.findOne(5));
+		archivoService.save(archivo, file);
+
+		return "redirect:/";
+	}
+	
+	@PostMapping("/validacion-infografia")
+	public String validar_infografia(@ModelAttribute Archivo archivo, BindingResult result,
+			@RequestParam(value = "file") MultipartFile file, @RequestParam String id_categoria, Model model) throws IOException {
+		
+		archivo.setCategoriaPublicacion(categoriaService.findOne(Integer.parseInt(id_categoria)));
+		archivoService.save(archivo, file);
+
+		return "redirect:/infografias";
+	}
+
+	@RequestMapping("/archivo/{id_archivo}")
+	public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable String id_archivo) {
+		Archivo archivo = archivoService.findOne(id_archivo);
+		return ResponseEntity.ok()
+				.contentType(MediaType.parseMediaType(archivo.getTipo()))
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment:filename=\"" + archivo.getNombre() + "\"")
+				.body(new ByteArrayResource(archivo.getContenido()));
 	}
 
 }

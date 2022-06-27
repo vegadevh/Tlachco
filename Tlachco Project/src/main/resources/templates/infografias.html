@@ -27,14 +27,35 @@
     <th:block th:replace="components/navbar :: navbar"></th:block>
     <div class="margin-container">
         <div class="container">
-            <div style="display: flex; justify-content: right;"
-                sec:authorize="hasAnyRole('ADMIN', 'TEACHER', 'STUDENT')">
-                <form class="p-1" th:action="@{/post/creacion}" method="GET">
+            <div style="display: flex; justify-content: right;" sec:authorize="hasAnyRole('ADMIN', 'TEACHER')">
+                <form class="p-1" th:action="@{/post/subir}" method="GET">
                     <input th:name="categoria" type="hidden" th:value="Infografia">
-                    <input type="submit" class="btn btn-primary" value="Crear Articulo">
+                    <input type="submit" class="btn btn-primary" value="Subir Infografía">
                 </form>
             </div>
+            <div th:each="infografia : ${listaInfografias}">
+                <table th:if="${infografia.nombre}" class="table shadow-lg bg-white rounded">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">#</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row" th:text="${infografia.nombre}"></th>
+                            <th scope="row"><a th:href="@{'/post/archivo/'+${infografia.id_archivo}}"
+                                    target="_blank">Ver</a></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- <form th:action="@{'/post/eliminar/video/'+ ${mivideo.id_video}}" method="post">
+                        <input th:name="id_video" type="hidden" th:value=${mivideo.id_video}>
+                        <input type="submit" class="btn btn-danger" value="Eliminar Video">
+                    </form> -->
         </div>
+    </div>
     </div>
     <th:block th:replace="components/footer :: footer"></th:block>
     <script>

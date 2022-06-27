@@ -76,7 +76,9 @@ public class PostCrontroller {
 				e.printStackTrace();
 			}
 		}
-		
+		Archivo archivo = new Archivo();
+
+		model.addAttribute("archivo", archivo);
 		model.addAttribute("teachers", teachers);
 		model.addAttribute("categoria", categoria);
 		// model.addAttribute("categorias", categorias);
@@ -112,7 +114,8 @@ public class PostCrontroller {
 
 	@RequestMapping("/validar-creacion")
 	public String validar_post(@Valid @ModelAttribute Publicacion publicacion, BindingResult result,
-			Principal principal, @RequestParam String categoria, @RequestParam String teacherSelect, HttpServletRequest request, Model model) {
+			Principal principal, @RequestParam String categoria, @RequestParam String teacherSelect, HttpServletRequest request, @ModelAttribute Archivo archivo, BindingResult result2,
+			@RequestParam(value = "file") MultipartFile file, Model model) {
 
 		String estado = null;
 
@@ -128,12 +131,20 @@ public class PostCrontroller {
 					e.printStackTrace();
 				}
 			}
+			model.addAttribute("archivo", archivo);
 			model.addAttribute("teachers", teachers);
 			model.addAttribute("categoria", categoria);
 			model.addAttribute("publicacion", publicacion);
 
 			return "crearPost";
 		} else {
+			
+			if(file != null) {				
+				archivo.setCategoriaPublicacion(categoriaService.findOne(5));
+				String id_archivo = archivoService.save2(archivo, file);
+				Archivo archivoaux = archivoService.findOne(id_archivo);
+				publicacion.setArchivo(archivoaux);
+			}
 
 			if (request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("ROLE_TEACHER")) {
 				estado = "Public";
@@ -205,34 +216,6 @@ public class PostCrontroller {
 
 			return "redirect:/videos";
 		}
-	}
-
-	@RequestMapping("/subir")
-	public String subir(Model model) {
-		Archivo archivo = new Archivo();
-
-		model.addAttribute("archivo", archivo);
-
-		return "subirArchivo";
-	}
-
-	// TEST - VALIDACIONES FALTANTES
-	@PostMapping("/validacion-subir")
-	public String validar_subir(@ModelAttribute Archivo archivo, BindingResult result,
-			@RequestParam(value = "file") MultipartFile file, Model model) throws IOException {
-
-		archivoService.save(archivo, file);
-
-		return "redirect:/";
-	}
-
-	@RequestMapping("/archivo/{id_archivo}")
-	public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable String id_archivo) {
-		Archivo archivo = archivoService.findOne(id_archivo);
-		return ResponseEntity.ok()
-				.contentType(MediaType.parseMediaType(archivo.getTipo()))
-				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment:filename=\"" + archivo.getNombre() + "\"")
-				.body(new ByteArrayResource(archivo.getContenido()));
 	}
 
 	@RequestMapping("/editar/{id_publicacion}")

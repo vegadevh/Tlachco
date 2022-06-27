@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.tlachco.observatoriodigital.domains.Archivo;
 import com.tlachco.observatoriodigital.domains.Video;
 import com.tlachco.observatoriodigital.dto.PublicacionesDTO;
 import com.tlachco.observatoriodigital.services.IArchivoService;
@@ -118,6 +119,16 @@ public class MainController {
 
 	@RequestMapping("/infografias")
 	public String infografias(Model model) {
+		
+		List<Archivo> listaInfografias = null;
+		
+		try {
+			listaInfografias = archivoService.findAllInfografia();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("listaInfografias", listaInfografias);
 
 		return "infografias";
 	}

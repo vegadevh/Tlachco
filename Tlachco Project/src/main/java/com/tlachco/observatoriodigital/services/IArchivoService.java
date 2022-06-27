@@ -7,6 +7,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.tlachco.observatoriodigital.domains.Archivo;
+import com.tlachco.observatoriodigital.domains.Video;
 
 public interface IArchivoService {
 	
@@ -19,5 +20,9 @@ public interface IArchivoService {
 //	public void delete(Integer id_archivo) throws DataAccessException;
 //	
 	public Archivo findOne(String id_archivo) throws DataAccessException;
+	
+	public List<Archivo> findAllInfografia() throws DataAccessException;
+	
+	public String save2(Archivo archivo, MultipartFile file) throws DataAccessException;
 
 }

@@ -23,6 +23,8 @@ CREATE TABLE ARCHIVO(
     contenido BYTEA,
     tipo TEXT,
     nombre TEXT
+    id_categoria INTEGER,
+    FOREIGN KEY(id_categoria) REFERENCES CATEGORIA(id_categoria),
 );
 -- noticias/articulos/infografias/archivos
 CREATE TABLE PUBLICACION(
@@ -34,9 +36,11 @@ CREATE TABLE PUBLICACION(
     id_categoria INTEGER,
     propietario VARCHAR(50),
     id_archivo TEXT,
+    profesor VARCHAR(50),
     FOREIGN KEY(id_categoria) REFERENCES CATEGORIA(id_categoria),
     FOREIGN KEY(propietario) REFERENCES USUARIO(usuario),
-    FOREIGN KEY(id_archivo) REFERENCES ARCHIVO(id_archivo)
+    FOREIGN KEY(id_archivo) REFERENCES ARCHIVO(id_archivo),
+    FOREIGN KEY(profesor) REFERENCES USUARIO(usuario)
 );
 
 -- videos

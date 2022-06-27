@@ -28,10 +28,14 @@
     <th:block th:replace="components/navbar :: navbar"></th:block>
     <div class="margin-container">
         <div class="container">
-            <h1>Crear Post</h1>
 
-            <form th:action="@{/post/validar-creacion}" th:object="${publicacion}" method="post">
+            <form th:action="@{/post/validar-creacion}" th:object="${publicacion}" method="post" enctype="multipart/form-data">
                 <th:block th:replace="components/formularios :: formulario-post"></th:block>
+                <br>
+                <p>Agregar un archivo como publicaci&oacute;n <span style="color: red;">(Opcional)</span></p>
+                <hr>
+                <th:block th:replace="components/archivo :: archivo"></th:block>
+                <br>
                 <input type="submit" value="Publicar" class="btn btn-primary">
             </form>
 
