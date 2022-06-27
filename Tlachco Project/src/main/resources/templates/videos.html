@@ -29,7 +29,7 @@
 
         <div class="container">
             <div style="display: flex; justify-content: right;"
-                sec:authorize="hasAnyRole('ADMIN', 'TEACHER', 'STUDENT')">
+                sec:authorize="hasAnyRole('ADMIN', 'TEACHER')">
                 <!-- <div style="display: flex; justify-content: right;"
                     sec:authorize="hasAnyRole('ADMIN', 'TEACHER', 'STUDENT')">
                     <form class="p-1" th:action="@{/post/creacion}" method="GET">

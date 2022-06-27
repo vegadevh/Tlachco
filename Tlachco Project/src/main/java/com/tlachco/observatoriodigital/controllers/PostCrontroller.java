@@ -118,8 +118,29 @@ public class PostCrontroller {
 			@RequestParam(value = "file") MultipartFile file, Model model) {
 
 		String estado = null;
+		System.out.println("AAAAAAAAAAAAAAAHHHH MI ANO" + teacherSelect);
+		if(request.isUserInRole("ROLE_STUDENT")) {
+			if(teacherSelect.equals("0")) {
+				String id_usuario = principal.getName();
+				Usuario user = usuarioService.findOne(id_usuario);
+				List<Usuario> teachers = null;
+				
+				if(user.getRol().getId_rol() == 3) {
+					try {
+						teachers = usuarioService.findTeachers();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				model.addAttribute("archivo", archivo);
+				model.addAttribute("teachers", teachers);
+				model.addAttribute("categoria", categoria);
+				model.addAttribute("publicacion", publicacion);
 
-		if (result.hasErrors()) {
+				return "crearPost";
+			}
+		}
+		if(result.hasErrors()) {
 			String id_usuario = principal.getName();
 			Usuario user = usuarioService.findOne(id_usuario);
 			List<Usuario> teachers = null;
@@ -138,8 +159,7 @@ public class PostCrontroller {
 
 			return "crearPost";
 		} else {
-			
-			if(file != null) {				
+			if(file.isEmpty() == false) {				
 				archivo.setCategoriaPublicacion(categoriaService.findOne(5));
 				String id_archivo = archivoService.save2(archivo, file);
 				Archivo archivoaux = archivoService.findOne(id_archivo);
