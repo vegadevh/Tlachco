@@ -33,23 +33,25 @@
                     <input type="submit" class="btn btn-primary" value="Subir Infografía">
                 </form>
             </div>
-            <div th:each="infografia : ${listaInfografias}">
-                <table th:if="${infografia.nombre}" class="table shadow-lg bg-white rounded">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">#</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row" th:text="${infografia.nombre}"></th>
-                            <th scope="row"><a th:href="@{'/post/archivo/'+${infografia.id_archivo}}"
-                                    target="_blank">Ver</a></th>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="text-center p-2" th:if="${listaInfografias == null or listaInfografias.empty}">
+                <span>Aun no se han agregado infografias.</span>
+                <br>
             </div>
+            <table th:unless="${listaInfografias == null or listaInfografias.empty}" class="table shadow-lg bg-white rounded">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Acci&oacute;n</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="infografia : ${listaInfografias}">
+                        <th scope="row" th:text="${infografia.nombre}"></th>
+                        <th scope="row"><a th:href="@{'/post/archivo/'+${infografia.id_archivo}}"
+                                target="_blank">Ver</a></th>
+                    </tr>
+                </tbody>
+            </table>
             <!-- <form th:action="@{'/post/eliminar/video/'+ ${mivideo.id_video}}" method="post">
                         <input th:name="id_video" type="hidden" th:value=${mivideo.id_video}>
                         <input type="submit" class="btn btn-danger" value="Eliminar Video">
