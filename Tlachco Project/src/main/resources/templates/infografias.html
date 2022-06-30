@@ -20,6 +20,8 @@
         integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
         crossorigin="anonymous"></script>
 
+    <!--Font Awesome-->
+    <script src="https://kit.fontawesome.com/f2dde07271.js" crossorigin="anonymous"></script>
     <title>Tlachco - Inicio</title>
 </head>
 
@@ -37,11 +39,13 @@
                 <span>Aun no se han agregado infografias.</span>
                 <br>
             </div>
-            <table th:unless="${listaInfografias == null or listaInfografias.empty}" class="table shadow-lg bg-white rounded">
+            <table th:unless="${listaInfografias == null or listaInfografias.empty}"
+                class="table shadow-lg bg-white rounded">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">Nombre</th>
                         <th scope="col">Acci&oacute;n</th>
+                        <div class="text-center" sec:authorize="hasAnyRole('ADMIN', 'TEACHER')"><th scope="col">Eliminar</th></div>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,6 +53,15 @@
                         <th scope="row" th:text="${infografia.nombre}"></th>
                         <th scope="row"><a th:href="@{'/post/archivo/'+${infografia.id_archivo}}"
                                 target="_blank">Ver</a></th>
+                        <div class="text-center" sec:authorize="hasAnyRole('ADMIN', 'TEACHER')">
+                            <th scope="row"><a class="btn btn-danger"
+                                    th:href="@{'/post/eliminar/archivo/'+${infografia.id_archivo}}"
+                                    target="_blank">Eliminar</a></th>
+                            <!--<th><input th:value="${infografia.categoriaPublicacion.id_categoria}" th:name="id_categoria"></th>-->
+                        </div>
+                    </tr>
+                    <tr>
+
                     </tr>
                 </tbody>
             </table>
