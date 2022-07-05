@@ -37,10 +37,12 @@
                 <span>Aun no se han agregado infografias.</span>
                 <br>
             </div>
-            <table th:unless="${listaInfografias == null or listaInfografias.empty}" class="table shadow-lg bg-white rounded">
+            <table th:unless="${listaInfografias == null or listaInfografias.empty}"
+                class="table shadow-lg bg-white rounded">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">Nombre</th>
+                        <th scope="col">Acci&oacute;n</th>
                         <th scope="col">Acci&oacute;n</th>
                     </tr>
                 </thead>
@@ -49,6 +51,8 @@
                         <th scope="row" th:text="${infografia.nombre}"></th>
                         <th scope="row"><a th:href="@{'/post/archivo/'+${infografia.id_archivo}}"
                                 target="_blank">Ver</a></th>
+                        <th scope="row"><a th:href="@{'/post/archivo/eliminar/'+${infografia.id_archivo}}"
+                                class="btn btn-primary">Eliminar</a></th>
                     </tr>
                 </tbody>
             </table>

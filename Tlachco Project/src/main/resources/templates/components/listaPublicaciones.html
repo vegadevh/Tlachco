@@ -102,7 +102,7 @@
 		</a>
 		<h6 class="card-subtitle mb-2 text-muted"
 			th:text="'Autor: ' + ${resultado.nombre} + ' ' + ${resultado.apellido}"></h6>
-		<p class="card-text" th:utext="${#strings.abbreviate(resultado.contenido, 100)}">
+		<p class="card-text" th:utext="${#strings.abbreviate(resultado.contenido, 100)}" th:maxlength="4">
 		</p>
 		<p class="card-subtitle mb-2 text-muted" th:text="${resultado.fecha_publicacion}"></p>
 		<a th:href="@{'/post/articuloDetail/' + ${resultado.id_publicacion}}" class="btn btn-primary">Leer

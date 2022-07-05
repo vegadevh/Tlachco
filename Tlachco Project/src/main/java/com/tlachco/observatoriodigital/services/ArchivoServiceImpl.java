@@ -111,4 +111,11 @@ public class ArchivoServiceImpl implements IArchivoService {
 		return infografias;
 	}
 
+	@Override
+	public void delete(String id_archivo) throws DataAccessException {
+		Archivo archivo = archivoRepo.getById(id_archivo);
+		archivoRepo.delete(archivo);
+		
+	}
+
 }

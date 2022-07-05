@@ -15,4 +15,6 @@ public interface ICategoriaPublicacionService {
 	public CategoriaPublicacion findOne(Integer id_categoriaArticulo) throws DataAccessException;
 	
 	public CategoriaPublicacion findByCategoria(String categoria) throws DataAccessException;
+	
+	public void deleteCategoria(Integer id_categoria) throws DataAccessException;
 }

@@ -17,8 +17,8 @@ public interface IArchivoService {
 	
 	public Archivo save(Archivo archivo, MultipartFile file) throws IOException;
 	
-//	public void delete(Integer id_archivo) throws DataAccessException;
-//	
+	public void delete(String id_archivo) throws DataAccessException;
+	
 	public Archivo findOne(String id_archivo) throws DataAccessException;
 	
 	public List<Archivo> findAllInfografia() throws DataAccessException;

@@ -36,4 +36,10 @@ public class CategoriaServiceImpl implements ICategoriaPublicacionService{
 		return categoriaPublicaionRepo.findByCategoria(categoria);
 	}
 
+	@Override
+	public void deleteCategoria(Integer id_categoria) throws DataAccessException {
+		categoriaPublicaionRepo.deleteCategoria(id_categoria);
+		
+	}
+
 }

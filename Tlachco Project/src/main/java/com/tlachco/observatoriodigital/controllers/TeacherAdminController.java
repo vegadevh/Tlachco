@@ -114,5 +114,14 @@ public class TeacherAdminController {
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment:filename=\"" + archivo.getNombre() + "\"")
 				.body(new ByteArrayResource(archivo.getContenido()));
 	}
+	
+	@RequestMapping("/archivo/eliminar/{id_archivo}")
+	public String eliminarInfografia(@PathVariable String id_archivo) {
+		if (id_archivo != null) {
+			archivoService.delete(id_archivo);
+		}
+
+		return "redirect:/";
+	}
 
 }
