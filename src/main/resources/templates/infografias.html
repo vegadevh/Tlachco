@@ -53,7 +53,8 @@
                         <td scope="row" class="p-1">
                             <a th:href="@{'/post/archivo/'+${infografia.id_archivo}}" target="_blank"
                                 class="btn btn-primary">Ver</a>
-                            <a th:href="@{'/post/archivo/eliminar/'+${infografia.id_archivo}}"
+                            <a sec:authorize="hasAnyRole('ADMIN')"
+                                th:href="@{'/post/archivo/eliminar/'+${infografia.id_archivo}}"
                                 class="btn btn-danger">Eliminar</a>
                         </td>
                     </tr>
