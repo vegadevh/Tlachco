@@ -29,23 +29,23 @@
     <th:block th:replace="components/navbar :: navbar"></th:block>
 
     <div class="margin-container">
-    	<div class="text-center" th:object="${usuario}">
-    		<h2 th:text="${usuario.nombre} + ' ' + ${usuario.apellido} + ' (' + ${usuario.usuario} + ')'"></h2>
-    		<div class="container">
-	            <th:block th:replace="components/listaPublicaciones :: listaPublicacionesUsuarioFromAdmin"></th:block>
-	        </div>
-    	</div>
-        
+        <div class="text-center" th:object="${usuario}">
+            <h2 th:text="${usuario.nombre} + ' ' + ${usuario.apellido} + ' (' + ${usuario.usuario} + ')'"></h2>
+            <div class="container">
+                <th:block th:replace="components/listaPublicaciones :: listaPublicacionesUsuarioFromAdmin"></th:block>
+            </div>
+        </div>
+
     </div>
-    
+
     <div class="text-center">
-		<form th:action="@{/admin/lista_usuarios}">
-			<input type="submit" class="btn btn-primary" value="Regresar">
-		</form>
-	</div>
-	
-	<br>
-				
+        <form th:action="@{/admin/lista_usuarios}">
+            <input type="submit" class="btn btn-primary" value="Regresar">
+        </form>
+    </div>
+
+    <br>
+
     <th:block th:replace="components/footer :: footer"></th:block>
     <script>
         document.addEventListener("DOMContentLoaded", function () {

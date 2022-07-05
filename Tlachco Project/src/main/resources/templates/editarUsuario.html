@@ -27,7 +27,7 @@
 
 <body>
 	<th:block th:replace="components/navbar :: navbar"></th:block>
-	
+
 	<div class="margin-container">
 		<div class="container">
 			<div class="card" style="padding: 2em;">
@@ -43,7 +43,7 @@
 							<!--<div th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}"
 								class="alert alert-danger" role="alert">
 							</div>-->
-							
+
 							<!--<div th:if="${iderror}" th:text="${iderror}" class="alert alert-danger" role="alert"></div>-->
 						</div>
 
@@ -95,16 +95,16 @@
 
 				</form>
 				<br>
-				
-				
+
+
 				<div class="text-center">
 					<form th:action="@{'/perfil/'+ ${usuario.usuario} + '/pass/'}">
 						<input type="submit" class="btn btn-primary" value="Cambiar Contraseña">
 					</form>
 				</div>
-				
+
 				<br>
-                        
+
 				<div class="text-center">
 					<form th:action="@{/admin/lista_usuarios}">
 						<input type="submit" class="btn btn-primary" value="Cancelar">

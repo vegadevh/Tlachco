@@ -115,10 +115,29 @@ public class PostCrontroller {
 	@RequestMapping("/validar-creacion")
 	public String validar_post(@Valid @ModelAttribute Publicacion publicacion, BindingResult result,
 			Principal principal, @RequestParam String categoria, @RequestParam String teacherSelect, HttpServletRequest request, @ModelAttribute Archivo archivo, BindingResult result2,
-			@RequestParam(value = "file") MultipartFile file, Model model) {
+			@RequestParam(defaultValue = "false") Boolean concentimiento, @RequestParam(value = "file") MultipartFile file, Model model) {
 
 		String estado = null;
-		System.out.println("AAAAAAAAAAAAAAAHHHH MI ANO" + teacherSelect);
+		System.out.println(concentimiento);
+		if(file.isEmpty() == false && concentimiento == false) {
+			String id_usuario = principal.getName();
+			Usuario user = usuarioService.findOne(id_usuario);
+			List<Usuario> teachers = null;
+			
+			if(user.getRol().getId_rol() == 3) {
+				try {
+					teachers = usuarioService.findTeachers();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			model.addAttribute("archivo", archivo);
+			model.addAttribute("teachers", teachers);
+			model.addAttribute("categoria", categoria);
+			model.addAttribute("publicacion", publicacion);
+
+			return "crearPost";
+		}
 		if(request.isUserInRole("ROLE_STUDENT")) {
 			if(teacherSelect.equals("0")) {
 				String id_usuario = principal.getName();

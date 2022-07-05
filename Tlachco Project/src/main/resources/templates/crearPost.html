@@ -19,6 +19,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
         integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
         crossorigin="anonymous"></script>
+    <!--Font Awesome-->
+    <script src="https://kit.fontawesome.com/f2dde07271.js" crossorigin="anonymous"></script>
 
     <title>Tlachco - Inicio</title>
     <script src="//cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
@@ -29,12 +31,42 @@
     <div class="margin-container">
         <div class="container">
 
-            <form th:action="@{/post/validar-creacion}" th:object="${publicacion}" method="post" enctype="multipart/form-data">
+            <form th:action="@{/post/validar-creacion}" th:object="${publicacion}" method="post"
+                enctype="multipart/form-data">
                 <th:block th:replace="components/formularios :: formulario-post"></th:block>
                 <br>
                 <p>Agregar un archivo como publicaci&oacute;n <span style="color: red;">(Opcional)</span></p>
                 <hr>
                 <th:block th:replace="components/archivo :: archivo"></th:block>
+                <br>
+                <div class="form-check row">
+                    <input type="checkbox" th:name="concentimiento" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Aceptar política de subida de archivos.
+                        <button data-toggle="modal" class="btn btn-warning" data-target="#exampleModalCenter">
+                            Conocer más.
+                        </button>
+                    </label>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <p class="modal-title">Política de subida de archivos.</p>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>En caso de agregar un archivo debe aceptar que la institución almacene y utilice el
+                                    archivo subido al sistema.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal -->
                 <br>
                 <input type="submit" value="Publicar" class="btn btn-primary">
             </form>

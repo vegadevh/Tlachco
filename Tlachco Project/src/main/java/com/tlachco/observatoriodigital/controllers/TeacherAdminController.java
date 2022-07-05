@@ -52,6 +52,20 @@ public class TeacherAdminController {
 
 		return "redirect:/";
 	}
+	
+	@RequestMapping("/eliminar/archivo/{id_archivo}")
+	public String eliminarArchivo(@PathVariable(value = "id_categoria") String id_categoria,
+			@RequestParam(value = "id_archivo") String id_archivo) {
+		if (id_archivo != null) {
+			System.out.println("HOLAAAAAAAA"+id_archivo);
+			System.out.println("HOLAAAAAAAA"+id_categoria);
+			//comentarioService.eliminarComentario(id_publicacion);
+			//publicacionService.deletePublicacion(Integer.parseInt(id_publicacion));
+		}
+
+		return "redirect:/";
+	}
+		
 
 	@RequestMapping("/eliminar/comentario/{id_comentario}")
 	public String eliminarComentario(@PathVariable(value = "id_comentario") String id_comentario,

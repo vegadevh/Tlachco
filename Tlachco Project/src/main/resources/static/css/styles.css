@@ -100,3 +100,21 @@ a {
         display: none;
     }
 }
+
+.about-text {
+    font-size: larger;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
+
+.bg-fteoricos {
+    background-color: rgba(146, 208, 80, 255) !important;
+}
+
+.bg-fempiricos {
+    background-color: rgba(126, 169, 202, 255) !important;
+}
