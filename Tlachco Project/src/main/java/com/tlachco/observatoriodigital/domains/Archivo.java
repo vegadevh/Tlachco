@@ -1,5 +1,6 @@
 package com.tlachco.observatoriodigital.domains;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -41,6 +42,52 @@ public class Archivo {
 
 	@Transient
 	private Integer id_categoria;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "propietario")
+	private Usuario usuario;
+
+	@Transient
+	private String propietario;
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+	@JoinColumn(name = "profesor")
+	private Usuario profesor;
+
+	@Transient
+	private String validador;
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getPropietario() {
+		return propietario;
+	}
+
+	public void setPropietario(String propietario) {
+		this.propietario = propietario;
+	}
+
+	public Usuario getProfesor() {
+		return profesor;
+	}
+
+	public void setProfesor(Usuario profesor) {
+		this.profesor = profesor;
+	}
+
+	public String getValidador() {
+		return validador;
+	}
+
+	public void setValidador(String validador) {
+		this.validador = validador;
+	}
 
 	public CategoriaPublicacion getCategoriaPublicacion() {
 		return categoriaPublicacion;

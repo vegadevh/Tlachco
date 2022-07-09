@@ -24,5 +24,7 @@ public interface IArchivoService {
 	public List<Archivo> findAllInfografia() throws DataAccessException;
 	
 	public String save2(Archivo archivo, MultipartFile file) throws DataAccessException;
+	
+	public void deleteArchivo(String id_archivo) throws DataAccessException;
 
 }

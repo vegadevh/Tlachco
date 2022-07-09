@@ -29,7 +29,8 @@
     <th:block th:replace="components/navbar :: navbar"></th:block>
     <div class="margin-container">
         <div class="container">
-            <div style="display: flex; justify-content: right;" sec:authorize="hasAnyRole('ADMIN', 'TEACHER')">
+            <div style="display: flex; justify-content: right;"
+                sec:authorize="hasAnyRole('ADMIN', 'TEACHER', 'STUDENT')">
                 <form class="p-1" th:action="@{/post/subir}" method="GET">
                     <input th:name="categoria" type="hidden" th:value="Infografia">
                     <input type="submit" class="btn btn-primary" value="Subir Infografía">
