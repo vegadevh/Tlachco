@@ -1,7 +1,9 @@
 <div class="" th:fragment="camposUsuario">
 	<div class="form-group">
 		<label for="usuario">Usuario: </label>
-		<input type="text" th:field="*{usuario}" th:name="usuario" class="form-control">
+		<input type="text" th:field="*{usuario}" th:name="usuario" class="form-control" pattern="^\S*"
+			oninvalid="setCustomValidity('El nombre de usuario no debe contener espacios.')"
+			oninput="this.setCustomValidity('')">
 		<div th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}" class="alert alert-danger" role="alert">
 		</div>
 		<div th:if="${iderror}" th:text="${iderror}" class="alert alert-danger" role="alert"></div>

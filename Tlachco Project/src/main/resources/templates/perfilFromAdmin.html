@@ -28,12 +28,14 @@
 <body>
     <th:block th:replace="components/navbar :: navbar"></th:block>
 
-    <div class="margin-container">
+    <div class="margin-container container">
         <div class="text-center" th:object="${usuario}">
             <h2 th:text="${usuario.nombre} + ' ' + ${usuario.apellido} + ' (' + ${usuario.usuario} + ')'"></h2>
-            <div class="container">
-                <th:block th:replace="components/listaPublicaciones :: listaPublicacionesUsuarioFromAdmin"></th:block>
-            </div>
+            <br>
+        </div>
+        <p class="about-text">Publicaciones realizadas</p>
+        <div class="text-center">
+            <th:block th:replace="components/listaPublicaciones :: listaPublicacionesUsuarioFromAdmin"></th:block>
         </div>
 
     </div>
