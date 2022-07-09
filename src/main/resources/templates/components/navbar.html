@@ -67,8 +67,7 @@
 								&nbsp;
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-								<a class="dropdown-item"
-									th:href="@{/perfil/{username}(username=${#authentication.getPrincipal().getUsername()})}">Perfil</a>
+								<a class="dropdown-item" th:href="@{/perfil/{username}(username=${#authentication.getPrincipal().getUsername()})}">Perfil</a>
 								<a class="dropdown-item" style="color: red;" th:href="@{/logout}">Cerrar Sesión</a>
 							</div>
 						</li>
