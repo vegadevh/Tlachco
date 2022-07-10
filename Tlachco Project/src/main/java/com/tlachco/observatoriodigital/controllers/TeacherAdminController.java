@@ -42,13 +42,13 @@ public class TeacherAdminController {
 
 	@Autowired
 	public IVideoService videoService;
-	
+
 	@Autowired
 	public IArchivoService archivoService;
-	
+
 	@Autowired
 	public ICategoriaPublicacionService categoriaService;
-	
+
 	@Autowired
 	public IUsuarioService usuarioService;
 
@@ -61,20 +61,19 @@ public class TeacherAdminController {
 
 		return "redirect:/";
 	}
-	
+
 	@RequestMapping("/eliminar/archivo/{id_archivo}")
 	public String eliminarArchivo(@PathVariable(value = "id_categoria") String id_categoria,
 			@RequestParam(value = "id_archivo") String id_archivo) {
 		if (id_archivo != null) {
-			System.out.println("HOLAAAAAAAA"+id_archivo);
-			System.out.println("HOLAAAAAAAA"+id_categoria);
-			//comentarioService.eliminarComentario(id_publicacion);
-			//publicacionService.deletePublicacion(Integer.parseInt(id_publicacion));
+			System.out.println("HOLAAAAAAAA" + id_archivo);
+			System.out.println("HOLAAAAAAAA" + id_categoria);
+			// comentarioService.eliminarComentario(id_publicacion);
+			// publicacionService.deletePublicacion(Integer.parseInt(id_publicacion));
 		}
 
 		return "redirect:/";
 	}
-		
 
 	@RequestMapping("/eliminar/comentario/{id_comentario}")
 	public String eliminarComentario(@PathVariable(value = "id_comentario") String id_comentario,
@@ -98,16 +97,16 @@ public class TeacherAdminController {
 		}
 		return "redirect:/videos";
 	}
-	
+
 	@RequestMapping("/subir")
 	public String subir(Principal principal, Model model) {
 		Archivo archivo = new Archivo();
-		
+
 		String id_usuario = principal.getName();
 		Usuario user = usuarioService.findOne(id_usuario);
 		List<Usuario> teachers = null;
-		
-		if(user.getRol().getId_rol() == 3) {
+
+		if (user.getRol().getId_rol() == 3) {
 			try {
 				teachers = usuarioService.findTeachers();
 			} catch (Exception e) {
@@ -120,19 +119,21 @@ public class TeacherAdminController {
 
 		return "subirArchivo";
 	}
-	
+
 	@PostMapping("/validacion-infografia")
-	public String validar_infografia(@ModelAttribute Archivo archivo, BindingResult result, Principal principal, @RequestParam String teacherSelect, HttpServletRequest request,
-			@RequestParam(value = "file") MultipartFile file, @RequestParam String id_categoria, @RequestParam String titulo, Model model) throws IOException {
+	public String validar_infografia(@ModelAttribute Archivo archivo, BindingResult result, Principal principal,
+			@RequestParam(defaultValue = "null") String teacherSelect, HttpServletRequest request,
+			@RequestParam(value = "file") MultipartFile file, @RequestParam String id_categoria,
+			@RequestParam String titulo, Model model) throws IOException {
 		String id_usuario = principal.getName();
 		Usuario user = usuarioService.findOne(id_usuario);
-		
-		if(request.isUserInRole("ROLE_STUDENT")) {
-			if(teacherSelect.equals("0")) {
-				
+
+		if (request.isUserInRole("ROLE_STUDENT")) {
+			if (teacherSelect.equals("0")) {
+
 				List<Usuario> teachers = null;
-				
-				if(user.getRol().getId_rol() == 3) {
+
+				if (user.getRol().getId_rol() == 3) {
 					try {
 						teachers = usuarioService.findTeachers();
 					} catch (Exception e) {
@@ -144,10 +145,11 @@ public class TeacherAdminController {
 				model.addAttribute("archivo", archivo);
 				return "subirArchivo";
 			}
-		}if(result.hasErrors()) {
+		}
+		if (result.hasErrors()) {
 			List<Usuario> teachers = null;
-			
-			if(user.getRol().getId_rol() == 3) {
+
+			if (user.getRol().getId_rol() == 3) {
 				try {
 					teachers = usuarioService.findTeachers();
 				} catch (Exception e) {
@@ -162,11 +164,13 @@ public class TeacherAdminController {
 			archivo.setCategoriaPublicacion(categoriaService.findOne(5));
 			archivo.setUsuario(user);
 			archivo.setProfesor(user);
-			if(teacherSelect != null) {
+			if (teacherSelect != null) {
 				archivo.setProfesor(usuarioService.findOne(teacherSelect));
 			}
-			if(request.isUserInRole("ROLE_STUDENT")) {
+			if (request.isUserInRole("ROLE_STUDENT")) {
 				archivo.setEstado("Review");
+			} else {
+				archivo.setEstado("Public");
 			}
 			archivo.setCategoriaPublicacion(categoriaService.findOne(Integer.parseInt(id_categoria)));
 			archivoService.save(archivo, file);
@@ -184,13 +188,22 @@ public class TeacherAdminController {
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment:filename=\"" + archivo.getNombre() + "\"")
 				.body(new ByteArrayResource(archivo.getContenido()));
 	}
-	
+
 	@RequestMapping("/archivo/eliminar/{id_archivo}")
 	public String eliminarInfografia(@PathVariable String id_archivo) {
 		if (id_archivo != null) {
-			
+
 			archivoService.deleteArchivo(id_archivo);
 		}
+
+		return "redirect:/infografias";
+	}
+
+	@RequestMapping("/archivo/aceptar/{id_archivo}")
+	public String aceptarInfografia(@PathVariable String id_archivo) {
+		String estado = "Public";
+		Archivo archivo = archivoService.findOne(id_archivo);
+		archivo.setEstado(estado);
 
 		return "redirect:/infografias";
 	}
