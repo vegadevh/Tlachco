@@ -21,7 +21,7 @@
         crossorigin="anonymous"></script>
     <!--Font Awesome-->
     <script src="https://kit.fontawesome.com/f2dde07271.js" crossorigin="anonymous"></script>
-    
+
     <title>Tlachco - Inicio</title>
 </head>
 
@@ -30,14 +30,31 @@
     <div class="margin-container">
         <div class="container">
             <h1>Subir infografía</h1>
-
+            <br>
             <form th:action="@{/post/validacion-infografia}" th:object="${archivo}" enctype="multipart/form-data"
                 method="post">
+                <label for="titulo">Titulo de la infografía: </label>
+                <input id="titulo" type="titulo" th:field="*{titulo}" th:name="titulo" class="form-control"
+                    oninvalid="setCustomValidity('Este campo es requerido.')"
+                    onchange="try{setCustomValidity('')}catch(e){}" required>
+                <br>
                 <div>
                     <input type="file" th:name="file" th:id="img" accept="image/*"
                         oninvalid="setCustomValidity('No puede dejar este campo vacio.')"
                         onchange="try{setCustomValidity('')}catch(e){}" required>
                     <input type="hidden" th:name="id_categoria" th:value="4">
+                </div>
+                <br>
+                <hr>
+                <div sec:authorize="hasAnyRole('STUDENT')">
+                    <label class="col-form-label">Profesor que revisara su publicaci&oacute;n <span
+                            style="color: red;">(Requerido)</span></label>
+                    <select class="form-control" id="teacherSelect" th:name="teacherSelect">
+                        <option value="0" selected="selected">Selecciona una opci&oacute;n</option>
+                        <option th:each="teacher : ${teachers}" th:value="${teacher.usuario}" th:id="${teacher.usuario}"
+                            th:text="${teacher.nombre}">
+                        </option>
+                    </select>
                 </div>
                 <br>
                 <input type="submit" value="Siguiente" class="btn btn-primary">
