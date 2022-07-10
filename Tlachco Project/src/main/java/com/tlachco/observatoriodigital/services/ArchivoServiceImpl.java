@@ -23,20 +23,6 @@ public class ArchivoServiceImpl implements IArchivoService {
 	@Autowired
 	private IArchivoRepo archivoRepo;
 
-//	@Override
-//	public void save(Archivo archivo, MultipartFile file) throws IOException {
-////		String nombreArchivo = file.getOriginalFilename();
-////		Archivo archivo = new Archivo(nombreArchivo.getBytes());
-//		String nombre = file.getOriginalFilename();
-//		archivo.setNombre(nombre);
-//		archivo.setTipo(file.getContentType());
-//		archivo.setContenido(file.getBytes());
-////		Archivo archivo = new Archivo(UUID.randomUUID().toString(),nombreArchivo.getBytes());
-//		archivoRepo.save(archivo);
-//	}
-	
-	
-
 	@Override
 	public List<Archivo> findAll() throws DataAccessException {
 		return archivoRepo.findAll();
@@ -56,43 +42,43 @@ public class ArchivoServiceImpl implements IArchivoService {
 
 	@Override
 	public Archivo save(Archivo archivo, MultipartFile file) throws IOException {
-//		Archivo archivo = new Archivo(nombreArchivo.getBytes());
+		// Archivo archivo = new Archivo(nombreArchivo.getBytes());
 		String nombre = file.getOriginalFilename();
-		
+
 		Date date = Calendar.getInstance().getTime();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
 		String strDate = dateFormat.format(date);
 		String myDate = strDate.replaceAll(":", "");
-		
+
 		try {
-			archivo.setId_archivo(myDate+nombre);
+			archivo.setId_archivo(myDate + nombre);
 			archivo.setTipo(file.getContentType());
 			archivo.setNombre(nombre);
 			archivo.setContenido(file.getBytes());
 			return archivoRepo.save(archivo);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
-		
+
 	}
 
 	public String save2(Archivo archivo, MultipartFile file) throws DataAccessException {
-//		Archivo archivo = new Archivo(nombreArchivo.getBytes());
+		// Archivo archivo = new Archivo(nombreArchivo.getBytes());
 		String nombre = file.getOriginalFilename();
-		
+
 		Date date = Calendar.getInstance().getTime();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
 		String strDate = dateFormat.format(date);
 		String myDate = strDate.replaceAll(":", "");
-		
+
 		try {
-			archivo.setId_archivo(myDate+nombre);
+			archivo.setId_archivo(myDate + nombre);
 			archivo.setTipo(file.getContentType());
 			archivo.setNombre(nombre);
 			archivo.setContenido(file.getBytes());
 			archivoRepo.save(archivo);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return archivo.getId_archivo();
@@ -114,13 +100,13 @@ public class ArchivoServiceImpl implements IArchivoService {
 	public void delete(String id_archivo) throws DataAccessException {
 		Archivo archivo = archivoRepo.getById(id_archivo);
 		archivoRepo.delete(archivo);
-		
+
 	}
 
 	@Override
 	public void deleteArchivo(String id_archivo) throws DataAccessException {
 		archivoRepo.deleteArchivo(id_archivo);
-		
+
 	}
 
 	@Override
@@ -143,6 +129,11 @@ public class ArchivoServiceImpl implements IArchivoService {
 			return p;
 		}).collect(Collectors.toList());
 		return infografias;
+	}
+
+	@Override
+	public void save3(Archivo archivo) throws IOException {
+		archivoRepo.save(archivo);
 	}
 
 }

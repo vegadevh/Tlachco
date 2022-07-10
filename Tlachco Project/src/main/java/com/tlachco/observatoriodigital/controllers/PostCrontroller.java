@@ -62,8 +62,8 @@ public class PostCrontroller {
 
 		Publicacion publicacion = new Publicacion();
 		List<Usuario> teachers = null;
-		
-		if(user.getRol().getId_rol() == 3) {
+
+		if (user.getRol().getId_rol() == 3) {
 			try {
 				teachers = usuarioService.findTeachers();
 			} catch (Exception e) {
@@ -108,17 +108,19 @@ public class PostCrontroller {
 
 	@RequestMapping("/validar-creacion")
 	public String validar_post(@Valid @ModelAttribute Publicacion publicacion, BindingResult result,
-			Principal principal, @RequestParam String categoria, @RequestParam String teacherSelect, HttpServletRequest request, @ModelAttribute Archivo archivo, BindingResult result2,
-			@RequestParam(defaultValue = "false") Boolean concentimiento, @RequestParam(value = "file") MultipartFile file, Model model) {
+			Principal principal, @RequestParam String categoria, @RequestParam String teacherSelect,
+			HttpServletRequest request, @ModelAttribute Archivo archivo, BindingResult result2,
+			@RequestParam(defaultValue = "false") Boolean concentimiento,
+			@RequestParam(value = "file") MultipartFile file, Model model) {
 
 		String estado = null;
 		System.out.println(concentimiento);
-		if(file.isEmpty() == false && concentimiento == false) {
+		if (file.isEmpty() == false && concentimiento == false) {
 			String id_usuario = principal.getName();
 			Usuario user = usuarioService.findOne(id_usuario);
 			List<Usuario> teachers = null;
-			
-			if(user.getRol().getId_rol() == 3) {
+
+			if (user.getRol().getId_rol() == 3) {
 				try {
 					teachers = usuarioService.findTeachers();
 				} catch (Exception e) {
@@ -132,13 +134,13 @@ public class PostCrontroller {
 
 			return "crearPost";
 		}
-		if(request.isUserInRole("ROLE_STUDENT")) {
-			if(teacherSelect.equals("0")) {
+		if (request.isUserInRole("ROLE_STUDENT")) {
+			if (teacherSelect.equals("0")) {
 				String id_usuario = principal.getName();
 				Usuario user = usuarioService.findOne(id_usuario);
 				List<Usuario> teachers = null;
-				
-				if(user.getRol().getId_rol() == 3) {
+
+				if (user.getRol().getId_rol() == 3) {
 					try {
 						teachers = usuarioService.findTeachers();
 					} catch (Exception e) {
@@ -153,12 +155,12 @@ public class PostCrontroller {
 				return "crearPost";
 			}
 		}
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			String id_usuario = principal.getName();
 			Usuario user = usuarioService.findOne(id_usuario);
 			List<Usuario> teachers = null;
-			
-			if(user.getRol().getId_rol() == 3) {
+
+			if (user.getRol().getId_rol() == 3) {
 				try {
 					teachers = usuarioService.findTeachers();
 				} catch (Exception e) {
@@ -172,8 +174,10 @@ public class PostCrontroller {
 
 			return "crearPost";
 		} else {
-			if(file.isEmpty() == false) {				
+			String id_usuario = principal.getName();
+			if (file.isEmpty() == false) {
 				archivo.setCategoriaPublicacion(categoriaService.findOne(5));
+				archivo.setUsuario(usuarioService.findOne(id_usuario));
 				String id_archivo = archivoService.save2(archivo, file);
 				Archivo archivoaux = archivoService.findOne(id_archivo);
 				publicacion.setArchivo(archivoaux);
@@ -185,16 +189,14 @@ public class PostCrontroller {
 				estado = "Review";
 			}
 
-			String id_usuario = principal.getName();
-
 			CategoriaPublicacion id_categoria = new CategoriaPublicacion();
 			id_categoria = categoriaService.findByCategoria(categoria);
 
 			Usuario propietario = new Usuario();
 			propietario = usuarioService.findOne(id_usuario);
-			
+
 			System.out.println("SELECT VALOR PARA " + teacherSelect);
-			if(teacherSelect != null) {
+			if (teacherSelect != null) {
 				publicacion.setProfesor(usuarioService.findOne(teacherSelect));
 			}
 			publicacion.setFecha_publicacion(new java.util.Date());
@@ -285,9 +287,9 @@ public class PostCrontroller {
 			return "editarPost";
 		} else {
 			Publicacion publicacionAux = publicacionService.findOne(Integer.parseInt(id_publicacion));
-			if(publicacionAux.getEstado().equals("Reviewed")) {
+			if (publicacionAux.getEstado().equals("Reviewed")) {
 				publicacion.setEstado("Review");
-			}else {
+			} else {
 				publicacion.setEstado(publicacionAux.getEstado());
 			}
 			publicacion.setFecha_publicacion(publicacionAux.getFecha_publicacion());

@@ -201,9 +201,14 @@ public class TeacherAdminController {
 
 	@RequestMapping("/archivo/aceptar/{id_archivo}")
 	public String aceptarInfografia(@PathVariable String id_archivo) {
-		String estado = "Public";
 		Archivo archivo = archivoService.findOne(id_archivo);
-		archivo.setEstado(estado);
+		archivo.setEstado("Public");
+		
+		try {
+			archivoService.save3(archivo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		return "redirect:/infografias";
 	}
