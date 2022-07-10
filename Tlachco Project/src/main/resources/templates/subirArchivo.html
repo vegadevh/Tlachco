@@ -33,6 +33,11 @@
             <br>
             <form th:action="@{/post/validacion-infografia}" th:object="${archivo}" enctype="multipart/form-data"
                 method="post">
+                <label for="titulo">Titulo de la infografía: </label>
+                <input id="titulo" type="titulo" th:field="*{titulo}" th:name="titulo" class="form-control"
+                    oninvalid="setCustomValidity('Este campo es requerido.')"
+                    onchange="try{setCustomValidity('')}catch(e){}" required>
+                <br>
                 <div>
                     <input type="file" th:name="file" th:id="img" accept="image/*"
                         oninvalid="setCustomValidity('No puede dejar este campo vacio.')"

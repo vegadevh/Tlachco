@@ -13,11 +13,19 @@ import com.tlachco.observatoriodigital.domains.Archivo;
 
 @Repository
 public interface IArchivoRepo extends JpaRepository<Archivo, String> {
-	
-	@Query(nativeQuery = true, value = "SELECT id_archivo, nombre\r\n"
-			+ "FROM public.archivo where id_categoria = 4;")
+
+	@Query(nativeQuery = true, value = "SELECT id_archivo, nombre, titulo\r\n"
+			+ "FROM public.archivo where id_categoria = 4 AND estado = 'Public';")
 	public List<Object[]> findAllInfografia() throws DataAccessException;
-	
+
+	@Query(nativeQuery = true, value = "SELECT id_archivo, titulo\r\n"
+			+ "	FROM public.archivo WHERE propietario = :propietario ;")
+	public List<Object[]> findMyInfografia(String propietario) throws DataAccessException;
+
+	@Query(nativeQuery = true, value = "SELECT id_archivo, titulo\r\n"
+			+ "	FROM public.archivo WHERE profesor = :profesor AND estado = 'Review';")
+	public List<Object[]> findStudentInfografia(String profesor) throws DataAccessException;
+
 	@Modifying
 	@Transactional
 	@Query(nativeQuery = true, value = "DELETE FROM public.archivo\r\n"

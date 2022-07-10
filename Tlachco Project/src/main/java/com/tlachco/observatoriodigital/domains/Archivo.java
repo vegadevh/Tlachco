@@ -31,6 +31,12 @@ public class Archivo {
 	@Column(name = "nombre")
 	private String nombre;
 
+	@Column(name = "titulo")
+	private String titulo;
+	
+	@Column(name = "estado")
+	private String estado;
+
 	// @Lob
 	// @Type(type="org.hibernate.type.BinaryType")
 	@Column(name = "contenido")
@@ -56,6 +62,22 @@ public class Archivo {
 
 	@Transient
 	private String validador;
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
 
 	public Usuario getUsuario() {
 		return usuario;

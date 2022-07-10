@@ -123,7 +123,7 @@ public class TeacherAdminController {
 	
 	@PostMapping("/validacion-infografia")
 	public String validar_infografia(@ModelAttribute Archivo archivo, BindingResult result, Principal principal, @RequestParam String teacherSelect, HttpServletRequest request,
-			@RequestParam(value = "file") MultipartFile file, @RequestParam String id_categoria, Model model) throws IOException {
+			@RequestParam(value = "file") MultipartFile file, @RequestParam String id_categoria, @RequestParam String titulo, Model model) throws IOException {
 		String id_usuario = principal.getName();
 		Usuario user = usuarioService.findOne(id_usuario);
 		
@@ -164,6 +164,9 @@ public class TeacherAdminController {
 			archivo.setProfesor(user);
 			if(teacherSelect != null) {
 				archivo.setProfesor(usuarioService.findOne(teacherSelect));
+			}
+			if(request.isUserInRole("ROLE_STUDENT")) {
+				archivo.setEstado("Review");
 			}
 			archivo.setCategoriaPublicacion(categoriaService.findOne(Integer.parseInt(id_categoria)));
 			archivoService.save(archivo, file);

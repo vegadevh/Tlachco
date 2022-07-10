@@ -21,7 +21,7 @@
         crossorigin="anonymous"></script>
     <!--Font Awesome-->
     <script src="https://kit.fontawesome.com/f2dde07271.js" crossorigin="anonymous"></script>
-    
+
     <title>Tlachco - Inicio</title>
 </head>
 
@@ -64,6 +64,62 @@
                 </div>
                 <div class="card-body p-0">
                     <th:block th:replace="components/listaPublicaciones :: listaPublicacionesReview"></th:block>
+                </div>
+            </div>
+            <br>
+            <div class="card">
+                <div class="card-header">
+                    <b>Infografias realizadas.</b>
+                </div>
+                <div class="card-body p-0">
+                    <table th:unless="${findMyInfografia == null or findMyInfografia.empty}"
+                        class="table shadow-lg bg-white rounded">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Acci&oacute;n</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="infografia : ${findMyInfografia}">
+                                <td scope="row" th:text="${infografia.titulo}"></td>
+                                <td scope="row" class="p-1">
+                                    <a th:href="@{'/post/archivo/'+${infografia.id_archivo}}" target="_blank"
+                                        class="btn btn-primary">Ver</a>
+                                    <a th:href="@{'/post/archivo/eliminar/'+${infografia.id_archivo}}"
+                                        class="btn btn-danger">Eliminar</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br>
+            <div class="card" sec:authorize="hasAnyRole('TEACHER')">
+                <div class="card-header">
+                    <b>Infografias de estudiante realizadas.</b>
+                </div>
+                <div class="card-body p-0">
+                    <table th:unless="${findStudentInfografia == null or findStudentInfografia.empty}"
+                        class="table shadow-lg bg-white rounded">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Acci&oacute;n</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="infografia : ${findStudentInfografia}">
+                                <td scope="row" th:text="${infografia.titulo}"></td>
+                                <td scope="row" class="p-1">
+                                    <a th:href="@{'/post/archivo/'+${infografia.id_archivo}}" target="_blank"
+                                        class="btn btn-primary">Ver</a>
+                                    <a th:href="@{'/post/archivo/eliminar/'+${infografia.id_archivo}}"
+                                        class="btn btn-danger">Eliminar</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

@@ -50,7 +50,7 @@
                 </thead>
                 <tbody>
                     <tr th:each="infografia : ${listaInfografias}">
-                        <td scope="row" th:text="${infografia.nombre}"></td>
+                        <td scope="row" th:text="${infografia.titulo}"></td>
                         <td scope="row" class="p-1">
                             <a th:href="@{'/post/archivo/'+${infografia.id_archivo}}" target="_blank"
                                 class="btn btn-primary">Ver</a>

@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tlachco.observatoriodigital.domains.Usuario;
+import com.tlachco.observatoriodigital.dto.ArchivoDTO;
 import com.tlachco.observatoriodigital.dto.PublicacionesDTO;
+import com.tlachco.observatoriodigital.services.IArchivoService;
 import com.tlachco.observatoriodigital.services.IPublicacionService;
 import com.tlachco.observatoriodigital.services.IUsuarioService;
 
@@ -28,6 +30,9 @@ public class GeneralController {
 	
 	@Autowired
 	public IUsuarioService usuarioService;
+	
+	@Autowired
+	public IArchivoService archivoService;
 
 	
 	@RequestMapping("/busquedaPublicaciones")
@@ -55,17 +60,22 @@ public class GeneralController {
 		
 		List<PublicacionesDTO> listaResultados = null;
 		List<PublicacionesDTO> listaPublicacionesReview = null;
-		
+		List<ArchivoDTO> findMyInfografia = null;
+		List<ArchivoDTO> findStudentInfografia = null;
 		
 		try {
 			listaResultados = publicacionService.findAllPublicacionesByPropietario(username);
 			listaPublicacionesReview = publicacionService.findReviewPublicacionesByProfesor(username);
+			findMyInfografia = archivoService.findMyInfografia(username);
+			findStudentInfografia = archivoService.findStudentInfografia(username);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		model.addAttribute("listaResultados", listaResultados);
 		model.addAttribute("listaPublicacionesReview", listaPublicacionesReview);
+		model.addAttribute("findMyInfografia", findMyInfografia);
+		model.addAttribute("findStudentInfografia", findStudentInfografia);
 		model.addAttribute("usuario",usuario);
 		return "perfil";
 				

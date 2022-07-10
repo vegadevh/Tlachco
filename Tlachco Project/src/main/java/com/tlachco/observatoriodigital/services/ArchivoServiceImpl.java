@@ -14,10 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.tlachco.observatoriodigital.domains.Archivo;
-import com.tlachco.observatoriodigital.domains.Video;
-import com.tlachco.observatoriodigital.dto.PublicacionesDTO;
+import com.tlachco.observatoriodigital.dto.ArchivoDTO;
 import com.tlachco.observatoriodigital.repositories.IArchivoRepo;
-import com.tlachco.observatoriodigital.repositories.IVideoRepo;
 
 @Service
 public class ArchivoServiceImpl implements IArchivoService {
@@ -106,6 +104,7 @@ public class ArchivoServiceImpl implements IArchivoService {
 			Archivo p = new Archivo();
 			p.setId_archivo(obj[0].toString());
 			p.setNombre(obj[1].toString());
+			p.setTitulo(obj[2].toString());
 			return p;
 		}).collect(Collectors.toList());
 		return infografias;
@@ -122,6 +121,28 @@ public class ArchivoServiceImpl implements IArchivoService {
 	public void deleteArchivo(String id_archivo) throws DataAccessException {
 		archivoRepo.deleteArchivo(id_archivo);
 		
+	}
+
+	@Override
+	public List<ArchivoDTO> findMyInfografia(String propietario) throws DataAccessException {
+		List<ArchivoDTO> infografias = archivoRepo.findMyInfografia(propietario).stream().map(obj -> {
+			ArchivoDTO p = new ArchivoDTO();
+			p.setId_archivo(obj[0].toString());
+			p.setTitulo(obj[1].toString());
+			return p;
+		}).collect(Collectors.toList());
+		return infografias;
+	}
+
+	@Override
+	public List<ArchivoDTO> findStudentInfografia(String profesor) throws DataAccessException {
+		List<ArchivoDTO> infografias = archivoRepo.findStudentInfografia(profesor).stream().map(obj -> {
+			ArchivoDTO p = new ArchivoDTO();
+			p.setId_archivo(obj[0].toString());
+			p.setTitulo(obj[1].toString());
+			return p;
+		}).collect(Collectors.toList());
+		return infografias;
 	}
 
 }
